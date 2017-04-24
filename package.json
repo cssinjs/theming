@@ -1,0 +1,26 @@
+{
+  "name": "theming",
+  "version": "0.0.0",
+  "description": "Theming tools",
+  "main": "dist",
+  "scripts": {
+    "test": "ava test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iamstarkov/theming.git"
+  },
+  "keywords": [
+    "react",
+    "theme",
+    "theming",
+    "cssinjs",
+    "css-in-js"
+  ],
+  "author": "Vladimir Starkov <iamstarkov@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/iamstarkov/theming/issues"
+  },
+  "homepage": "https://github.com/iamstarkov/theming#readme"
+}
