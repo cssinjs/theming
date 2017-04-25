@@ -4,6 +4,7 @@
   "description": "Theming tools",
   "main": "dist",
   "scripts": {
+    "lint": "eslint .",
     "test": "ava test"
   },
   "repository": {
@@ -14,13 +15,21 @@
     "react",
     "theme",
     "theming",
+    "styled-components",
+    "jss",
     "cssinjs",
     "css-in-js"
   ],
-  "author": "Vladimir Starkov <iamstarkov@gmail.com>",
+  "author": "Vladimir Starkov <iamstarkov@gmail.com> (https://iamstarkov.com)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/iamstarkov/theming/issues"
   },
-  "homepage": "https://github.com/iamstarkov/theming#readme"
+  "homepage": "https://github.com/iamstarkov/theming#readme",
+  "devDependencies": {
+    "@iamstarkov/eslint-plugin-require-path-exists": "^1.1.5",
+    "eslint": "^3.19.0",
+    "eslint-config-pedant": "^0.9.0",
+    "eslint-plugin-react": "^6.10.3"
+  }
 }

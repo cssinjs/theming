@@ -1,0 +1,23 @@
+{
+  "extends": [
+    "pedant",
+    "plugin:@iamstarkov/eslint-plugin-require-path-exists/recommended",
+    "plugin:react/recommended"
+  ],
+  "plugins": [
+    "@iamstarkov/eslint-plugin-require-path-exists",
+    "react"
+  ],
+  "env": {
+    "node": true,
+    "es6": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2017,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "impliedStrict": true,
+      "jsx": true
+    }
+  }
+}
