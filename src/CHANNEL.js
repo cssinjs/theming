@@ -1,1 +1,1 @@
-export default '__THEMING__';
+module.exports = '__THEMING__';

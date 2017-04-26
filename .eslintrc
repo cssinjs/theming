@@ -1,4 +1,5 @@
 {
+  "parser": "babel-eslint",
   "extends": [
     "pedant",
     "plugin:require-path-exists/recommended",

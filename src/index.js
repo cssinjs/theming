@@ -1,13 +1,11 @@
-export { default as ThemeProvider } from './ThemeProvider';
-export { default as withTheme } from './withTheme';
-export { default as CHANNEL } from './channel';
+const ThemeProvider = require('./ThemeProvider');
+const withTheme = require('./withTheme');
+const onThemeUpdate = require('./onThemeUpdate');
+const CHANNEL = require('./CHANNEL');
 
-import ThemeProvider from './ThemeProvider';
-// import withTheme from './withTheme';
-import CHANNEL from './channel';
-
-export default {
+module.exports = {
   ThemeProvider,
-  // withTheme,
+  withTheme,
+  onThemeUpdate,
   CHANNEL,
 };

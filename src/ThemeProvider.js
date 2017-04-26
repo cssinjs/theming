@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import isFunction from 'is-function';
-import isPlainObject from 'is-plain-object';
-import createBroadcast from './create-broadcast';
-import { CHANNEL } from './';
+const React = require('react');
+const PropTypes = require('prop-types');
+const isFunction = require('is-function');
+const isPlainObject = require('is-plain-object');
+const createBroadcast = require('./create-broadcast');
+const CHANNEL = require('./CHANNEL');
 
 // const noop = () => {}
 
@@ -14,7 +14,7 @@ import { CHANNEL } from './';
  * and event listeners (have to do both context
  * and event emitter as pure components block context updates)
  */
-class ThemeProvider extends Component {
+class ThemeProvider extends React.Component {
   // outerTheme: Theme
   // unsubscribeToOuter: noop
   // props: ThemeProviderProps
@@ -74,14 +74,14 @@ class ThemeProvider extends Component {
       const mergedTheme = theme(this.outerTheme);
       if (!isPlainObject(mergedTheme)) {
         throw new Error(
-          '[ThemeProvider] Please return an object from your theme function, i.e. theme={() => ({})}!'
+          '[ThemeProvider] Please return an object from your theme function, i.e. theme={() => ({})}!',
         );
       }
       return mergedTheme;
     }
     if (!isPlainObject(theme)) {
       throw new Error(
-        '[ThemeProvider] Please make your theme prop a plain object'
+        '[ThemeProvider] Please make your theme prop a plain object',
       );
     }
     return { ...this.outerTheme, ...(theme: Object) };
@@ -95,4 +95,4 @@ class ThemeProvider extends Component {
   }
 }
 
-export default ThemeProvider;
+module.exports = ThemeProvider;
