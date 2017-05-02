@@ -1,13 +1,11 @@
-const ThemeProvider = require('./ThemeProvider');
-const withTheme = require('./withTheme');
-const onThemeUpdate = require('./onThemeUpdate');
-const themify = require('./themify');
-const CHANNEL = require('./CHANNEL');
+const createThemeProvider = require('./create-theme-provider');
+const createWithTheme = require('./create-with-theme');
+const channel = require('./channel');
 
 module.exports = {
-  ThemeProvider,
-  withTheme,
-  onThemeUpdate,
-  themify,
-  CHANNEL,
+  ThemeProvider: createThemeProvider(channel),
+  withTheme: createWithTheme(channel),
+  channel,
+  createThemeProvider,
+  createWithTheme,
 };
