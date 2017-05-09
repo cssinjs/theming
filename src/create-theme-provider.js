@@ -3,6 +3,7 @@ const PropTypes = require('prop-types');
 const isFunction = require('is-function');
 const isPlainObject = require('is-plain-object');
 const createBroadcast = require('./create-broadcast');
+const channel = require('./channel');
 
 /**
  * Provide a theme to an entire react component tree via context
@@ -10,7 +11,7 @@ const createBroadcast = require('./create-broadcast');
  * and event emitter as pure components block context updates)
  */
 
-function createThemeProvider(CHANNEL) {
+function createThemeProvider(CHANNEL = channel) {
   return class ThemeProvider extends React.Component {
     static propTypes = {
       children: PropTypes.element,
