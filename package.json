@@ -7,7 +7,17 @@
     "build": "babel src -d dist",
     "watch": "babel src -d dist --watch",
     "lint": "eslint .",
-    "test": "ava test"
+    "test": "ava",
+    "tdd": "ava --watch"
+  },
+  "ava": {
+    "files": [
+      "src/**/*test.js"
+    ],
+    "require": [
+      "babel-register"
+    ],
+    "babel": "inherit"
   },
   "repository": {
     "type": "git",
@@ -29,16 +39,21 @@
   },
   "homepage": "https://github.com/iamstarkov/theming#readme",
   "devDependencies": {
+    "ava": "^0.19.1",
     "babel-cli": "^6.24.1",
     "babel-eslint": "^7.2.3",
     "babel-preset-env": "^1.4.0",
     "babel-preset-es2017": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
+    "babel-register": "^6.24.1",
+    "enzyme": "^2.8.2",
     "eslint": "^3.19.0",
     "eslint-config-pedant": "^0.9.0",
     "eslint-plugin-react": "^6.10.3",
-    "eslint-plugin-require-path-exists": "^1.1.7"
+    "eslint-plugin-require-path-exists": "^1.1.7",
+    "react-dom": "^15.5.4",
+    "react-test-renderer": "^15.5.4"
   },
   "dependencies": {
     "is-function": "^1.0.1",
