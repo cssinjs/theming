@@ -72,34 +72,28 @@ test(`emit new value to all subscribers`, t => {
 
 test(`dont emit new value to removed subscribers`, t => {
   const broadcast = createBroadcast();
-  const EXPECTED_VALUE_1 = 'EXPECTED_VALUE_1';
-  const EXPECTED_VALUE_2 = 'EXPECTED_VALUE_2';
-  const EXPECTED_VALUE_3 = 'EXPECTED_VALUE_3';
-  const EXPECTED_VALUE_4 = 'EXPECTED_VALUE_4';
+  const EXPECTED_VALUE = 'EXPECTED_VALUE';
+  const UNEXPECTED_VALUE = 'UNEXPECTED_VALUE';
 
-  let ACTUAL_VALUE_1;
-  let ACTUAL_VALUE_2;
-  let ACTUAL_VALUE_3;
+  let ACTUAL_VALUE;
 
-  const listener1 = x => (ACTUAL_VALUE_1 = x);
-  const listener2 = x => (ACTUAL_VALUE_2 = x);
-  const listener3 = x => (ACTUAL_VALUE_3 = x);
+  const listener = x => (ACTUAL_VALUE = x);
 
-  const unsubscribe1 = broadcast.subscribe(listener1);
-  const unsubscribe2 = broadcast.subscribe(listener2);
-  const unsubscribe3 = broadcast.subscribe(listener3);
+  const unsubscribe = broadcast.subscribe(listener);
 
-  broadcast.publish(EXPECTED_VALUE_1);
-  unsubscribe1();
-  broadcast.publish(EXPECTED_VALUE_2);
-  unsubscribe2();
-  broadcast.publish(EXPECTED_VALUE_3);
-  unsubscribe3();
-  broadcast.publish(EXPECTED_VALUE_4);
+  broadcast.publish(EXPECTED_VALUE);
+  unsubscribe();
+  broadcast.publish(UNEXPECTED_VALUE);
 
-  t.deepEqual(
-    [ACTUAL_VALUE_1, ACTUAL_VALUE_2, ACTUAL_VALUE_3],
-    [EXPECTED_VALUE_1, EXPECTED_VALUE_2, EXPECTED_VALUE_3],
-    `all listeners should get the same emitted value after first publish`,
+  t.is(
+    ACTUAL_VALUE,
+    EXPECTED_VALUE,
+    `listener shoult get last emiited value before unsubscribing`,
+  );
+
+  t.not(
+    ACTUAL_VALUE,
+    UNEXPECTED_VALUE,
+    `listener shoult not get value emiited after unsubscribing`,
   );
 });
