@@ -47,6 +47,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.24.1",
+    "browser-env": "^2.0.31",
     "enzyme": "^2.8.2",
     "eslint": "^3.19.0",
     "eslint-config-pedant": "^0.9.0",
