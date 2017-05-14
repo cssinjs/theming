@@ -50,6 +50,7 @@
     "enzyme": "^2.8.2",
     "eslint": "^3.19.0",
     "eslint-config-pedant": "^0.9.0",
+    "eslint-config-prettier": "^2.1.0",
     "eslint-plugin-react": "^6.10.3",
     "eslint-plugin-require-path-exists": "^1.1.7",
     "react-dom": "^15.5.4",
