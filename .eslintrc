@@ -3,7 +3,9 @@
   "extends": [
     "pedant",
     "plugin:require-path-exists/recommended",
-    "plugin:react/recommended"
+    "plugin:react/recommended",
+    "prettier",
+    "prettier/react"
   ],
   "plugins": [
     "require-path-exists",
