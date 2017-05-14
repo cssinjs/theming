@@ -200,6 +200,71 @@ test('ThemeProvider theme augmenting', t => {
   t.deepEqual(
     actualTheme,
     expectedTheme,
-    `ThemeProvider should pass merge themes`,
+    `ThemeProvider should pass merged themes`,
+  );
+});
+
+test('ThemeProvider propagate even theme updates', t => {
+  const ThemeProvider = createThemeProvider();
+  const Child = onThemeChild();
+  const initTheme = { themed: true };
+  const expectedTheme = { updated: true };
+  let actualTheme;
+  const intercept = theme => {
+    actualTheme = theme;
+  };
+
+  const wrapper = mount(
+    <ThemeProvider theme={initTheme}>
+      <Child onTheme={intercept} />
+    </ThemeProvider>,
+  );
+
+  t.deepEqual(
+    actualTheme,
+    initTheme,
+    `ThemeProvider should pass initial theme`,
+  );
+
+  wrapper.setProps({ theme: expectedTheme });
+
+  t.deepEqual(
+    actualTheme,
+    expectedTheme,
+    `ThemeProvider should pass theme update`,
+  );
+});
+
+test('ThemeProvider propagate theme updates even through PureComponent', t => {
+  const ThemeProvider = createThemeProvider();
+  const Child = onThemeChild();
+  const Pure = getPure();
+  const initTheme = { themed: true };
+  const expectedTheme = { updated: true };
+  let actualTheme;
+  const intercept = theme => {
+    actualTheme = theme;
+  };
+
+  const wrapper = mount(
+    <ThemeProvider theme={initTheme}>
+      <Pure>
+        <Child onTheme={intercept} />
+      </Pure>
+    </ThemeProvider>,
+  );
+
+  t.deepEqual(
+    actualTheme,
+    initTheme,
+    `ThemeProvider should pass initial theme through PureComponent`,
+  );
+
+  wrapper.setProps({ theme: expectedTheme });
+
+  t.deepEqual(
+    actualTheme,
+    expectedTheme,
+    `ThemeProvider should pass theme update even through PureComponent`,
   );
 });
