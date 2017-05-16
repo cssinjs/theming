@@ -1,7 +1,7 @@
 import test from 'ava';
 import React, { Component, PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { shallow, mount } from 'enzyme'; // eslint-disable-line
+import { mount } from 'enzyme';
 import browserEnv from 'browser-env';
 
 import isFunction from 'is-function';
@@ -204,7 +204,7 @@ test('ThemeProvider theme augmenting', t => {
   );
 });
 
-test('ThemeProvider propagate even theme updates', t => {
+test('ThemeProvider propagates theme updates', t => {
   const ThemeProvider = createThemeProvider();
   const Child = onThemeChild();
   const initTheme = { themed: true };
@@ -235,7 +235,7 @@ test('ThemeProvider propagate even theme updates', t => {
   );
 });
 
-test('ThemeProvider propagate theme updates even through PureComponent', t => {
+test('ThemeProvider propagates theme updates even through PureComponent', t => {
   const ThemeProvider = createThemeProvider();
   const Child = onThemeChild();
   const Pure = getPure();
