@@ -7,7 +7,14 @@ import isFunction from 'is-function';
 import createWithTheme from './create-with-theme';
 import channel from './channel';
 import createBroadcast from './create-broadcast';
-import { getChannel, Comp, Pure, Trap, mountOptions } from './helpers';
+import {
+  getChannel,
+  Comp,
+  Pure,
+  Trap,
+  mountOptions,
+  getInterceptor,
+} from './helpers';
 
 browserEnv(['window', 'document', 'navigator']);
 
@@ -46,30 +53,21 @@ test(`withTheme(Comp) custom channel`, t => {
 test(`withTheme(Comp) receive theme`, t => {
   const withTheme = createWithTheme();
   const theme = { themed: true };
-  let actual;
-  const updateActual = x => {
-    actual = x;
-  };
+  const actual = getInterceptor();
   const expected = theme;
 
   const ComponentWithTheme = withTheme(Trap.Prop);
   const broadcast = createBroadcast(theme);
 
-  mount(
-    <ComponentWithTheme intercept={updateActual} />,
-    mountOptions(broadcast),
-  );
+  mount(<ComponentWithTheme intercept={actual} />, mountOptions(broadcast));
 
-  t.deepEqual(actual, expected, `withTheme(Comp) should receive theme`);
+  t.deepEqual(actual(), expected, `withTheme(Comp) should receive theme`);
 });
 
 test(`withTheme(Comp) receive theme deep into tree`, t => {
   const withTheme = createWithTheme();
   const theme = { themed: true };
-  let actual;
-  const updateActual = x => {
-    actual = x;
-  };
+  const actual = getInterceptor();
   const expected = theme;
 
   const ComponentWithTheme = withTheme(Trap.Prop);
@@ -78,14 +76,14 @@ test(`withTheme(Comp) receive theme deep into tree`, t => {
   mount(
     <div>
       <div>
-        <ComponentWithTheme intercept={updateActual} />
+        <ComponentWithTheme intercept={actual} />
       </div>
     </div>,
     mountOptions(broadcast),
   );
 
   t.deepEqual(
-    actual,
+    actual(),
     expected,
     `withTheme(Comp) should receive a theme deep down into tree`,
   );
@@ -94,10 +92,7 @@ test(`withTheme(Comp) receive theme deep into tree`, t => {
 test(`withTheme(Comp) receives theme through PureComponent`, t => {
   const withTheme = createWithTheme();
   const theme = { themed: true };
-  let actual;
-  const updateActual = x => {
-    actual = x;
-  };
+  const actual = getInterceptor();
   const expected = theme;
 
   const ComponentWithTheme = withTheme(Trap.Prop);
@@ -105,13 +100,13 @@ test(`withTheme(Comp) receives theme through PureComponent`, t => {
 
   mount(
     <Pure>
-      <ComponentWithTheme intercept={updateActual} />
+      <ComponentWithTheme intercept={actual} />
     </Pure>,
     mountOptions(broadcast),
   );
 
   t.deepEqual(
-    actual,
+    actual(),
     expected,
     `withTheme(Comp) should receive theme through PureComponent`,
   );
@@ -121,33 +116,28 @@ test(`withTheme(Comp) receives theme updates`, t => {
   const withTheme = createWithTheme();
   const theme = { themed: true };
   const update = { updated: true };
-  let actual;
-  const updateActualTheme = x => {
-    actual = x;
-  };
+  const actual = getInterceptor();
   const expected = update;
 
   const ComponentWithTheme = withTheme(Trap.Prop);
   const broadcast = createBroadcast(theme);
 
-  mount(
-    <ComponentWithTheme intercept={updateActualTheme} />,
-    mountOptions(broadcast),
-  );
+  mount(<ComponentWithTheme intercept={actual} />, mountOptions(broadcast));
 
   broadcast.publish(update);
 
-  t.deepEqual(actual, expected, `withTheme(Comp) should receive theme updates`);
+  t.deepEqual(
+    actual(),
+    expected,
+    `withTheme(Comp) should receive theme updates`,
+  );
 });
 
 test(`withTheme(Comp) receives theme updates even through PureComponent`, t => {
   const withTheme = createWithTheme();
   const theme = { themed: true };
   const update = { updated: true };
-  let actual;
-  const updateActual = x => {
-    actual = x;
-  };
+  const actual = getInterceptor();
   const expected = update;
 
   const ComponentWithTheme = withTheme(Trap.Prop);
@@ -155,7 +145,7 @@ test(`withTheme(Comp) receives theme updates even through PureComponent`, t => {
 
   mount(
     <Pure>
-      <ComponentWithTheme intercept={updateActual} />
+      <ComponentWithTheme intercept={actual} />
     </Pure>,
     mountOptions(broadcast),
   );
@@ -163,7 +153,7 @@ test(`withTheme(Comp) receives theme updates even through PureComponent`, t => {
   broadcast.publish(update);
 
   t.deepEqual(
-    actual,
+    actual(),
     expected,
     `withTheme(Comp) should receive theme updates even through PureComponent`,
   );
