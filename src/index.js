@@ -3,13 +3,11 @@ const createWithTheme = require('./create-with-theme');
 const channel = require('./channel');
 
 module.exports = {
-  ThemeProvider: createThemeProvider(),
   withTheme: createWithTheme(),
+  ThemeProvider: createThemeProvider(),
   channel,
-  createThemeProvider,
-  createWithTheme,
-  create: (customChannel = channel) => ({
-    ThemeProvider: createThemeProvider(customChannel),
+  createTheming: (customChannel = channel) => ({
     withTheme: createWithTheme(customChannel),
+    ThemeProvider: createThemeProvider(customChannel),
   }),
 };

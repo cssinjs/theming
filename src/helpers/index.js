@@ -72,3 +72,13 @@ export const Trap = {
   Prop: PropTrap,
   Context: ContextTrap,
 };
+
+export function getInterceptor() {
+  let state;
+  return newState => {
+    if (newState) {
+      state = newState;
+    }
+    return state;
+  };
+}
