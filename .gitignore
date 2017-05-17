@@ -4,3 +4,5 @@ node_modules
 *.lock
 dist
 shrinkwrap.*
+.nyc_output
+coverage
