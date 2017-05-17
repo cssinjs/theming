@@ -51,7 +51,7 @@ export default App;
 
 ## License
 
-MIT © [Nordnet Bank AB](https://www.nordnet.se)
+MIT © [Vladimir Starkov](https://iamstarkov.com)
 
 [npm-url]: https://npmjs.org/package/theming
 [npm-image]: https://img.shields.io/npm/v/theming.svg?style=flat-square
