@@ -3,8 +3,12 @@
   "version": "0.0.1",
   "description": "Theming High-Order Components toolkit",
   "main": "dist",
+  "files": [
+    "src",
+    "dist"
+  ],
   "scripts": {
-    "build": "babel src -d dist --ignore test-helpers",
+    "build": "babel src -d dist --ignore '*test*'",
     "watch": "babel src -d dist --watch",
     "lint": "eslint .",
     "test": "ava",
