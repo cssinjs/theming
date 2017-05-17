@@ -1,7 +1,7 @@
 {
   "name": "theming",
   "version": "0.0.1",
-  "description": "Theming tools",
+  "description": "Theming High-Order Components toolkit",
   "main": "dist",
   "scripts": {
     "build": "babel src -d dist",
