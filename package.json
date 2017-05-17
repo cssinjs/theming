@@ -1,6 +1,6 @@
 {
   "name": "theming",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Theming High-Order Components toolkit",
   "main": "dist",
   "files": [
