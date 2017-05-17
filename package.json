@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "test": "ava",
     "tdd": "ava --watch",
+    "coverage": "nyc ava",
     "coveralls": "run-s coveralls:*",
     "coveralls:gather": "npm run coverage",
     "coveralls:upload": "coveralls < coverage/lcov.info"
@@ -71,6 +72,7 @@
     "eslint-config-prettier": "^2.1.0",
     "eslint-plugin-react": "^6.10.3",
     "eslint-plugin-require-path-exists": "^1.1.7",
+    "npm-run-all": "^4.0.2",
     "nyc": "^10.3.2",
     "react-dom": "^15.5.4",
     "react-test-renderer": "^15.5.4"
