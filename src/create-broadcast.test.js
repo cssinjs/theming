@@ -27,11 +27,9 @@ test(`createBroadcast result keys`, t => {
 
 test(`publish/subscribe types`, t => {
   const broadcast = createBroadcast();
-
-  t.true(
-    Object.values(broadcast).every(isFunction),
-    `createBroadcast() should have publish and subscribe methods`,
-  );
+  const { publish, subscribe } = broadcast;
+  const actual = [publish, subscribe].every(isFunction);
+  t.true(actual, `createBroadcast() should have publish and subscribe methods`);
 });
 
 test(`emit initial value to subscriber from the start`, t => {
