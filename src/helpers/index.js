@@ -20,7 +20,7 @@ export const Comp = props => <div {...props} />;
 export const getContextTypes = C => C.contextTypes;
 export const getChannel = C => Object.keys(getContextTypes(C))[0];
 
-export class ThemePropInterceptor extends Component {
+export class PropTrap extends Component {
   static propTypes = {
     intercept: PropTypes.func.isRequired,
     theme: PropTypes.object.isRequired,
@@ -48,3 +48,27 @@ export const mountOptions = broadcast => ({
     [channel]: broadcast.subscribe,
   },
 });
+
+export class ContextTrap extends Component {
+  static propTypes = {
+    intercept: PropTypes.func.isRequired,
+  };
+  static contextTypes = {
+    [channel]: PropTypes.func.isRequired,
+  };
+  componentWillMount() {
+    const subscribe = this.context[channel] || (() => {});
+    this.unsubscribe = subscribe(theme => {
+      this.props.intercept(theme);
+    });
+  }
+  // eslint-disable-next-line
+  render() {
+    return <div />;
+  }
+}
+
+export const Trap = {
+  Prop: PropTrap,
+  Context: ContextTrap,
+};

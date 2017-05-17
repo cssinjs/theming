@@ -7,14 +7,7 @@ import isFunction from 'is-function';
 import createWithTheme from './create-with-theme';
 import channel from './channel';
 import createBroadcast from './create-broadcast';
-import {
-  getChannel,
-  Comp,
-  Pure,
-  ThemePropInterceptor,
-  mountOptions,
-  onTheme,
-} from './helpers';
+import { getChannel, Comp, Pure, Trap, mountOptions } from './helpers';
 
 browserEnv(['window', 'document', 'navigator']);
 
@@ -59,7 +52,7 @@ test(`withTheme(Comp) receive theme`, t => {
   };
   const expected = theme;
 
-  const ComponentWithTheme = withTheme(ThemePropInterceptor);
+  const ComponentWithTheme = withTheme(Trap.Prop);
   const broadcast = createBroadcast(theme);
 
   mount(
@@ -79,7 +72,7 @@ test(`withTheme(Comp) receive theme deep into tree`, t => {
   };
   const expected = theme;
 
-  const ComponentWithTheme = withTheme(ThemePropInterceptor);
+  const ComponentWithTheme = withTheme(Trap.Prop);
   const broadcast = createBroadcast(expected);
 
   mount(
@@ -107,7 +100,7 @@ test(`withTheme(Comp) receives theme through PureComponent`, t => {
   };
   const expected = theme;
 
-  const ComponentWithTheme = withTheme(ThemePropInterceptor);
+  const ComponentWithTheme = withTheme(Trap.Prop);
   const broadcast = createBroadcast(expected);
 
   mount(
@@ -134,7 +127,7 @@ test(`withTheme(Comp) receives theme updates`, t => {
   };
   const expected = update;
 
-  const ComponentWithTheme = withTheme(ThemePropInterceptor);
+  const ComponentWithTheme = withTheme(Trap.Prop);
   const broadcast = createBroadcast(theme);
 
   mount(
@@ -157,7 +150,7 @@ test(`withTheme(Comp) receives theme updates even through PureComponent`, t => {
   };
   const expected = update;
 
-  const ComponentWithTheme = withTheme(ThemePropInterceptor);
+  const ComponentWithTheme = withTheme(Trap.Prop);
   const broadcast = createBroadcast(theme);
 
   mount(
