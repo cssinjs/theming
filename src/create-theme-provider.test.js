@@ -6,7 +6,7 @@ import browserEnv from 'browser-env';
 import isFunction from 'is-function';
 import createThemeProvider from './create-theme-provider';
 import channel from './channel';
-import { getChannel, Trap, Pure, getInterceptor } from './helpers';
+import { getChannel, Trap, Pure, getInterceptor } from './test-helpers';
 
 browserEnv(['window', 'document', 'navigator']);
 

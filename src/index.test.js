@@ -4,7 +4,7 @@ import { mount } from 'enzyme';
 import browserEnv from 'browser-env';
 import isFunction from 'is-function';
 import isPlainObject from 'is-plain-object';
-import { Trap, Pure, Comp, getInterceptor, getChannel } from './helpers';
+import { Trap, Pure, Comp, getInterceptor, getChannel } from './test-helpers';
 
 browserEnv(['window', 'document', 'navigator']);
 

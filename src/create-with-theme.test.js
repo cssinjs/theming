@@ -14,7 +14,7 @@ import {
   Trap,
   mountOptions,
   getInterceptor,
-} from './helpers';
+} from './test-helpers';
 
 browserEnv(['window', 'document', 'navigator']);
 

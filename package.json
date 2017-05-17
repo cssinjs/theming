@@ -8,7 +8,10 @@
     "watch": "babel src -d dist --watch",
     "lint": "eslint .",
     "test": "ava",
-    "tdd": "ava --watch"
+    "tdd": "ava --watch",
+    "coveralls": "run-s coveralls:*",
+    "coveralls:gather": "npm run coverage",
+    "coveralls:upload": "coveralls < coverage/lcov.info"
   },
   "ava": {
     "files": [
@@ -18,6 +21,19 @@
       "babel-register"
     ],
     "babel": "inherit"
+  },
+  "nyc": {
+    "include": [
+      "src"
+    ],
+    "exclude": [
+      "src/*test*"
+    ],
+    "all": true,
+    "reporter": [
+      "lcov",
+      "text"
+    ]
   },
   "repository": {
     "type": "git",
@@ -48,12 +64,14 @@
     "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.24.1",
     "browser-env": "^2.0.31",
+    "coveralls": "^2.13.1",
     "enzyme": "^2.8.2",
     "eslint": "^3.19.0",
     "eslint-config-pedant": "^0.9.0",
     "eslint-config-prettier": "^2.1.0",
     "eslint-plugin-react": "^6.10.3",
     "eslint-plugin-require-path-exists": "^1.1.7",
+    "nyc": "^10.3.2",
     "react-dom": "^15.5.4",
     "react-test-renderer": "^15.5.4"
   },
