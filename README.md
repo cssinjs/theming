@@ -49,6 +49,41 @@ const App = () => (
 export default App;
 ```
 
+## API
+
+### ThemeProvider
+
+React High-Order component, which passes theme object down the react tree by context.
+
+```
+<ThemeProvider theme={theme}>
+  <App />
+</ThemeProvider>
+```
+
+### props
+
+#### props.theme
+
+*Required*  
+Type: `Object`, `Function`
+
+If its `Object` and its root `ThemeProvider` then its intact and being passed down the react tree.
+
+If its `Object` and its nested `ThemeProvider` then its being merged with theme from parent `ThemeProvider` and passed down to the react tree.
+
+If its `Function` and its nested ThemeProvider then its being applied to the theme from parent ThemeProvider and if result is an object it will be passed down to the react tree.
+
+
+#### props.children
+
+*Required*  
+Type: `PropTypes.element`
+
+ThemeProvider uses [`React.Children.only`](https://facebook.github.io/react/docs/react-api.html#react.children.only) in render, which returns the only child in children. Throws otherwise.
+
+
+
 ## License
 
 MIT © [Vladimir Starkov](https://iamstarkov.com)
