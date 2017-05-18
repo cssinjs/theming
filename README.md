@@ -72,7 +72,7 @@ If its `Object` and its root `ThemeProvider` then its intact and being passed do
 
 If its `Object` and its nested `ThemeProvider` then its being merged with theme from parent `ThemeProvider` and passed down to the react tree.
 
-If its `Function` and its nested ThemeProvider then its being applied to the theme from parent ThemeProvider and if result is an object it will be passed down to the react tree.
+If its `Function` and its nested `ThemeProvider` then its being applied to the theme from parent `ThemeProvider`. if result is an `Object` it will be passed down to the react tree, throws otherwise.
 
 
 #### props.children
