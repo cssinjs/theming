@@ -150,8 +150,7 @@ React High-Order component, which maps context to theme prop.
 *Required*  
 Type: `PropTypes.element`
 
-You need to have `ThemeProvider` with a theme somewhere upper the react tree, after that wrap you component in `withTheme` and your component will get theme as prop.1 `withTheme` will handle initial theme object as well as theme updates.
-
+You need to have `ThemeProvider` with a theme somewhere upper the react tree, after that wrap your component in `withTheme` and your component will get theme as a prop. `withTheme` will handle initial theme object as well as theme updates.
 
 PS. It doesnt break if you have `PureComponent` somewhere in between your ThemeProvider and withTheme (i have tests for that).
 
