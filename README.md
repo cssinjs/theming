@@ -197,7 +197,7 @@ Function to create `ThemeProvider` and `withTheme` with custom context channel.
 #### customChannel
 
 Type: `String`  
-Default: `__THEMING__`
+Default: `__THEMING__`  
 Result: `Object { channel, withTheme, ThemeProvider }`
 
 `withTheme` and `ThemeProvider` are the same as default ones, but with overwritten context channel.
