@@ -14,8 +14,8 @@
 * [API](#api)
   * [channel](#channel)
   * [ThemeProvider](#themeprovider)
-  * [withTheme](#withtheme)
-  * [createTheming](#createtheming)
+  * [withTheme](#withthemecomponent)
+  * [createTheming](#createthemingcustomchannel)
 * [License](#license)
 
 
