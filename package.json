@@ -23,7 +23,8 @@
       "src/**/*test.js"
     ],
     "require": [
-      "babel-register"
+      "babel-register",
+      "./.browser-env"
     ],
     "babel": "inherit"
   },
