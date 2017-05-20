@@ -12,10 +12,10 @@
 * [Install](#install)
 * [Usage](#usage)
 * [API](#api)
-  * [channel][#channel]
-  * [ThemeProvider][#themeprovider]
-  * [withTheme][#withtheme]
-  * [createTheming][#createtheming]
+  * [channel](#channel)
+  * [ThemeProvider](#themeprovider)
+  * [withTheme](#withtheme)
+  * [createTheming](#createtheming)
 * [License](#license)
 
 
