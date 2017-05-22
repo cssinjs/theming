@@ -74,7 +74,7 @@ export default App;
 
 ## Motivation
 
-These components are enabling seamless theming for your react applications. And as far as you dont want to pass theme object to each and every component. Thats why you want to use context. But as far context feature is _experimental API and it is likely to break in future releases of React_ you do not want to use it directly. Here `theming` comes to play.
+These components are enabling seamless theming for your react applications. And as far as you dont want to pass theme object to each and every component. Thats why you want to use context. But as far context feature is _experimental API and it is likely to break in future releases of React_ you don't want to use it directly. Here `theming` comes to play.
 
 > If you insist on using context despite these warnings, try to isolate your use of context to a small area and avoid using the context API directly when possible so that it's easier to upgrade when the API changes.
 >
@@ -163,7 +163,7 @@ const augment = outerTheme =>
 ##### props.children
 
 *Required*  
-Type: `PropTypes.elemenwt`
+Type: `PropTypes.element`
 
 ThemeProvider uses [`React.Children.only`](https://facebook.github.io/react/docs/react-api.html#react.children.only) in render, which returns the only child in children. Throws otherwise.
 
