@@ -5,7 +5,7 @@
 [![Coveralls Status][coveralls-image]][coveralls-url]
 [![Dependency Status][depstat-image]][depstat-url]
 
-> React High-Order Components for theming
+> Unified CSSinJS theming solution for React
 
 * `ThemeProvider` allows you to pass, update, merge and augment `theme` through context down react tree.
 * `withTheme` allows you to receive theme and its updates in your components as a `theme` prop.
