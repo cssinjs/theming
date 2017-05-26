@@ -2,8 +2,8 @@ const React = require('react');
 const PropTypes = require('prop-types');
 const isFunction = require('is-function');
 const isPlainObject = require('is-plain-object');
-const createBroadcast = require('./create-broadcast');
 const channel = require('./channel');
+const brcast = require('brcast');
 
 /**
  * Provide a theme to an entire react component tree via context
@@ -19,46 +19,15 @@ function createThemeProvider(CHANNEL = channel) {
         .isRequired,
     };
 
-    static contextTypes = {
-      [CHANNEL]: PropTypes.func,
-    };
-
     static childContextTypes = {
-      [CHANNEL]: PropTypes.func.isRequired,
+      [CHANNEL]: PropTypes.object.isRequired,
     };
 
-    constructor() {
-      super();
-      this.getTheme = this.getTheme.bind(this);
-    }
+    static contextTypes = {
+      [CHANNEL]: PropTypes.object,
+    };
 
-    getChildContext() {
-      return { ...this.context, [CHANNEL]: this.broadcast.subscribe };
-    }
-
-    componentWillMount() {
-      // If there is a ThemeProvider wrapper anywhere around this theme provider,
-      // merge this theme with the outer theme
-      if (this.context[CHANNEL]) {
-        const subscribe = this.context[CHANNEL];
-        this.unsubscribeToOuter = subscribe(theme => {
-          this.outerTheme = theme;
-        });
-      }
-      this.broadcast = createBroadcast(this.getTheme());
-    }
-
-    componentWillReceiveProps(nextProps) {
-      if (this.props.theme !== nextProps.theme) {
-        this.broadcast.publish(this.getTheme(nextProps.theme));
-      }
-    }
-
-    componentWillUnmount() {
-      if (this.context[CHANNEL]) {
-        this.unsubscribeToOuter();
-      }
-    }
+    broadcast = brcast(this.getTheme());
 
     // Get the theme from the props, supporting both (outerTheme) => {} as well as object notation
     getTheme(passedTheme) {
@@ -77,7 +46,41 @@ function createThemeProvider(CHANNEL = channel) {
           '[ThemeProvider] Please make your theme prop a plain object',
         );
       }
-      return { ...this.outerTheme, ...(theme: Object) };
+
+      return { ...this.outerTheme, ...theme };
+    }
+
+    setOuterTheme = theme => {
+      this.outerTheme = theme;
+    };
+
+    getChildContext() {
+      return { [CHANNEL]: this.broadcast };
+    }
+
+    componentDidMount() {
+      // create a new subscription for keeping track of outer theme, if present
+      if (this.context[CHANNEL]) {
+        this.unsubscribe = this.context[CHANNEL].subscribe(this.setOuterTheme);
+      }
+    }
+
+    // set broadcast state by merging outer theme with own
+    componentWillMount() {
+      if (this.context[CHANNEL]) {
+        this.setOuterTheme(this.context[CHANNEL].getState());
+        this.broadcast.setState(this.getTheme());
+      }
+    }
+
+    componentWillReceiveProps(nextProps) {
+      if (this.props.theme !== nextProps.theme) {
+        this.broadcast.setState(this.getTheme(nextProps.theme));
+      }
+    }
+
+    componentWillUnmount() {
+      this.unsubscribe && this.unsubscribe();
     }
 
     render() {

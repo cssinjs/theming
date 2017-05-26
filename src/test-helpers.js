@@ -7,10 +7,10 @@ export const getChannel = C => Object.keys(getContextTypes(C))[0];
 
 export const mountOptions = broadcast => ({
   childContextTypes: {
-    [channel]: PropTypes.func.isRequired,
+    [channel]: PropTypes.object.isRequired,
   },
   context: {
-    [channel]: broadcast.subscribe,
+    [channel]: broadcast,
   },
 });
 
@@ -64,13 +64,17 @@ export class ContextTrap extends Component {
     intercept: PropTypes.func.isRequired,
   };
   static contextTypes = {
-    [channel]: PropTypes.func.isRequired,
+    [channel]: PropTypes.object.isRequired,
   };
   componentWillMount() {
-    const subscribe = this.context[channel] || (() => {});
-    this.unsubscribe = subscribe(theme => {
-      this.props.intercept(theme);
-    });
+    if (this.context[channel]) {
+      this.props.intercept(this.context[channel].getState());
+    }
+  }
+  componentDidMount() {
+    if (this.context[channel]) {
+      this.unsubscribe = this.context[channel].subscribe(this.props.intercept);
+    }
   }
   // eslint-disable-next-line
   render() {

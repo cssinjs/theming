@@ -5,7 +5,9 @@ import { mount } from 'enzyme';
 import isFunction from 'is-function';
 import createThemeProvider from './create-theme-provider';
 import channel from './channel';
-import createBroadcast from './create-broadcast';
+// import createBroadcast from './create-broadcast';
+const createBroadcast = require('brcast');
+
 import {
   getChannel,
   Trap,
@@ -57,7 +59,7 @@ test(`ThemeProvider unsubscribes on unmounting`, t => {
 
   t.false(unsubscribed());
 
-  wrapper.instance().unsubscribeToOuter = () => unsubscribed(true);
+  wrapper.instance().unsubscribe = () => unsubscribed(true);
   wrapper.unmount();
 
   t.true(unsubscribed(), `ThemeProvider should unsubscribe on unmounting`);
@@ -166,7 +168,8 @@ test(`ThemeProvider themes objects merging`, t => {
       </ThemeProvider>
     </ThemeProvider>,
   );
-
+  // console.log({ actual: actual() });
+  // t.is(1, 1);
   t.deepEqual(actual(), expected, `ThemeProvider should merge themes`);
 });
 
