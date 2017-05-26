@@ -47,7 +47,7 @@ test(`withTheme(Comp) custom channel`, t => {
   t.is(actual, expected, `createWithTheme() should work with custom channel`);
 });
 
-test.only(`withTheme(Comp) unsubscribes on unmounting`, t => {
+test(`withTheme(Comp) unsubscribes on unmounting`, t => {
   const withTheme = createWithTheme();
   const theme = { themed: true };
   const ComponentWithTheme = withTheme(Trap.Prop);
