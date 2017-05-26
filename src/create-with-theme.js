@@ -5,8 +5,11 @@ const channel = require('./channel');
 function createWithTheme(CHANNEL = channel) {
   return Component =>
     class withTheme extends React.Component {
+      state = { theme: {} };
+      setTheme = theme => this.setState({ theme });
+
       static contextTypes = {
-        [CHANNEL]: PropTypes.func,
+        [CHANNEL]: PropTypes.object.isRequired,
       };
 
       componentWillMount() {
@@ -16,10 +19,13 @@ function createWithTheme(CHANNEL = channel) {
           );
         }
 
-        const subscribe = this.context[CHANNEL];
-        this.unsubscribe = subscribe(theme => {
-          this.setState({ theme });
-        });
+        this.setState({ theme: this.context[CHANNEL].getState() });
+      }
+
+      componentDidMount() {
+        if (this.context[CHANNEL]) {
+          this.unsubscribe = this.context[CHANNEL].subscribe(this.setTheme);
+        }
       }
 
       componentWillUnmount() {

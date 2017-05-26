@@ -80,7 +80,9 @@ function createThemeProvider(CHANNEL = channel) {
     }
 
     componentWillUnmount() {
-      this.unsubscribe && this.unsubscribe();
+      if (typeof this.unsubscribe === 'function') {
+        this.unsubscribe();
+      }
     }
 
     render() {

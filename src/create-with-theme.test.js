@@ -5,7 +5,7 @@ import { mount } from 'enzyme';
 import isFunction from 'is-function';
 import createWithTheme from './create-with-theme';
 import channel from './channel';
-import createBroadcast from './create-broadcast';
+import createBroadcast from 'brcast';
 import {
   getChannel,
   Comp,
@@ -47,7 +47,7 @@ test(`withTheme(Comp) custom channel`, t => {
   t.is(actual, expected, `createWithTheme() should work with custom channel`);
 });
 
-test(`withTheme(Comp) unsubscribes on unmounting`, t => {
+test.only(`withTheme(Comp) unsubscribes on unmounting`, t => {
   const withTheme = createWithTheme();
   const theme = { themed: true };
   const ComponentWithTheme = withTheme(Trap.Prop);
@@ -154,7 +154,7 @@ test(`withTheme(Comp) receives theme updates`, t => {
 
   mount(<ComponentWithTheme intercept={actual} />, mountOptions(broadcast));
 
-  broadcast.publish(update);
+  broadcast.setState(update);
 
   t.deepEqual(
     actual(),
@@ -180,7 +180,7 @@ test(`withTheme(Comp) receives theme updates even through PureComponent`, t => {
     mountOptions(broadcast),
   );
 
-  broadcast.publish(update);
+  broadcast.setState(update);
 
   t.deepEqual(
     actual(),
