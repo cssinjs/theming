@@ -2,9 +2,13 @@ const React = require('react');
 const PropTypes = require('prop-types');
 const channel = require('./channel');
 
+const getDisplayName = Component =>
+  Component.displayName || Component.name || 'Component';
+
 function createWithTheme(CHANNEL = channel) {
   return Component =>
-    class withTheme extends React.Component {
+    class WithTheme extends React.Component {
+      static displayName = `WithTheme(${getDisplayName(Component)})`;
       state = { theme: {} };
       setTheme = theme => this.setState({ theme });
 
@@ -15,7 +19,7 @@ function createWithTheme(CHANNEL = channel) {
       componentWillMount() {
         if (!this.context[CHANNEL]) {
           throw new Error(
-            '[withTheme] Please use ThemeProvider to be able to use withTheme',
+            '[WithTheme(${getDisplayName(Component)})] Please use ThemeProvider to be able to use WithTheme',
           );
         }
 

@@ -1,6 +1,6 @@
 import test from 'ava';
 import React, { Component } from 'react';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 
 import isFunction from 'is-function';
 import createWithTheme from './create-with-theme';
@@ -45,6 +45,50 @@ test(`withTheme(Comp) custom channel`, t => {
   const actual = getChannel(withTheme(Comp));
   const expected = custom;
   t.is(actual, expected, `createWithTheme() should work with custom channel`);
+});
+
+test(`withTheme(Comp) and stateless component`, t => {
+  const withTheme = createWithTheme();
+  const StatelessComp = (...props) => <div {...props} />;
+  const ThemedComp = withTheme(StatelessComp);
+  const theme = { themed: true };
+  const broadcast = createBroadcast(theme);
+  const wrapper = shallow(
+    <div><ThemedComp /></div>,
+    mountOptions(broadcast),
+  ).childAt(0);
+  const actual = wrapper.name();
+  const expected = `WithTheme(StatelessComp)`;
+
+  t.is(
+    actual,
+    expected,
+    `withTheme(Comp) should include wrapped stateless component's name in the displayName`,
+  );
+});
+
+test(`withTheme(Comp) and statefull component`, t => {
+  const withTheme = createWithTheme();
+  class StatefullComp extends Component {
+    render() {
+      return <div {...this.props} />;
+    }
+  }
+  const ThemedComp = withTheme(StatefullComp);
+  const theme = { themed: true };
+  const broadcast = createBroadcast(theme);
+  const wrapper = shallow(
+    <div><ThemedComp /></div>,
+    mountOptions(broadcast),
+  ).childAt(0);
+  const actual = wrapper.name();
+  const expected = `WithTheme(StatefullComp)`;
+
+  t.is(
+    actual,
+    expected,
+    `withTheme(Comp) should include wrapped statefull component's name in the displayName`,
+  );
 });
 
 test(`withTheme(Comp) unsubscribes on unmounting`, t => {
