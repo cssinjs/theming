@@ -3,7 +3,7 @@ const PropTypes = require('prop-types');
 const isFunction = require('is-function');
 const isPlainObject = require('is-plain-object');
 const channel = require('./channel');
-const brcast = require('brcast');
+const createBroadcast = require('brcast');
 
 /**
  * Provide a theme to an entire react component tree via context
@@ -27,7 +27,7 @@ function createThemeProvider(CHANNEL = channel) {
       [CHANNEL]: PropTypes.object,
     };
 
-    broadcast = brcast(this.getTheme());
+    broadcast = createBroadcast(this.getTheme());
 
     // Get the theme from the props, supporting both (outerTheme) => {} as well as object notation
     getTheme(passedTheme) {
