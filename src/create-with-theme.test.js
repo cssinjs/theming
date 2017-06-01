@@ -102,10 +102,10 @@ test(`withTheme(Comp) unsubscribes on unmounting`, t => {
     <ComponentWithTheme intercept={() => {}} />,
     mountOptions(broadcast),
   );
+  wrapper.instance().unsubscribe = () => unsubscribed(true);
 
   t.false(unsubscribed());
 
-  wrapper.instance().unsubscribe = () => unsubscribed(true);
   wrapper.unmount();
 
   t.true(unsubscribed(), `withTheme(Comp) should unsubscribe on unmounting`);
@@ -120,7 +120,7 @@ test(`withTheme(Comp) without ThemeProvider`, t => {
       mount(<ComponentWithTheme intercept={() => {}} />);
     },
     Error,
-    `withTheme(Comp) should throw if used with appropriate context`,
+    `withTheme(Comp) should throw if used without appropriate context`,
   );
 });
 
