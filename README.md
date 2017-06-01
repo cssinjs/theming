@@ -11,7 +11,11 @@
 
 * `ThemeProvider` allows you to pass, update, merge and augment `theme` through context down react tree.
 * `withTheme` allows you to receive theme and its updates in your components as a `theme` prop.
+<<<<<<< HEAD
 * `createTheming` allows you to integrate `theming` into your CSSinJS library with custom `channel` (if you need custom one).
+=======
+* _Advanced usage:_ `themeListener` allows you to add theming support in your components.
+>>>>>>> write documentation for themeListener
 
 See [Motivation](#motivation) for details.
 
@@ -26,6 +30,7 @@ See [Motivation](#motivation) for details.
   * [channel](#channel)
   * [ThemeProvider](#themeprovider)
   * [withTheme](#withthemecomponent)
+  * [themeListener](#themeListener)
   * [createTheming](#createthemingcustomchannel)
 * [Credits](#credits)
 * [License](#license)
@@ -229,6 +234,103 @@ const App = () => (
 export default App;
 ```
 
+### themeListener
+
+Advanced helper to hook theming in any Component.
+
+```js
+import { themeListener } from 'theming';
+
+function CustomWithTheme(Component) {
+  return class CustomWithTheme extends React.Component {
+    static contextTypes = themeListener.contextTypes;
+    constructor(props) {
+      super(props);
+      this.state = { theme: {} };
+      this.setTheme = theme => this.setState({ theme });
+
+      this.themeListenerInit = themeListener.init.bind(this);
+      this.themeListenerSubscribe = themeListener.subscribe.bind(this);
+      this.themeListenerUnsubscribe = themeListener.unsubscribe.bind(this);
+    }
+    componentWillMount() {
+      this.themeListenerInit(this.setTheme);
+    }
+    componentDidMount() {
+      this.themeListenerSubscribe(this.setTheme);
+    }
+    componentWillUnmount() {
+      this.themeListenerUnsubscribe();
+    }
+    render() {
+      const { theme } = this.state;
+      return <Component theme={theme} {...this.props} />;
+    }
+  }
+}
+```
+
+themeListener is an `Object` with following fields:
+
+* `themeListener.contextTypes`
+  * type: `Object`
+  * meant to be added your component's contextTypes:
+    ```js
+    static contextTypes = themeListener.contextTypes;
+    // or
+    static contextTypes = Object.assign({}, themeListener.contextTypes, {
+      /* your Component's contextTypes */
+    });
+    ```
+* `themeListener.init`
+  * type: `Function`
+  * takes callback `Function`, which in turn will be invoked with initial theme `Object`
+  * meant to be bound to component's context in `constructor`
+  * meant to be used in `componentWillMount`
+  * throws an error if your component will be used outside ThemeProvider
+  * example:
+    ```js
+    constructor(props) {
+      super(props);
+      this.themeListenerInit = themeListener.init.bind(this);
+    }
+    componentWillMount() {
+      this.themeListenerInit(theme => this.setState({ theme }));
+    }
+    ```
+* `themeListener.subscribe`
+  * type: `Function`
+  * takes callback `Function`, which in turn will be invoked with theme update `Object`, every time theme is updated in `ThemeProvider`
+  * meant to be bound to component's context in `constructor`
+  * meant to be used in `componentDidMount`
+  * assigns function to `this.unsubscribe` under the hood which meant to be used in `themeListener.unsubscribe`
+  * example:
+    ```js
+    constructor(props) {
+      super(props);
+      this.themeListenerSubscribe = themeListener.subscribe.bind(this);
+    }
+    componentDidMount() {
+      this.themeListenerSubscribe(theme => this.setState({ theme }));
+    }
+    ```
+* `themeListener.unsubscribe`
+  * type: `Function`
+  * takes no arguments
+  * meant to be bound to component's context in `constructor`
+  * meant to be used in `componentWillUnmount`
+  * invokes `this.unsubscribe`, which has been created in `themeListener.subscribe`
+  * example:
+    ```js
+    constructor(props) {
+      super(props);
+      this.themeListenerUnsubscribe = themeListener.unsubscribe.bind(this);
+    }
+    componentWillUnmount() {
+      this.themeListenerUnsubscribe();
+    }
+    ```
+
 ### createTheming(customChannel)
 
 Function to create `ThemeProvider` and `withTheme` with custom context channel.
@@ -237,9 +339,9 @@ Function to create `ThemeProvider` and `withTheme` with custom context channel.
 
 Type: `String`  
 Default: `__THEMING__`  
-Result: `Object { channel, withTheme, ThemeProvider }`
+Result: `Object { channel, withTheme, ThemeProvider. themeListener }`
 
-`withTheme` and `ThemeProvider` are the same as default ones, but with overwritten context channel.
+`withTheme`, `ThemeProvider` and `themeListener` are the same as default ones, but with overwritten context channel.
 
 `channel` is `customChannel` to track what is context channel.
 
