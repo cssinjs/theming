@@ -21,7 +21,7 @@ test(`createTheming()'s type`, t => {
 test(`createTheming()'s key names`, t => {
   const theming = createTheming();
   const actual = Object.keys(theming);
-  const expected = ['channel', 'withTheme', 'ThemeProvider'];
+  const expected = ['channel', 'withTheme', 'ThemeProvider', 'themeListener'];
 
   t.deepEqual(
     actual,
