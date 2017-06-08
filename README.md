@@ -18,6 +18,7 @@ See [Motivation](#motivation) for details.
 
 * [Install](#install)
 * [Usage](#usage)
+* [Playground demo](#playgroundemo)
 * [Motivation](#motivation)
 * [API](#api)
   * [channel](#channel)
@@ -72,6 +73,13 @@ const App = () => (
 
 export default App;
 ```
+
+## Playground demo
+
+Be our guest, play with `theming` in this webpackbin:
+[https://www.webpackbin.com/bins/-Km8TglfWP84oYhDquT1](https://www.webpackbin.com/bins/-Km8TglfWP84oYhDquT1)
+
+[![theming](https://user-images.githubusercontent.com/559321/26953553-5049761e-4cab-11e7-848f-9056684487cd.gif)](https://www.webpackbin.com/bins/-Km8TglfWP84oYhDquT1)
 
 ## Motivation
 
