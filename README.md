@@ -88,17 +88,19 @@ These components are enabling seamless theming for your react applications. And 
 
 > If you insist on using context despite these warnings, try to isolate your use of context to a small area and avoid using the context API directly when possible so that it's easier to upgrade when the API changes.
 >
-> If you insist on using context despite these warnings, try to isolate your use of context to a small area and avoid using the context API directly when possible so that it's easier to upgrade when the API changes.
+> If you insist on using context despite these warnings, try to isolate your use of context to a small area and avoid using the context API directly when possible so that it's easier to upgrade when the API changes.  
 > — [Context, React documentation](https://facebook.github.io/react/docs/context.html)
 
 Regarding _isolation your use of context to a small area_ and _small areas__ in particular our very own react prophet Dan Abramov have a thing to say:
 
 > Should I use React unstable “context” feature?
-> ![context application areas](https://pbs.twimg.com/media/CmeGPNcVYAAM7TR.jpg)
+> <img src="https://pbs.twimg.com/media/CmeGPNcVYAAM7TR.jpg" alt="![context application areas]" height="300" />  
+> — [Dan Abramov @dan_abramov on Twitter](https://twitter.com/dan_abramov/status/749715530454622208?lang=en)
 
 So you are fine to use context for theming. `theming` package provides you everything you need to do that:
-* `ThemeProvider` allows you to pass and update `theme` through context down react tree
+* `ThemeProvider` allows you to pass and update `theme` through context down react tree.
 * `withTheme` allows you to receive theme and its updates in your components as a `theme` prop.
+* `createTheming` allows you to integrate `theming` into your CSSinJS library with custom `channel` (if you need custom one).
 
 
 ## API
