@@ -1,5 +1,7 @@
 # theming
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/iamstarkov/theming.svg)](https://greenkeeper.io/)
+
 [![NPM version][npm-image]][npm-url]
 [![Build][travis-image]][travis-url]
 [![Coveralls Status][coveralls-image]][coveralls-url]
