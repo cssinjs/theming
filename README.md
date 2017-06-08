@@ -25,6 +25,7 @@ See [Motivation](#motivation) for details.
   * [ThemeProvider](#themeprovider)
   * [withTheme](#withthemecomponent)
   * [createTheming](#createthemingcustomchannel)
+* [Credits](#credits)
 * [License](#license)
 
 
@@ -251,6 +252,28 @@ export default {
   ThemeProvider,
 };
 ```
+
+## Credits
+
+* Thanks to [jss][jss] creator [Oleg Slobodskoi @kof][kof] for immersive help, support and code review.
+* Thanks to [styled-components][sc] creator [Max Stoiber @mxstbr][mxstbr] for initial and battle tested implementation of theming support in [styled-components][sc] as well as help and code review.
+* Thanks to [styled-components'][sc] core team member [Phil Plückthun @philpl][philpl] for help and code review.
+* Thanks to [glamorous][glamorous] creator [Kent C. Dodds @kentcdodds][kentcdodds] for help, support and code review.
+* Thanks to [glamorous's][glamorous] core team member [Alessandro Arnodo @vesparny][vesparny] for improved theming support in [glamorous][glamorous] and [brcast][brcast].
+* Thanks to [Gert Sallaerts @gertt][gertt] for the [playground][playground] demo.
+
+[kof]: https://github.com/kof
+[mxstbr]: https://github.com/mxstbr
+[philpl]: https://github.com/philpl
+[kentcdodds]: https://github.com/kentcdodds
+[vesparny]: https://github.com/vesparny
+[gertt]: https://github.com/gertt
+
+[jss]: https://github.com/cssinjs/jss
+[sc]: https://github.com/styled-components/styled-components
+[glamorous]: https://github.com/paypal/glamorous
+[brcast]: https://github.com/vesparny/brcast
+[playground]: https://www.webpackbin.com/bins/-Km8TglfWP84oYhDquT1
 
 ## License
 
