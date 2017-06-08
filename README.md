@@ -18,7 +18,7 @@ See [Motivation](#motivation) for details.
 
 * [Install](#install)
 * [Usage](#usage)
-* [Playground demo](#playgroundemo)
+* [Playground demo](#playground-demo)
 * [Motivation](#motivation)
 * [API](#api)
   * [channel](#channel)
