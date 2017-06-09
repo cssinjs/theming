@@ -2,13 +2,20 @@
   "name": "theming",
   "version": "1.0.0",
   "description": "Unified CSSinJS theming solution for React",
-  "main": "dist",
+  "main": "dist/theming.cjs.js",
+  "jsnext:main": "dist/theming.es.js",
+  "module": "dist/theming.es.js",
   "files": [
     "src",
     "dist"
   ],
   "scripts": {
-    "build": "babel src -d dist --ignore '*test*'",
+    "build": "npm-run-all clean --parallel build:*",
+    "clean": "rimraf dist/",
+    "build:es": "rollup --config --environment FORMAT:es",
+    "build:cjs": "rollup --config --environment FORMAT:cjs",
+    "build:umd": "rollup --config --sourcemap --environment FORMAT:umd",
+    "build:umd-min": "rollup --config --sourcemap --environment MINIFY,FORMAT:umd",
     "watch": "babel src -d dist --watch",
     "lint": "eslint .",
     "test": "ava",
@@ -64,6 +71,7 @@
     "ava": "^0.19.1",
     "babel-cli": "^6.24.1",
     "babel-eslint": "^7.2.3",
+    "babel-plugin-external-helpers": "^6.22.0",
     "babel-preset-env": "^1.4.0",
     "babel-preset-es2017": "^6.24.1",
     "babel-preset-react": "^6.24.1",
@@ -79,14 +87,25 @@
     "eslint-plugin-require-path-exists": "^1.1.7",
     "npm-run-all": "^4.0.2",
     "nyc": "^10.3.2",
+    "prop-types": "^15.5.8",
+    "react": "^15.5.4",
     "react-dom": "^15.5.4",
-    "react-test-renderer": "^15.5.4"
+    "react-test-renderer": "^15.5.4",
+    "rimraf": "^2.6.1",
+    "rollup": "^0.42.0",
+    "rollup-plugin-babel": "^2.7.1",
+    "rollup-plugin-commonjs": "^8.0.2",
+    "rollup-plugin-json": "^2.3.0",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-uglify": "^2.0.1"
+  },
+  "peerDependencies": {
+    "prop-types": "^15.5.8",
+    "react": "^15.5.4"
   },
   "dependencies": {
     "brcast": "^2.0.0",
     "is-function": "^1.0.1",
-    "is-plain-object": "^2.0.1",
-    "prop-types": "^15.5.8",
-    "react": "^15.5.4"
+    "is-plain-object": "^2.0.1"
   }
 }
