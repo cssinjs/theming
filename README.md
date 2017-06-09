@@ -97,7 +97,7 @@ Regarding _isolation your use of context to a small area_ and _small areas__ in 
 > <img src="https://pbs.twimg.com/media/CmeGPNcVYAAM7TR.jpg" alt="![context application areas]" height="300" />  
 > — [Dan Abramov @dan_abramov on Twitter](https://twitter.com/dan_abramov/status/749715530454622208?lang=en)
 
-So you are fine to use context for theming. `theming` package provides you everything you need to do that:
+So you are fine to use context for theming. `theming` package provides everything you need to do that:
 * `ThemeProvider` allows you to pass and update `theme` through context down react tree.
 * `withTheme` allows you to receive theme and its updates in your components as a `theme` prop.
 * `createTheming` allows you to integrate `theming` into your CSSinJS library with custom `channel` (if you need custom one).
