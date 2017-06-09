@@ -1,6 +1,6 @@
-const React = require('react');
-const PropTypes = require('prop-types');
-const channel = require('./channel');
+import React from 'react';
+import PropTypes from 'prop-types';
+import channel from './channel';
 
 const getDisplayName = Component =>
   Component.displayName || Component.name || 'Component';
@@ -46,4 +46,4 @@ function createWithTheme(CHANNEL = channel) {
     };
 }
 
-module.exports = createWithTheme;
+export default createWithTheme;
