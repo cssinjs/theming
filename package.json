@@ -86,7 +86,8 @@
     "npm-run-all": "^4.0.2",
     "nyc": "^10.3.2",
     "react-dom": "^15.5.4",
-    "react-test-renderer": "^15.5.4"
+    "react-test-renderer": "^15.5.4",
+    "rimraf": "^2.6.1"
   },
   "dependencies": {
     "brcast": "^2.0.0",
