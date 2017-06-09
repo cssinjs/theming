@@ -93,7 +93,7 @@ These components are enabling seamless theming for your react applications. And 
 
 Regarding _isolation your use of context to a small area_ and _small areas__ in particular our very own react prophet Dan Abramov have a thing to say:
 
-> Should I use React unstable “context” feature?
+> Should I use React unstable “context” feature?  
 > <img src="https://pbs.twimg.com/media/CmeGPNcVYAAM7TR.jpg" alt="![context application areas]" height="300" />  
 > — [Dan Abramov @dan_abramov on Twitter](https://twitter.com/dan_abramov/status/749715530454622208?lang=en)
 
