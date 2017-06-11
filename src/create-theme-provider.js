@@ -1,9 +1,9 @@
-const React = require('react');
-const PropTypes = require('prop-types');
-const isFunction = require('is-function');
-const isPlainObject = require('is-plain-object');
-const channel = require('./channel');
-const createBroadcast = require('brcast');
+import React from 'react';
+import PropTypes from 'prop-types';
+import isFunction from 'is-function';
+import isPlainObject from 'is-plain-object';
+import channel from './channel';
+import createBroadcast from 'brcast';
 
 /**
  * Provide a theme to an entire react component tree via context
@@ -11,7 +11,7 @@ const createBroadcast = require('brcast');
  * and event emitter as pure components block context updates)
  */
 
-function createThemeProvider(CHANNEL = channel) {
+export default function createThemeProvider(CHANNEL = channel) {
   return class ThemeProvider extends React.Component {
     static propTypes = {
       children: PropTypes.element,
@@ -93,5 +93,3 @@ function createThemeProvider(CHANNEL = channel) {
     }
   };
 }
-
-module.exports = createThemeProvider;
