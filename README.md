@@ -82,7 +82,7 @@ export default App;
 Be our guest, play with `theming` in this webpackbin:
 [https://www.webpackbin.com/bins/-Km8TglfWP84oYhDquT1](https://www.webpackbin.com/bins/-Km8TglfWP84oYhDquT1)
 
-[![theming playground demo](https://user-images.githubusercontent.com/559321/27082371-ba194816-5044-11e7-8f06-6cbdbdefb602.gif)
+![theming playground demo](https://user-images.githubusercontent.com/559321/27082371-ba194816-5044-11e7-8f06-6cbdbdefb602.gif)
 
 ## Motivation
 
