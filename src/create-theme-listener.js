@@ -1,7 +1,7 @@
-const PropTypes = require('prop-types');
-const channel = require('./channel');
+import PropTypes from 'prop-types';
+import channel from './channel';
 
-function createThemeListener(CHANNEL = channel) {
+export default function createThemeListener(CHANNEL = channel) {
   const contextTypes = {
     [CHANNEL]: PropTypes.object.isRequired,
   };
@@ -35,5 +35,3 @@ function createThemeListener(CHANNEL = channel) {
     unsubscribe,
   };
 }
-
-module.exports = createThemeListener;
