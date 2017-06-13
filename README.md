@@ -11,11 +11,8 @@
 
 * `ThemeProvider` allows you to pass, update, merge and augment `theme` through context down react tree.
 * `withTheme` allows you to receive theme and its updates in your components as a `theme` prop.
-<<<<<<< HEAD
 * `createTheming` allows you to integrate `theming` into your CSSinJS library with custom `channel` (if you need custom one).
-=======
 * _Advanced usage:_ `themeListener` allows you to add theming support in your components.
->>>>>>> write documentation for themeListener
 
 See [Motivation](#motivation) for details.
 
