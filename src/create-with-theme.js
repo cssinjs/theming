@@ -16,19 +16,15 @@ export default function createWithTheme(CHANNEL = channel) {
         super(props);
         this.state = { theme: {} };
         this.setTheme = theme => this.setState({ theme });
-
-        this.themeListenerInit = themeListener.init.bind(this);
-        this.themeListenerSubscribe = themeListener.subscribe.bind(this);
-        this.themeListenerUnsubscribe = themeListener.unsubscribe.bind(this);
       }
       componentWillMount() {
-        this.themeListenerInit(this.setTheme);
+        this.setTheme(themeListener.initial(this.context))
       }
       componentDidMount() {
-        this.themeListenerSubscribe(this.setTheme);
+        this.unsubscribe = themeListener.subscribe(this.context, this.setTheme);
       }
       componentWillUnmount() {
-        this.themeListenerUnsubscribe();
+        this.unsubscribe();
       }
       render() {
         const { theme } = this.state;
