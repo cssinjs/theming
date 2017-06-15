@@ -6,32 +6,25 @@ export default function createThemeListener(CHANNEL = channel) {
     [CHANNEL]: PropTypes.object.isRequired,
   };
 
-  function init(cb) {
-    if (!this.context[CHANNEL]) {
+  function initial(context) {
+    if (!context[CHANNEL]) {
       throw new Error(
         `[${this.displayName}] Please use ThemeProvider to be able to use WithTheme`,
       );
     }
 
-    cb(this.context[CHANNEL].getState());
+    return context[CHANNEL].getState()
   }
 
-  function subscribe(cb) {
-    if (this.context[CHANNEL]) {
-      this.unsubscribe = this.context[CHANNEL].subscribe(cb);
-    }
-  }
-
-  function unsubscribe() {
-    if (typeof this.unsubscribe === 'function') {
-      this.unsubscribe();
+  function subscribe(context, cb) {
+    if (context[CHANNEL]) {
+       return context[CHANNEL].subscribe(cb);
     }
   }
 
   return {
     contextTypes,
-    init,
+    initial,
     subscribe,
-    unsubscribe,
   };
 }
