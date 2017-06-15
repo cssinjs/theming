@@ -279,52 +279,37 @@ themeListener is an `Object` with following fields:
       /* your Component's contextTypes */
     });
     ```
-* `themeListener.init`
+* `themeListener.initial`
   * type: `Function`
-  * takes callback `Function`, which in turn will be invoked with initial theme `Object`
-  * meant to be bound to component's context in `constructor`
+  * takes a single context `Object`, where `context` is `this.context` from your component
   * meant to be used in `componentWillMount`
   * throws an error if your component will be used outside ThemeProvider
   * example:
     ```js
     constructor(props) {
       super(props);
-      this.themeListenerInit = themeListener.init.bind(this);
     }
     componentWillMount() {
-      this.themeListenerInit(theme => this.setState({ theme }));
+      this.setState({ theme: themeListener.initial(this.context) });
     }
     ```
 * `themeListener.subscribe`
   * type: `Function`
-  * takes callback `Function`, which in turn will be invoked with theme update `Object`, every time theme is updated in `ThemeProvider`
-  * meant to be bound to component's context in `constructor`
+  * takes 2 arguments:
+    * context `Object`, where `context` is `this.context` from your component
+    * callback `Function`, which in turn will be invoked with theme update `Object`, every time theme is updated in `ThemeProvider`
   * meant to be used in `componentDidMount`
-  * assigns function to `this.unsubscribe` under the hood which meant to be used in `themeListener.unsubscribe`
+  * returns unsubscribe `Function`, which you should invoke in `componentWillUnmount`
   * example:
     ```js
     constructor(props) {
       super(props);
-      this.themeListenerSubscribe = themeListener.subscribe.bind(this);
     }
     componentDidMount() {
-      this.themeListenerSubscribe(theme => this.setState({ theme }));
-    }
-    ```
-* `themeListener.unsubscribe`
-  * type: `Function`
-  * takes no arguments
-  * meant to be bound to component's context in `constructor`
-  * meant to be used in `componentWillUnmount`
-  * invokes `this.unsubscribe`, which has been created in `themeListener.subscribe`
-  * example:
-    ```js
-    constructor(props) {
-      super(props);
-      this.themeListenerUnsubscribe = themeListener.unsubscribe.bind(this);
+      this.unsubscribe = themeListener.subscribe(theme => this.setState({ theme }));
     }
     componentWillUnmount() {
-      this.themeListenerUnsubscribe();
+      this.unsubscribe();
     }
     ```
 
