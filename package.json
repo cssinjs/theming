@@ -79,7 +79,7 @@
     "coveralls": "^2.13.1",
     "cross-env": "^5.0.1",
     "enzyme": "^2.8.2",
-    "eslint": "^3.19.0",
+    "eslint": "^4.1.0",
     "eslint-config-pedant": "^0.10.0",
     "eslint-config-prettier": "^2.1.0",
     "eslint-plugin-react": "^7.0.1",
