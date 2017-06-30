@@ -75,7 +75,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.24.1",
-    "browser-env": "^2.0.31",
+    "browser-env": "^3.0.0",
     "coveralls": "^2.13.1",
     "cross-env": "^5.0.1",
     "enzyme": "^2.8.2",
