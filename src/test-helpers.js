@@ -66,14 +66,16 @@ export class ContextTrap extends Component {
   static contextTypes = {
     [channel]: PropTypes.object.isRequired,
   };
-  componentWillMount() {
-    if (this.context[channel]) {
-      this.props.intercept(this.context[channel].getState());
+  constructor(props, context) {
+    super(props, context)
+    this.broadcast = this.context[channel];
+    if (this.broadcast) {
+      this.props.intercept(this.broadcast.getState());
     }
   }
   componentDidMount() {
-    if (this.context[channel]) {
-      this.unsubscribe = this.context[channel].subscribe(this.props.intercept);
+    if (this.broadcast) {
+      this.unsubscribe = this.broadcast.subscribe(this.props.intercept);
     }
   }
   // eslint-disable-next-line

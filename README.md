@@ -241,19 +241,18 @@ import { themeListener } from 'theming';
 function CustomWithTheme(Component) {
   return class CustomWithTheme extends React.Component {
     static contextTypes = themeListener.contextTypes;
-    constructor(props) {
-      super(props);
-      this.state = { theme: {} };
+    constructor(props, context) {
+      super(props, context);
+      this.state = { theme: themeListener.initial(context) };
       this.setTheme = theme => this.setState({ theme });
-    }
-    componentWillMount() {
-      this.setTheme(themeListener.initial(this.context))
     }
     componentDidMount() {
       this.unsubscribe = themeListener.subscribe(this.context, this.setTheme);
     }
     componentWillUnmount() {
-      this.unsubscribe();
+      if (typeof this.unsubscribe === 'function') {
+        this.unsubscribe();
+      }
     }
     render() {
       const { theme } = this.state;
@@ -277,16 +276,14 @@ themeListener is an `Object` with following fields:
     ```
 * `themeListener.initial`
   * type: `Function`
-  * takes a single context `Object`, where `context` is `this.context` from your component
-  * meant to be used in `componentWillMount`
+  * takes a single context `Object`, where `context` is `context` of your component
+  * meant to be used in `constructor`
   * throws an error if your component will be used outside ThemeProvider
   * example:
     ```js
-    constructor(props) {
-      super(props);
-    }
-    componentWillMount() {
-      this.setState({ theme: themeListener.initial(this.context) });
+    constructor(props, context) {
+      super(props, context);
+      this.state = { theme: themeListener.initial(context) }
     }
     ```
 * `themeListener.subscribe`
@@ -298,14 +295,13 @@ themeListener is an `Object` with following fields:
   * returns unsubscribe `Function`, which you should invoke in `componentWillUnmount`
   * example:
     ```js
-    constructor(props) {
-      super(props);
-    }
     componentDidMount() {
-      this.unsubscribe = themeListener.subscribe(theme => this.setState({ theme }));
+      this.unsubscribe = themeListener.subscribe(this.context, theme => this.setState({ theme }));
     }
     componentWillUnmount() {
-      this.unsubscribe();
+      if (typeof this.unsubscribe === 'function') {
+        this.unsubscribe();
+      }
     }
     ```
 
