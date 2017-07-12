@@ -110,6 +110,21 @@ test(`ThemeProvider passes theme`, t => {
   t.deepEqual(actual(), expected, `ThemeProvider should pass a theme`);
 });
 
+test(`ThemeProvider passes theme instance`, t => {
+  const ThemeProvider = createThemeProvider();
+  const theme = { themed: true };
+  const actual = getInterceptor();
+  const expected = theme;
+
+  mount(
+    <ThemeProvider theme={theme}>
+      <Trap.Context intercept={actual} />
+    </ThemeProvider>,
+  );
+
+  t.is(actual(), expected, `ThemeProvider should pass theme instance, if it is not nested`);
+});
+
 test(`ThemeProvider passes theme deep into tree`, t => {
   const ThemeProvider = createThemeProvider();
   const theme = { themed: true };
