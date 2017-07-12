@@ -5,3 +5,8 @@ node_js:
   - v4
 after_script:
   - 'npm run coveralls'
+
+# blocklist version commits
+branches:
+  except:
+    - /^v[0-9]/
