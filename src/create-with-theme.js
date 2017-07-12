@@ -12,19 +12,18 @@ export default function createWithTheme(CHANNEL = channel) {
       static displayName = `WithTheme(${getDisplayName(Component)})`;
       static contextTypes = themeListener.contextTypes;
 
-      constructor(props) {
-        super(props);
-        this.state = { theme: {} };
+      constructor(props, context) {
+        super(props, context);
+        this.state = { theme: themeListener.initial(context) };
         this.setTheme = theme => this.setState({ theme });
-      }
-      componentWillMount() {
-        this.setTheme(themeListener.initial(this.context))
       }
       componentDidMount() {
         this.unsubscribe = themeListener.subscribe(this.context, this.setTheme);
       }
       componentWillUnmount() {
-        this.unsubscribe();
+        if (typeof this.unsubscribe === 'function') {
+          this.unsubscribe();
+        }
       }
       render() {
         const { theme } = this.state;

@@ -21,7 +21,7 @@ test(`createThemeListener's result's type`, t => {
 
 test(`themeListener's fields`, t => {
   const actual = Object.keys(createThemeListener());
-  const expected = ['contextTypes', 'init', 'subscribe', 'unsubscribe'];
+  const expected = ['contextTypes', 'initial', 'subscribe'];
 
   t.deepEqual(
     actual,
@@ -51,10 +51,10 @@ test(`themeListener's custom channel`, t => {
   );
 });
 
-test(`themeListener's init, subscribe and unsubscribe`, t => {
+test(`themeListener's initial and subscribe`, t => {
   const themeListener = createThemeListener();
-  const { init, subscribe, unsubscribe } = themeListener;
-  const actual = [init, subscribe, unsubscribe].every(isFunction);
+  const { initial, subscribe } = themeListener;
+  const actual = [initial, subscribe].every(isFunction);
 
   t.true(
     actual,
@@ -68,21 +68,17 @@ const getTrap = themeListener => {
       intercept: PropTypes.func.isRequired,
     };
     static contextTypes = themeListener.contextTypes;
-    constructor(props) {
-      super(props);
-      this.intercept = this.props.intercept;
-      this.themeListenerInit = themeListener.init.bind(this);
-      this.themeListenerSubscribe = themeListener.subscribe.bind(this);
-      this.themeListenerUnsubscribe = themeListener.unsubscribe.bind(this);
-    }
-    componentWillMount() {
-      this.themeListenerInit(this.intercept);
+    constructor(props, context) {
+      super(props, context);
+      this.props.intercept(themeListener.initial(context))
     }
     componentDidMount() {
-      this.themeListenerSubscribe(this.intercept);
+      this.unsubscribe = themeListener.subscribe(this.context, this.props.intercept)
     }
     componentWillUnmount() {
-      this.themeListenerUnsubscribe();
+      if (typeof this.unsubscribe === 'function') {
+        this.unsubscribe()
+      }
     }
     // eslint-disable-next-line
     render() {
