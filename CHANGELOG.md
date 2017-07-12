@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-### upcoming
+### 1.0.2 (2017-07-12)
 
 Fix a bug where ThemeProvider tried to merge with `outerTheme`, when there is none. In these case ThemeProvider needs to pass original theme without merging ([#19][] by [@iamstarkov][])
 
