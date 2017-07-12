@@ -47,6 +47,10 @@ export default function createThemeProvider(CHANNEL = channel) {
         );
       }
 
+      if (!this.outerTheme) {
+        return theme;
+      }
+
       return { ...this.outerTheme, ...theme };
     }
 
