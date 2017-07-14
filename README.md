@@ -324,12 +324,13 @@ import { createTheming } from 'theming';
 
 const theming = createTheming('__styled-components__');
 
-const { channel, withTheme, ThemeProvider } = theming;
+const { channel, withTheme, ThemeProvider, themeListener } = theming;
 
 export default {
   channel,
   withTheme,
   ThemeProvider,
+  themeListener,
 };
 ```
 
