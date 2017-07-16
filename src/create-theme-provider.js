@@ -27,7 +27,7 @@ export default function createThemeProvider(CHANNEL = channel) {
       [CHANNEL]: PropTypes.object,
     };
 
-    broadcast = createBroadcast(this.getTheme());
+    broadcast = createBroadcast();
 
     // Get the theme from the props, supporting both (outerTheme) => {} as well as object notation
     getTheme(passedTheme) {
