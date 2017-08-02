@@ -65,7 +65,7 @@ export default function createThemeProvider(CHANNEL = channel) {
     componentDidMount() {
       // create a new subscription for keeping track of outer theme, if present
       if (this.context[CHANNEL]) {
-        this.unsubscribe = this.context[CHANNEL].subscribe(this.setOuterTheme);
+        this.unsubscribeId = this.context[CHANNEL].subscribe(this.setOuterTheme);
       }
     }
 
@@ -84,9 +84,7 @@ export default function createThemeProvider(CHANNEL = channel) {
     }
 
     componentWillUnmount() {
-      if (typeof this.unsubscribe === 'function') {
-        this.unsubscribe();
-      }
+      this.unsubscribeId  && this.context[CHANNEL].unsubscribe(this.unsubscribeId);
     }
 
     render() {

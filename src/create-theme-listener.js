@@ -22,9 +22,16 @@ export default function createThemeListener(CHANNEL = channel) {
     }
   }
 
+  function unsubscribe(context, subscriptionId) {
+    if (context[CHANNEL]) {
+       return context[CHANNEL].unsubscribe(subscriptionId);
+    }
+  }
+
   return {
     contextTypes,
     initial,
     subscribe,
+    unsubscribe,
   };
 }
