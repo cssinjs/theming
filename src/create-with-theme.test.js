@@ -232,3 +232,26 @@ test(`withTheme(Comp) receives theme updates even through PureComponent`, t => {
     `withTheme(Comp) should receive theme updates even through PureComponent`,
   );
 });
+
+test(`withTheme(Comp) hoists non-react static class properties`, t => {
+  const withTheme = createWithTheme();
+
+  class ExampleComponent extends Component {
+    static displayName = 'foo';
+    static someSpecialStatic = 'bar';
+  }
+
+  const ComponentWithTheme = withTheme(ExampleComponent);
+
+  t.deepEqual(
+    ComponentWithTheme.displayName,
+    'WithTheme(foo)',
+    `withTheme(Comp) should not hoist react static properties`,
+  );
+
+  t.deepEqual(
+    ComponentWithTheme.someSpecialStatic,
+    ExampleComponent.someSpecialStatic,
+    `withTheme(Comp) should hoist non-react static properties`,
+  );
+});
