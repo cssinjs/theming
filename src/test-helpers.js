@@ -75,7 +75,7 @@ export class ContextTrap extends Component {
   }
   componentDidMount() {
     if (this.broadcast) {
-      this.unsubscribe = this.broadcast.subscribe(this.props.intercept);
+      this.subscriptionId = this.broadcast.subscribe(this.props.intercept);
     }
   }
   // eslint-disable-next-line

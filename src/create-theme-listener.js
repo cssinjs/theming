@@ -18,7 +18,13 @@ export default function createThemeListener(CHANNEL = channel) {
 
   function subscribe(context, cb) {
     if (context[CHANNEL]) {
-       return context[CHANNEL].subscribe(cb);
+      return context[CHANNEL].subscribe(cb);
+    }
+  }
+
+  function unsubscribe(context, subscriptionId) {
+    if (context[CHANNEL]) {
+      context[CHANNEL].unsubscribe(subscriptionId);
     }
   }
 
@@ -26,5 +32,6 @@ export default function createThemeListener(CHANNEL = channel) {
     contextTypes,
     initial,
     subscribe,
+    unsubscribe,
   };
 }

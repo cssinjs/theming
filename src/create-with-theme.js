@@ -18,12 +18,10 @@ export default function createWithTheme(CHANNEL = channel) {
         this.setTheme = theme => this.setState({ theme });
       }
       componentDidMount() {
-        this.unsubscribe = themeListener.subscribe(this.context, this.setTheme);
+        this.subscriptionId = themeListener.subscribe(this.context, this.setTheme);
       }
       componentWillUnmount() {
-        if (typeof this.unsubscribe === 'function') {
-          this.unsubscribe();
-        }
+        themeListener.unsubscribe(this.context, this.subscriptionId);
       }
       render() {
         const { theme } = this.state;

@@ -102,7 +102,8 @@ test(`withTheme(Comp) unsubscribes on unmounting`, t => {
     <ComponentWithTheme intercept={() => {}} />,
     mountOptions(broadcast),
   );
-  wrapper.instance().unsubscribe = () => unsubscribed(true);
+  const instanceSubscriptionId = wrapper.instance().subscriptionId;
+  broadcast.unsubscribe = (subscriptionId) => unsubscribed(instanceSubscriptionId === subscriptionId);
 
   t.false(unsubscribed());
 
