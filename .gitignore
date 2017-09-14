@@ -7,3 +7,4 @@ dist
 shrinkwrap.*
 .nyc_output
 coverage
+.idea

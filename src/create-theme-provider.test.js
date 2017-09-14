@@ -56,10 +56,11 @@ test(`ThemeProvider unsubscribes on unmounting`, t => {
     <ThemeProvider theme={theme} />,
     mountOptions(broadcast),
   );
+  const instanceSubscriptionId = wrapper.instance().subscriptionId;
+  broadcast.unsubscribe = (subscriptionId) => unsubscribed(instanceSubscriptionId === subscriptionId);
 
   t.false(unsubscribed());
 
-  wrapper.instance().unsubscribe = () => unsubscribed(true);
   wrapper.unmount();
 
   t.true(unsubscribed(), `ThemeProvider should unsubscribe on unmounting`);

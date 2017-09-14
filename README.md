@@ -247,12 +247,10 @@ function CustomWithTheme(Component) {
       this.setTheme = theme => this.setState({ theme });
     }
     componentDidMount() {
-      this.unsubscribe = themeListener.subscribe(this.context, this.setTheme);
+      this.subscriptionId = themeListener.subscribe(this.context, this.setTheme);
     }
     componentWillUnmount() {
-      if (typeof this.unsubscribe === 'function') {
-        this.unsubscribe();
-      }
+      themeListener.unsubscribe(this.context, this.subscriptionId);
     }
     render() {
       const { theme } = this.state;
@@ -292,17 +290,32 @@ themeListener is an `Object` with following fields:
     * context `Object`, where `context` is `this.context` from your component
     * callback `Function`, which in turn will be invoked with theme update `Object`, every time theme is updated in `ThemeProvider`
   * meant to be used in `componentDidMount`
-  * returns unsubscribe `Function`, which you should invoke in `componentWillUnmount`
+  * returns subscriptionId `Number`, which you should use to unsubscribe in `componentWillUnmount`
   * example:
     ```js
     componentDidMount() {
-      this.unsubscribe = themeListener.subscribe(this.context, theme => this.setState({ theme }));
+      this.subscriptionId = themeListener.subscribe(this.context, theme => this.setState({ theme }));
     }
     componentWillUnmount() {
-      if (typeof this.unsubscribe === 'function') {
-        this.unsubscribe();
-      }
+      themeListener.unsubscribe(this.context, this.subscriptionId);
     }
+    ```
+* `themeListener.unsubscribe`
+  * type: `Function`
+  * takes 2 arguments:
+    * context `Object`, where `context` is `this.context` from your component
+    * subscriptionId `Number` returned by `themeListener.subscribe` in `componentDidMount`
+  * meant to be used in `componentWillUnmount`
+  * returns nothing
+  * example:
+    ```js
+    componentDidMount() {
+      this.subscriptionId = themeListener.subscribe(this.context, theme => this.setState({ theme }));
+    }
+    componentWillUnmount() {
+      themeListener.unsubscribe(this.context, this.subscriptionId);
+    }
+    ```
     ```
 
 ### createTheming(customChannel)

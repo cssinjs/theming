@@ -21,7 +21,7 @@ test(`createThemeListener's result's type`, t => {
 
 test(`themeListener's fields`, t => {
   const actual = Object.keys(createThemeListener());
-  const expected = ['contextTypes', 'initial', 'subscribe'];
+  const expected = ['contextTypes', 'initial', 'subscribe', 'unsubscribe'];
 
   t.deepEqual(
     actual,
@@ -73,12 +73,11 @@ const getTrap = themeListener => {
       this.props.intercept(themeListener.initial(context))
     }
     componentDidMount() {
-      this.unsubscribe = themeListener.subscribe(this.context, this.props.intercept)
+      this.subscriptionId = themeListener.subscribe(this.context, this.props.intercept)
     }
     componentWillUnmount() {
-      if (typeof this.unsubscribe === 'function') {
-        this.unsubscribe()
-      }
+      console.log('call did mount and unsubscribe', this.subscriptionId)
+      themeListener.unsubscribe(this.subscriptionId);
     }
     // eslint-disable-next-line
     render() {
@@ -235,7 +234,8 @@ test(`themeListener and unsubscribe`, t => {
   const unsubscribed = getInterceptor(false);
 
   const wrapper = mount(<Trap intercept={() => {}} />, mountOptions(broadcast));
-  wrapper.instance().unsubscribe = () => unsubscribed(true);
+  const instanceSubscriptionId = wrapper.instance().subscriptionId;
+  themeListener.unsubscribe = (subscriptionId) => unsubscribed(instanceSubscriptionId === subscriptionId);
 
   t.false(unsubscribed());
 
