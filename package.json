@@ -95,6 +95,6 @@
     "is-function": "^1.0.1",
     "is-plain-object": "^2.0.1",
     "prop-types": "^15.5.8",
-    "react": "^15.5.4"
+    "react": "^16.0.0"
   }
 }
