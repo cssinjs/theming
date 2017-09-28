@@ -76,7 +76,7 @@
     "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.24.1",
     "browser-env": "2.0.31",
-    "coveralls": "^2.13.1",
+    "coveralls": "^3.0.0",
     "cross-env": "^5.0.1",
     "enzyme": "^2.8.2",
     "eslint": "^4.1.0",
