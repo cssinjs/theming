@@ -1,12 +1,15 @@
 import test from 'ava';
 import React, { Component } from 'react';
-import { mount } from 'enzyme';
+import { mount, configure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 
 import isFunction from 'is-function';
 import createThemeProvider from './create-theme-provider';
 import channel from './channel';
 // import createBroadcast from './create-broadcast';
 const createBroadcast = require('brcast');
+
+configure({ adapter: new Adapter() });
 
 import {
   getChannel,
