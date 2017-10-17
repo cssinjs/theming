@@ -60,9 +60,15 @@ test(`ThemeProvider unsubscribes on unmounting`, t => {
     mountOptions(broadcast),
   );
 
+  t.true(wrapper.instance().subscriptionId !== undefined, 'brcast subscriptionId is undefined');
+  t.true(typeof wrapper.instance().subscriptionId === 'number', 'brcast subscriptionId expected to be number');
+
   t.false(unsubscribed());
 
-  wrapper.instance().unsubscribe = () => unsubscribed(true);
+  const brcastInst = wrapper.context(channel);
+  brcastInst.unsubscribe = () => unsubscribed(true);
+  wrapper.setContext({[channel]: brcastInst});
+
   wrapper.unmount();
 
   t.true(unsubscribed(), `ThemeProvider should unsubscribe on unmounting`);
