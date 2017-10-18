@@ -2,12 +2,15 @@ import test from 'ava';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import createBroadcast from 'brcast';
-import { mount } from 'enzyme';
+import { mount, configure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 import isFunction from 'is-function';
 import isPainObject from 'is-plain-object';
 import { getChannel, Pure, mountOptions, getInterceptor } from './test-helpers';
 import CHANNEL from './channel';
 import createThemeListener from './create-theme-listener';
+
+configure({ adapter: new Adapter() });
 
 test(`createThemeListener's type`, t => {
   const actual = isFunction(createThemeListener);
