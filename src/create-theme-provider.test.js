@@ -53,25 +53,25 @@ test(`ThemeProvider unsubscribes on unmounting`, t => {
   const ThemeProvider = createThemeProvider();
   const theme = { themed: true };
   const broadcast = createBroadcast(theme);
-  const unsubscribed = getInterceptor(false);
 
   const wrapper = mount(
     <ThemeProvider theme={theme} />,
     mountOptions(broadcast),
   );
 
+  const { subscriptionId } = wrapper.instance();
   t.true(wrapper.instance().subscriptionId !== undefined, 'brcast subscriptionId is undefined');
   t.true(typeof wrapper.instance().subscriptionId === 'number', 'brcast subscriptionId expected to be number');
 
-  t.false(unsubscribed());
+  const subscription = getInterceptor(subscriptionId);
 
   const brcastInst = wrapper.context(channel);
-  brcastInst.unsubscribe = () => unsubscribed(true);
+  brcastInst.unsubscribe = (id) => subscription(id);
   wrapper.setContext({[channel]: brcastInst});
 
   wrapper.unmount();
 
-  t.true(unsubscribed(), `ThemeProvider should unsubscribe on unmounting`);
+  t.true(subscription() === subscriptionId, `ThemeProvider should unsubscribe on unmounting`);
 });
 
 test(`ThemeProvider and not a plain object theme`, t => {
