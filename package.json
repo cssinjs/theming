@@ -42,6 +42,7 @@
       "src/*test*"
     ],
     "all": true,
+    "cache": true,
     "reporter": [
       "lcov",
       "text"
