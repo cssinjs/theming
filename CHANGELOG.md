@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+### 1.2.0 (2017-11-12)
+
+- Update React to v16
+- Update brcast
+
 ### 1.1.0 (2017-07-12)
 
 Add `themeListener`—advanced helper to hook theming in any Component.
