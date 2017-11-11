@@ -22,7 +22,8 @@
     "babel:esm": "cross-env BABEL_ENV=esm babel src -d dist/esm --ignore '*test*'",
     "watch": "npm-run-all clean -p babel:watch:*",
     "babel:watch:cjs": "npm run babel:cjs -- --watch",
-    "babel:watch:esm": "npm run babel:esm -- --watch"
+    "babel:watch:esm": "npm run babel:esm -- --watch",
+    "postversion": "npm run build"
   },
   "ava": {
     "files": [
