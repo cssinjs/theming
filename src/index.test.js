@@ -1,11 +1,14 @@
 import test from 'ava';
 import React from 'react';
-import { mount } from 'enzyme';
+import { mount, configure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 import isFunction from 'is-function';
 import isPlainObject from 'is-plain-object';
 import { Trap, Pure, Comp, getInterceptor, getChannel } from './test-helpers';
 
 import { channel, createTheming, ThemeProvider, withTheme } from './index';
+
+configure({ adapter: new Adapter() });
 
 test(`createTheming's type`, t => {
   const actual = isFunction(createTheming);

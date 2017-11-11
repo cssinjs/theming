@@ -42,6 +42,7 @@
       "src/*test*"
     ],
     "all": true,
+    "cache": true,
     "reporter": [
       "lcov",
       "text"
@@ -67,18 +68,19 @@
   },
   "homepage": "https://github.com/iamstarkov/theming#readme",
   "devDependencies": {
-    "ava": "^0.21.0",
+    "ava": "^0.22.0",
     "babel-cli": "^6.24.1",
-    "babel-eslint": "^7.2.3",
+    "babel-eslint": "^8.0.1",
     "babel-preset-env": "^1.4.0",
     "babel-preset-es2017": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.24.1",
-    "browser-env": "2.0.31",
-    "coveralls": "^2.13.1",
+    "browser-env": "^3.2.1",
+    "coveralls": "3.0.0",
     "cross-env": "^5.0.1",
-    "enzyme": "^2.8.2",
+    "enzyme": "^3.1.0",
+    "enzyme-adapter-react-16": "^1.0.2",
     "eslint": "^4.1.0",
     "eslint-config-pedant": "^0.10.0",
     "eslint-config-prettier": "^2.1.0",
@@ -86,16 +88,19 @@
     "eslint-plugin-require-path-exists": "^1.1.7",
     "npm-run-all": "^4.0.2",
     "nyc": "^11.0.2",
-    "react-dom": "^15.5.4",
-    "react-test-renderer": "^15.5.4",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-test-renderer": "^16.0.0",
     "rimraf": "^2.6.1"
   },
   "dependencies": {
-    "brcast": "^2.0.0",
+    "brcast": "^3.0.1",
     "hoist-non-react-statics": "^2.3.0",
     "is-function": "^1.0.1",
     "is-plain-object": "^2.0.1",
-    "prop-types": "^15.5.8",
-    "react": "^15.5.4"
+    "prop-types": "^15.5.8"
+  },
+  "peerDependencies": {
+    "react": ">=0.15"
   }
 }
