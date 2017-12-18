@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+### 1.3.0 (2017-12-18)
+
+- Added unsubscribe method
+
 ### 1.2.1 (2017-11-12)
 
 - Update React to v16
