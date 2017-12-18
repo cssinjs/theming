@@ -1,13 +1,11 @@
-# theming
-
-[![Greenkeeper badge](https://badges.greenkeeper.io/iamstarkov/theming.svg)](https://greenkeeper.io/)
+# Theming
 
 [![NPM version][npm-image]][npm-url]
 [![Build][travis-image]][travis-url]
 [![Coveralls Status][coveralls-image]][coveralls-url]
 [![Dependency Status][depstat-image]][depstat-url]
 
-> Unified CSSinJS theming solution for React
+## Unified CSSinJS theming solution for React
 
 * `ThemeProvider` allows you to pass, update, merge and augment `theme` through context down react tree.
 * `withTheme` allows you to receive theme and its updates in your components as a `theme` prop.
