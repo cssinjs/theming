@@ -245,11 +245,11 @@ function CustomWithTheme(Component) {
       this.setTheme = theme => this.setState({ theme });
     }
     componentDidMount() {
-      this.unsubscribe = themeListener.subscribe(this.context, this.setTheme);
+      this.subscription = themeListener.subscribe(this.context, this.setTheme);
     }
     componentWillUnmount() {
-      if (typeof this.unsubscribe === 'function') {
-        this.unsubscribe();
+      if (typeof this.subscription === 'number') {
+        themeListener.unsubscribe(this.subscription);
       }
     }
     render() {
