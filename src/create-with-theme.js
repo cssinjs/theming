@@ -1,13 +1,14 @@
 import React from 'react';
 import channel from './channel';
 import createThemeListener from './create-theme-listener';
+import hoist from 'hoist-non-react-statics';
 
 const getDisplayName = Component =>
   Component.displayName || Component.name || 'Component';
 
 export default function createWithTheme(CHANNEL = channel) {
   const themeListener = createThemeListener(CHANNEL);
-  return Component =>
+  return Component => {
     class WithTheme extends React.Component {
       static displayName = `WithTheme(${getDisplayName(Component)})`;
       static contextTypes = themeListener.contextTypes;
@@ -31,4 +32,9 @@ export default function createWithTheme(CHANNEL = channel) {
         return <Component theme={theme} {...this.props} />;
       }
     };
+
+    hoist(WithTheme, Component);
+
+    return WithTheme;
+  }
 }
