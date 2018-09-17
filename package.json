@@ -87,6 +87,7 @@
     "eslint-config-prettier": "^2.1.0",
     "eslint-plugin-react": "^7.0.1",
     "eslint-plugin-require-path-exists": "^1.1.7",
+    "flow-bin": "^0.81.0",
     "npm-run-all": "^4.0.2",
     "nyc": "^11.0.2",
     "react": "^16.0.0",
@@ -95,10 +96,12 @@
     "rimraf": "^2.6.1"
   },
   "dependencies": {
-    "brcast": "^3.0.1",
+    "create-react-context": "^0.2.3",
+    "hoist-non-react-statics": "^3.0.1",
     "is-function": "^1.0.1",
     "is-plain-object": "^2.0.1",
-    "prop-types": "^15.5.8"
+    "prop-types": "^15.5.8",
+    "react-display-name": "^0.2.4"
   },
   "peerDependencies": {
     "react": ">=0.15"
