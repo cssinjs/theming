@@ -12,11 +12,13 @@ type Props = {
 };
 
 export default function createThemeProvider(context: Context<{}>) {
-  class ThemeProvider extends React.Component<Props> {
+  return class ThemeProvider extends React.Component<Props> {
     static propTypes = {
       children: PropTypes.node,
       theme: PropTypes.oneOfType([PropTypes.shape({}), PropTypes.func]).isRequired,
     };
+
+    static defaultProps = { children: null };
 
     // Get the theme from the props, supporting both (outerTheme) => {} as well as object notation
     getTheme(outerTheme: Object) {
@@ -39,10 +41,6 @@ export default function createThemeProvider(context: Context<{}>) {
         '[ThemeProvider] Please make your theme prop a plain object',
       );
 
-      if (!outerTheme) {
-        return theme;
-      }
-
       return { ...outerTheme, ...theme };
     }
 
@@ -61,7 +59,5 @@ export default function createThemeProvider(context: Context<{}>) {
         </context.Consumer>
       );
     }
-  }
-
-  return ThemeProvider;
+  };
 }

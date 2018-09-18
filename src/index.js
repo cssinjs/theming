@@ -1,10 +1,11 @@
+// @flow
 
 import createReactContext from 'create-react-context';
 
 import createThemeProvider from './create-theme-provider';
 import createWithTheme from './create-with-theme';
 
-function createTheming(defaultTheme = {}) {
+function createTheming(defaultTheme: {} = {}) {
   const context = createReactContext(defaultTheme);
 
   return {

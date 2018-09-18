@@ -78,3 +78,14 @@ test('should merge nested themes', t => {
     },
   );
 });
+
+test('should not render any Consumer and Provider if no children were passed', t => {
+  const context = createReactContext({});
+  const ThemeProvider = createThemeProvider(context);
+
+  const wrapper = mount((
+    <ThemeProvider theme={{}} />
+  ));
+
+  t.deepEqual(wrapper.find('ThemeProvider').children().length, 0);
+});

@@ -12,7 +12,7 @@
     "lint": "eslint .",
     "test": "cross-env BABEL_ENV=cjs ava",
     "tdd": "npm run test -- --watch",
-    "coverage": "cross-env BABEL_ENV=cjs nyc ava",
+    "coverage": "nyc yarn test",
     "coveralls": "run-s coveralls:*",
     "coveralls:gather": "npm run coverage",
     "coveralls:upload": "coveralls < coverage/lcov.info",
