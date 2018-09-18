@@ -93,7 +93,8 @@
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-test-renderer": "^16.0.0",
-    "rimraf": "^2.6.1"
+    "rimraf": "^2.6.1",
+    "sinon": "^6.3.3"
   },
   "dependencies": {
     "create-react-context": "^0.2.3",
@@ -101,7 +102,8 @@
     "is-function": "^1.0.1",
     "is-plain-object": "^2.0.1",
     "prop-types": "^15.5.8",
-    "react-display-name": "^0.2.4"
+    "react-display-name": "^0.2.4",
+    "warning": "^4.0.2"
   },
   "peerDependencies": {
     "react": ">=0.15"

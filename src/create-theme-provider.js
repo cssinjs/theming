@@ -2,6 +2,7 @@
 
 import { type Context } from 'create-react-context';
 import React, { type Node } from 'react';
+import warning from 'warning';
 import PropTypes from 'prop-types';
 import isPlainObject from 'is-plain-object';
 
@@ -24,20 +25,19 @@ export default function createThemeProvider(context: Context<{}>) {
       if (typeof theme === 'function') {
         const mergedTheme = theme(outerTheme);
 
-        if (!isPlainObject(mergedTheme)) {
-          throw new Error(
-            '[ThemeProvider] Please return an object from your theme function, i.e. theme={() => ({})}!',
-          );
-        }
+        warning(
+          isPlainObject(mergedTheme),
+          '[ThemeProvider] Please return an object from your theme function',
+
+        );
 
         return mergedTheme;
       }
 
-      if (!isPlainObject(theme)) {
-        throw new Error(
-          '[ThemeProvider] Please make your theme prop a plain object',
-        );
-      }
+      warning(
+        isPlainObject(theme),
+        '[ThemeProvider] Please make your theme prop a plain object',
+      );
 
       if (!outerTheme) {
         return theme;
