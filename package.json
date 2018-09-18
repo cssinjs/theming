@@ -10,6 +10,7 @@
   ],
   "scripts": {
     "lint": "eslint .",
+    "flow": "flow check --max-warnings 0",
     "test": "cross-env BABEL_ENV=cjs ava",
     "tdd": "npm run test -- --watch",
     "coverage": "nyc yarn test",

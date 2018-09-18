@@ -1,11 +1,10 @@
 import test from 'ava';
-import React from 'react';
-import { mount, configure } from 'enzyme';
+import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import isFunction from 'is-function';
 import isPlainObject from 'is-plain-object';
 
-import { createTheming, ThemeProvider, withTheme } from './index';
+import { createTheming } from './index';
 
 configure({ adapter: new Adapter() });
 

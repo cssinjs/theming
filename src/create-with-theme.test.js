@@ -69,6 +69,7 @@ test(`withTheme(Comp) hoists non-react static class properties`, t => {
     `withTheme(Comp) should not hoist react static properties`,
   );
   t.deepEqual(
+    // $FlowFixMe: Need to find a better way to type the hoist-non-react-statics
     ComponentWithTheme.someSpecialStatic,
     ExampleComponent.someSpecialStatic,
     `withTheme(Comp) should hoist non-react static properties`,
