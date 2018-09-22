@@ -30,7 +30,6 @@ export default function createThemeProvider(context: Context<{}>) {
         warning(
           isObject(mergedTheme),
           '[ThemeProvider] Please return an object from your theme function',
-
         );
 
         return mergedTheme;
