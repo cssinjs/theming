@@ -100,8 +100,6 @@
   "dependencies": {
     "create-react-context": "^0.2.3",
     "hoist-non-react-statics": "^3.0.1",
-    "is-function": "^1.0.1",
-    "is-plain-object": "^2.0.1",
     "prop-types": "^15.5.8",
     "react-display-name": "^0.2.4",
     "warning": "^4.0.2"

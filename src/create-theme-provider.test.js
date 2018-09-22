@@ -6,7 +6,7 @@ import React, { Component } from 'react';
 import sinon from 'sinon';
 import { mount } from 'enzyme';
 
-import isFunction from 'is-function';
+import { isFunction } from './utils';
 import createThemeProvider from './create-theme-provider';
 import { Comp } from './test-helpers';
 

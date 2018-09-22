@@ -1,8 +1,7 @@
 import test from 'ava';
 import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import isFunction from 'is-function';
-import isPlainObject from 'is-plain-object';
+import {isObject, isFunction} from './utils';
 
 import { createTheming } from './index';
 
@@ -15,7 +14,7 @@ test(`createTheming's type`, t => {
 
 test(`createTheming()'s type`, t => {
   const theming = createTheming();
-  const actual = isPlainObject(theming);
+  const actual = isObject(theming);
   t.true(actual, `createTheming() should be an object`);
 });
 

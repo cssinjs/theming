@@ -4,7 +4,7 @@ import { type Context } from 'create-react-context';
 import React, { type Node } from 'react';
 import warning from 'warning';
 import PropTypes from 'prop-types';
-import isPlainObject from 'is-plain-object';
+import { isObject, isFunction } from './utils';
 
 type Props = {
   children: Node,
@@ -24,11 +24,11 @@ export default function createThemeProvider(context: Context<{}>) {
     getTheme(outerTheme: Object) {
       const theme = this.props.theme;
 
-      if (typeof theme === 'function') {
+      if (isFunction(theme)) {
         const mergedTheme = theme(outerTheme);
 
         warning(
-          isPlainObject(mergedTheme),
+          isObject(mergedTheme),
           '[ThemeProvider] Please return an object from your theme function',
 
         );
@@ -37,7 +37,7 @@ export default function createThemeProvider(context: Context<{}>) {
       }
 
       warning(
-        isPlainObject(theme),
+        isObject(theme),
         '[ThemeProvider] Please make your theme prop a plain object',
       );
 
