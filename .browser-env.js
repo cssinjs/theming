@@ -1,6 +1,6 @@
 import browserEnv from 'browser-env';
-import { configure } from 'enzyme/build';
-import Adapter from 'enzyme-adapter-react-16/build';
+import { configure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 
 browserEnv(['window', 'document', 'navigator']);
 
