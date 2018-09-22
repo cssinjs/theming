@@ -66,9 +66,9 @@
   "author": "Vladimir Starkov <iamstarkov@gmail.com> (https://iamstarkov.com)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/iamstarkov/theming/issues"
+    "url": "https://github.com/cssinjs/theming/issues"
   },
-  "homepage": "https://github.com/iamstarkov/theming#readme",
+  "homepage": "https://github.com/cssinjs/theming#readme",
   "devDependencies": {
     "ava": "^0.22.0",
     "babel-cli": "^6.24.1",
