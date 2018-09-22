@@ -1,13 +1,13 @@
 // @flow
 
-import createReactContext from 'create-react-context';
+import createReactContext, { type Context } from 'create-react-context';
 
 import createThemeProvider from './create-theme-provider';
 import createWithTheme from './create-with-theme';
 
-function createTheming(defaultTheme: {} = {}) {
-  const context = createReactContext(defaultTheme);
+const defaultContext = createReactContext({});
 
+function createTheming(context: Context<{}>) {
   return {
     withTheme: createWithTheme(context),
     ThemeProvider: createThemeProvider(context),
@@ -17,7 +17,7 @@ function createTheming(defaultTheme: {} = {}) {
 const {
   withTheme,
   ThemeProvider,
-} = createTheming();
+} = createTheming(defaultContext);
 
 export {
   withTheme,

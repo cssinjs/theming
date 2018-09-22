@@ -10,7 +10,6 @@
 * `ThemeProvider` allows you to pass, update, merge and augment `theme` through context down react tree.
 * `withTheme` allows you to receive theme and its updates in your components as a `theme` prop.
 * `createTheming` allows you to integrate `theming` into your CSSinJS library with custom `channel` (if you need custom one).
-* _Advanced usage:_ `themeListener` allows you to add theming support in your components.
 
 See [Motivation](#motivation) for details.
 
@@ -22,10 +21,8 @@ See [Motivation](#motivation) for details.
 * [Playground demo](#playground-demo)
 * [Motivation](#motivation)
 * [API](#api)
-  * [channel](#channel)
   * [ThemeProvider](#themeprovider)
   * [withTheme](#withthemecomponent)
-  * [themeListener](#themeListener)
   * [createTheming](#createthemingcustomchannel)
 * [Credits](#credits)
 * [License](#license)
@@ -102,20 +99,10 @@ Regarding _isolation your use of context to a small area_ and _small areas__ in 
 So you are fine to use context for theming. `theming` package provides everything you need to do that:
 * `ThemeProvider` allows you to pass and update `theme` through context down react tree.
 * `withTheme` allows you to receive theme and its updates in your components as a `theme` prop.
-* `createTheming` allows you to integrate `theming` into your CSSinJS library with custom `channel` (if you need custom one).
+* `createTheming` allows you to integrate `theming` into your CSSinJS library with a custom `context` (if you need custom one).
 
 
 ## API
-
-### channel
-
-Theming package by default uses this string as a name of the field in context (hence `contextTypes` and `childContextTypes`). If you want to build your own components on top of theming, it might be a good idea to not rely on hard coded value, but instead import this value from the package.
-
-```js
-import { channel } from 'theming';
-
-console.log(channel); '__THEMING__';
-```
 
 ### ThemeProvider
 
@@ -179,8 +166,6 @@ const augment = outerTheme =>
 *Required*  
 Type: `PropTypes.element`
 
-ThemeProvider uses [`React.Children.only`](https://facebook.github.io/react/docs/react-api.html#react.children.only) in render, which returns the only child in children. Throws otherwise.
-
 ### withTheme(component)
 
 React High-Order component, which maps context to theme prop.
@@ -229,106 +214,31 @@ const App = () => (
 export default App;
 ```
 
-### themeListener
+### createTheming(context)
 
-Advanced helper to hook theming in any Component.
+Function to create `ThemeProvider` and `withTheme` with custom context.
+The context you pass in will be used.
 
-```js
-import { themeListener } from 'theming';
+#### context
 
-function CustomWithTheme(Component) {
-  return class CustomWithTheme extends React.Component {
-    static contextTypes = themeListener.contextTypes;
-    constructor(props, context) {
-      super(props, context);
-      this.state = { theme: themeListener.initial(context) };
-      this.setTheme = theme => this.setState({ theme });
-    }
-    componentDidMount() {
-      this.subscription = themeListener.subscribe(this.context, this.setTheme);
-    }
-    componentWillUnmount() {
-      if (typeof this.subscription === 'number') {
-        themeListener.unsubscribe(this.subscription);
-      }
-    }
-    render() {
-      const { theme } = this.state;
-      return <Component theme={theme} {...this.props} />;
-    }
-  }
-}
-```
+Type: `Object`   
+Result: `Object { withTheme, ThemeProvider }`
 
-themeListener is an `Object` with following fields:
-
-* `themeListener.contextTypes`
-  * type: `Object`
-  * meant to be added your component's contextTypes:
-    ```js
-    static contextTypes = themeListener.contextTypes;
-    // or
-    static contextTypes = Object.assign({}, themeListener.contextTypes, {
-      /* your Component's contextTypes */
-    });
-    ```
-* `themeListener.initial`
-  * type: `Function`
-  * takes a single context `Object`, where `context` is `context` of your component
-  * meant to be used in `constructor`
-  * throws an error if your component will be used outside ThemeProvider
-  * example:
-    ```js
-    constructor(props, context) {
-      super(props, context);
-      this.state = { theme: themeListener.initial(context) }
-    }
-    ```
-* `themeListener.subscribe`
-  * type: `Function`
-  * takes 2 arguments:
-    * context `Object`, where `context` is `this.context` from your component
-    * callback `Function`, which in turn will be invoked with theme update `Object`, every time theme is updated in `ThemeProvider`
-  * meant to be used in `componentDidMount`
-  * returns unsubscribe `Function`, which you should invoke in `componentWillUnmount`
-  * example:
-    ```js
-    componentDidMount() {
-      this.unsubscribe = themeListener.subscribe(this.context, theme => this.setState({ theme }));
-    }
-    componentWillUnmount() {
-      if (typeof this.unsubscribe === 'function') {
-        this.unsubscribe();
-      }
-    }
-    ```
-
-### createTheming(customChannel)
-
-Function to create `ThemeProvider` and `withTheme` with custom context channel.
-
-#### customChannel
-
-Type: `String`  
-Default: `__THEMING__`  
-Result: `Object { channel, withTheme, ThemeProvider. themeListener }`
-
-`withTheme`, `ThemeProvider` and `themeListener` are the same as default ones, but with overwritten context channel.
-
-`channel` is `customChannel` to track what is context channel.
+`withTheme` and `ThemeProvider` will use the context passed to `createTheming`.
 
 ```js
 import { createTheming } from 'theming';
+import createReactContext from 'create-react-context';
 
-const theming = createTheming('__styled-components__');
+const context = createReactContext({});
 
-const { channel, withTheme, ThemeProvider, themeListener } = theming;
+const theming = createTheming(context);
+
+const { withTheme, ThemeProvider } = theming;
 
 export default {
-  channel,
   withTheme,
   ThemeProvider,
-  themeListener,
 };
 ```
 
