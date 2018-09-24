@@ -10,7 +10,7 @@ import createThemeProvider from './create-theme-provider';
 import { Comp } from './test-helpers';
 
 test(`createThemeProvider's type`, t => {
-  t.true(typeof createThemeProvider, `createThemeProvider should be a function`);
+  t.true(typeof createThemeProvider === 'function', `createThemeProvider should be a function`);
 });
 
 test(`createThemeProvider's result instance type`, t => {
