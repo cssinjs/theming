@@ -5,20 +5,17 @@ import createReactContext from 'create-react-context';
 import React from 'react';
 import { mount } from 'enzyme';
 
-import {isFunction} from './utils';
 import createWithTheme from './create-with-theme';
 import { Comp } from './test-helpers';
 
 test(`createWithTheme's type`, t => {
-  const actual = isFunction(createWithTheme);
-  t.true(actual, `createWithTheme should be a function`);
+  t.true(typeof createWithTheme === 'function', `createWithTheme should be a function`);
 });
 
 test(`createWithTheme's result is function on its own`, t => {
   const context = createReactContext({});
   const withTheme = createWithTheme(context);
-  const actual = isFunction(withTheme);
-  t.true(actual, `withTheme should be a function`);
+  t.true(typeof withTheme === 'function', `withTheme should be a function`);
 });
 
 test('should pass the default value of the context', t => {

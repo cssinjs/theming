@@ -1,12 +1,11 @@
 import test from 'ava';
-import {isObject, isFunction} from './utils';
+import isObject from './is-object';
 
 import { createTheming } from './index';
 
 
 test(`createTheming's type`, t => {
-  const actual = isFunction(createTheming);
-  t.true(actual, `createTheming should be a function`);
+  t.true(typeof createTheming === 'function', `createTheming should be a function`);
 });
 
 test(`createTheming()'s type`, t => {

@@ -4,7 +4,7 @@ import { type Context } from 'create-react-context';
 import React, { type Node } from 'react';
 import warning from 'warning';
 import PropTypes from 'prop-types';
-import { isObject, isFunction } from './utils';
+import isObject from './is-object';
 
 type Props = {
   children: Node,
@@ -24,7 +24,7 @@ export default function createThemeProvider(context: Context<{}>) {
     getTheme(outerTheme: Object) {
       const theme = this.props.theme;
 
-      if (isFunction(theme)) {
+      if (typeof theme === 'function') {
         const mergedTheme = theme(outerTheme);
 
         warning(

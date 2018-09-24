@@ -6,13 +6,11 @@ import React, { Component } from 'react';
 import sinon from 'sinon';
 import { mount } from 'enzyme';
 
-import { isFunction } from './utils';
 import createThemeProvider from './create-theme-provider';
 import { Comp } from './test-helpers';
 
 test(`createThemeProvider's type`, t => {
-  const actual = isFunction(createThemeProvider);
-  t.true(actual, `createThemeProvider should be a function`);
+  t.true(typeof createThemeProvider, `createThemeProvider should be a function`);
 });
 
 test(`createThemeProvider's result instance type`, t => {
