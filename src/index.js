@@ -1,25 +1,32 @@
+// @flow
+
+import createReactContext, { type Context } from 'create-react-context';
+
 import createThemeProvider from './create-theme-provider';
 import createWithTheme from './create-with-theme';
-import createThemeListener from './create-theme-listener';
-import defaultChannel from './channel';
 
-export const channel = defaultChannel;
-export const withTheme = createWithTheme();
-export const ThemeProvider = createThemeProvider();
-export const themeListener = createThemeListener();
-export function createTheming(customChannel = defaultChannel) {
+const defaultContext = createReactContext({});
+
+function createTheming(context: Context<{}>) {
   return {
-    channel: customChannel,
-    withTheme: createWithTheme(customChannel),
-    ThemeProvider: createThemeProvider(customChannel),
-    themeListener: createThemeListener(customChannel),
+    withTheme: createWithTheme(context),
+    ThemeProvider: createThemeProvider(context),
   };
 }
 
-export default {
-  channel: defaultChannel,
+const {
   withTheme,
   ThemeProvider,
-  themeListener,
+} = createTheming(defaultContext);
+
+export {
+  withTheme,
+  createTheming,
+  ThemeProvider,
+};
+
+export default {
+  withTheme,
+  ThemeProvider,
   createTheming,
 };

@@ -1,34 +1,30 @@
+// @flow
+
+import { type ComponentType } from 'react';
 import React from 'react';
-import channel from './channel';
-import createThemeListener from './create-theme-listener';
+import { type Context } from 'create-react-context';
+import hoist from 'hoist-non-react-statics';
+import getDisplayName from 'react-display-name';
 
-const getDisplayName = Component =>
-  Component.displayName || Component.name || 'Component';
+export default function createWithTheme(context: Context<{}>) {
+  return <Props, Comp: ComponentType<Props>>(Component: Comp, propName: string = 'theme') => {
+    function withTheme(props: Props) {
+      return (
+        <context.Consumer>
+          {theme => (
+            <Component
+              {...{ [propName]: theme }}
+              {...props}
+            />
+          )}
+        </context.Consumer>
+      );
+    }
 
-export default function createWithTheme(CHANNEL = channel) {
-  const themeListener = createThemeListener(CHANNEL);
-  return Component =>
-    class WithTheme extends React.Component {
-      static displayName = `WithTheme(${getDisplayName(Component)})`;
-      static contextTypes = themeListener.contextTypes;
+    withTheme.displayName = `WithTheme(${getDisplayName(Component)})`;
 
-      constructor(props, context) {
-        super(props, context);
-        this.state = { theme: themeListener.initial(context) };
-        this.setTheme = theme => this.setState({ theme });
-      }
-      componentDidMount() {
-        this.unsubscribe = themeListener.subscribe(this.context, this.setTheme);
-      }
-      componentWillUnmount() {
-        if (typeof this.unsubscribe === 'function') {
-          this.unsubscribe();
-        }
-      }
-      render() {
-        const { theme } = this.state;
+    hoist(withTheme, Component);
 
-        return <Component theme={theme} {...this.props} />;
-      }
-    };
+    return withTheme;
+  };
 }
