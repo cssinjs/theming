@@ -22,7 +22,7 @@ export default function createThemeProvider(context: Context<{}>) {
 
     // Get the theme from the props, supporting both (outerTheme) => {} as well as object notation
     getTheme(outerTheme: Object) {
-      const theme = this.props.theme;
+      const { theme } = this.props;
 
       if (typeof theme === 'function') {
         const mergedTheme = theme(outerTheme);
@@ -44,7 +44,9 @@ export default function createThemeProvider(context: Context<{}>) {
     }
 
     render() {
-      if (!this.props.children) {
+      const { children } = this.props;
+
+      if (!children) {
         return null;
       }
 
@@ -52,7 +54,7 @@ export default function createThemeProvider(context: Context<{}>) {
         <context.Consumer>
           {outerTheme => (
             <context.Provider value={this.getTheme(outerTheme)}>
-              {this.props.children}
+              {children}
             </context.Provider>
           )}
         </context.Consumer>
