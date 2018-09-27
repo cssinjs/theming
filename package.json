@@ -95,6 +95,6 @@
     "warning": "^4.0.2"
   },
   "peerDependencies": {
-    "react": ">=0.15"
+    "react": ">=15"
   }
 }
