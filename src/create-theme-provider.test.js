@@ -7,7 +7,8 @@ import sinon from 'sinon';
 import { mount } from 'enzyme';
 
 import createThemeProvider from './create-theme-provider';
-import { Comp } from './test-helpers';
+
+const Comp = () => null;
 
 test('createThemeProvider\'s type', (t) => {
   t.true(typeof createThemeProvider === 'function', 'createThemeProvider should be a function');

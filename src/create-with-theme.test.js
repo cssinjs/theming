@@ -6,7 +6,8 @@ import React from 'react';
 import { mount } from 'enzyme';
 
 import createWithTheme from './create-with-theme';
-import { Comp } from './test-helpers';
+
+const Comp = () => null;
 
 test('createWithTheme\'s type', (t) => {
   t.true(typeof createWithTheme === 'function', 'createWithTheme should be a function');
