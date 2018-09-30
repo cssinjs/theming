@@ -77,7 +77,7 @@ export default App;
 ## Playground demo
 
 Be our guest; play with `theming` in this Sandbox:
-[https://codesandbox.io/s/k9vq9930xo](https://codesandbox.io/s/k9vq9930xo)
+[https://codesandbox.io/s/n7737w10ol](https://codesandbox.io/s/n7737w10ol)
 
 ![theming playground demo](https://user-images.githubusercontent.com/559321/27082371-ba194816-5044-11e7-8f06-6cbdbdefb602.gif)
 
