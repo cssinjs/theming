@@ -76,8 +76,8 @@ export default App;
 
 ## Playground demo
 
-Be our guest, play with `theming` in this webpackbin:
-[https://www.webpackbin.com/bins/-Km8TglfWP84oYhDquT1](https://www.webpackbin.com/bins/-Km8TglfWP84oYhDquT1)
+Be our guest, play with `theming` in codesandbox:
+[https://codesandbox.io/s/jvwzkkxrp5](https://codesandbox.io/s/jvwzkkxrp5)
 
 ![theming playground demo](https://user-images.githubusercontent.com/559321/27082371-ba194816-5044-11e7-8f06-6cbdbdefb602.gif)
 
@@ -269,7 +269,7 @@ export default {
 [sc]: https://github.com/styled-components/styled-components
 [glamorous]: https://github.com/paypal/glamorous
 [brcast]: https://github.com/vesparny/brcast
-[playground]: https://www.webpackbin.com/bins/-Km8TglfWP84oYhDquT1
+[playground]: https://codesandbox.io/s/jvwzkkxrp5
 
 ## License
 
