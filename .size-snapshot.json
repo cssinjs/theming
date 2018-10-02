@@ -1,0 +1,31 @@
+{
+  "dist/theming.js": {
+    "bundled": 55370,
+    "minified": 19027,
+    "gzipped": 6048
+  },
+  "dist/theming.min.js": {
+    "bundled": 25557,
+    "minified": 9711,
+    "gzipped": 3526
+  },
+  "dist/theming.cjs.js": {
+    "bundled": 4171,
+    "minified": 2601,
+    "gzipped": 971
+  },
+  "dist/theming.esm.js": {
+    "bundled": 3796,
+    "minified": 2300,
+    "gzipped": 906,
+    "treeshaked": {
+      "rollup": {
+        "code": 1383,
+        "import_statements": 179
+      },
+      "webpack": {
+        "code": 2893
+      }
+    }
+  }
+}
