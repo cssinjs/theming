@@ -52,6 +52,18 @@ test('should pass the theme as the specified prop', (t) => {
   t.true(root.findByType(Comp).props.outerTheme === theme);
 });
 
+test('should allow overriding the prop from the outer props', (t) => {
+  const theme = {};
+  const otherTheme = {};
+  const context = createReactContext(theme);
+  const WithTheme = createWithTheme(context)(Comp);
+  const { root } = TestRenderer.create((
+    <WithTheme theme={otherTheme} />
+  ));
+
+  t.true(root.findByType(Comp).props.theme === otherTheme);
+});
+
 test('withTheme(Comp) hoists non-react static class properties', (t) => {
   const context = createReactContext({});
   const withTheme = createWithTheme(context);
