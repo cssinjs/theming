@@ -4,6 +4,5 @@ export default {
   ],
   require: [
     '@babel/register',
-    './.browser-env',
   ],
 };

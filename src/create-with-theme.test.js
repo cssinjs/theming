@@ -1,9 +1,8 @@
 // @flow
-
 import test from 'ava';
 import createReactContext from 'create-react-context';
 import React from 'react';
-import { mount } from 'enzyme';
+import TestRenderer from 'react-test-renderer';
 
 import createWithTheme from './create-with-theme';
 
@@ -23,9 +22,9 @@ test('should pass the default value of the context', (t) => {
   const theme = {};
   const context = createReactContext(theme);
   const WithTheme = createWithTheme(context)(Comp);
-  const wrapper = mount(<WithTheme />);
+  const { root } = TestRenderer.create(<WithTheme />);
 
-  t.true(wrapper.find('Comp').prop('theme') === theme);
+  t.true(root.findByType(Comp).props.theme === theme);
 });
 
 
@@ -33,24 +32,36 @@ test('should pass the value of the Provider', (t) => {
   const theme = { test: 'test' };
   const context = createReactContext(theme);
   const WithTheme = createWithTheme(context)(Comp);
-  const wrapper = mount((
+  const { root } = TestRenderer.create((
     <context.Provider value={theme}>
       <WithTheme />
     </context.Provider>
   ));
 
-  t.true(wrapper.find('Comp').prop('theme') === theme);
+  t.true(root.findByType(Comp).props.theme === theme);
 });
 
 test('should pass the theme as the specified prop', (t) => {
   const theme = { test: 'test' };
   const context = createReactContext(theme);
   const WithTheme = createWithTheme(context)(Comp, 'outerTheme');
-  const wrapper = mount((
+  const { root } = TestRenderer.create((
     <WithTheme />
   ));
 
-  t.true(wrapper.find('Comp').prop('outerTheme') === theme);
+  t.true(root.findByType(Comp).props.outerTheme === theme);
+});
+
+test('should allow overriding the prop from the outer props', (t) => {
+  const theme = {};
+  const otherTheme = {};
+  const context = createReactContext(theme);
+  const WithTheme = createWithTheme(context)(Comp);
+  const { root } = TestRenderer.create((
+    <WithTheme theme={otherTheme} />
+  ));
+
+  t.true(root.findByType(Comp).props.theme === otherTheme);
 });
 
 test('withTheme(Comp) hoists non-react static class properties', (t) => {

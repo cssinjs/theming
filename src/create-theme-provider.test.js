@@ -4,7 +4,7 @@ import test from 'ava';
 import createReactContext from 'create-react-context';
 import React from 'react';
 import sinon from 'sinon';
-import { mount } from 'enzyme';
+import TestRenderer from 'react-test-renderer';
 
 import createThemeProvider from './create-theme-provider';
 
@@ -20,7 +20,7 @@ test('should call the theme fn with the default theme', (t) => {
   const context = createReactContext(defaultTheme);
   const ThemeProvider = createThemeProvider(context);
 
-  mount((
+  TestRenderer.create((
     <ThemeProvider theme={themeFn}>
       <Comp />
     </ThemeProvider>
@@ -35,7 +35,7 @@ test('should call the theme fn with the outerTheme', (t) => {
   const context = createReactContext({});
   const ThemeProvider = createThemeProvider(context);
 
-  mount((
+  TestRenderer.create((
     <ThemeProvider theme={outerTheme}>
       <ThemeProvider theme={themeFn}>
         <Comp />
@@ -52,18 +52,18 @@ test('should merge nested themes', (t) => {
   const themeA = { themeA: 'a' };
   const themeB = { themeB: 'b' };
 
-  const wrapper = mount((
+  const { root } = TestRenderer.create((
     <ThemeProvider theme={themeA}>
       <ThemeProvider theme={themeB}>
         <context.Consumer>
-          {theme => <div theme={theme} />}
+          {theme => <Comp theme={theme} />}
         </context.Consumer>
       </ThemeProvider>
     </ThemeProvider>
   ));
 
   t.deepEqual(
-    wrapper.find('div').prop('theme'),
+    root.findByType(Comp).props.theme,
     {
       themeA: 'a',
       themeB: 'b',
@@ -75,9 +75,9 @@ test('should not render any Consumer and Provider if no children were passed', (
   const context = createReactContext({});
   const ThemeProvider = createThemeProvider(context);
 
-  const wrapper = mount((
+  const { root } = TestRenderer.create((
     <ThemeProvider theme={{}} />
   ));
 
-  t.deepEqual(wrapper.find('ThemeProvider').children().length, 0);
+  t.deepEqual(root.findByType(ThemeProvider).children.length, 0);
 });
