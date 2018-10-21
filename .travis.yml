@@ -2,6 +2,12 @@ language: node_js
 node_js:
   - v8
   - v6
+script:
+  - yarn lint
+  - yarn flow
+  - yarn ts-check
+  - yarn build
+  - yarn test
 after_script:
   - 'npm run coveralls'
 
