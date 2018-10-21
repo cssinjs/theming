@@ -9,6 +9,9 @@
     "src",
     "dist"
   ],
+  "engines": {
+    "node": ">=8"
+  },
   "scripts": {
     "lint": "eslint .",
     "flow": "flow check --max-warnings 0",
