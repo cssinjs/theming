@@ -6,6 +6,7 @@ script:
   - yarn lint
   - yarn flow
   - yarn ts-check
+  - yarn match-snapshot
   - yarn build
   - yarn test
 after_script:
