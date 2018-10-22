@@ -15,7 +15,7 @@
   "scripts": {
     "lint": "eslint .",
     "flow": "flow check --max-warnings 0",
-    "ts-check": "tsc --pretty --noEmit src/index.d.ts",
+    "ts-check": "tsc",
     "test": "ava",
     "tdd": "yarn test --watch",
     "coverage": "nyc yarn test",
