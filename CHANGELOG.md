@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+### 2.0.0 (Unreleased)
+
+- Use new React Context API ([#54](https://github.com/cssinjs/theming/pull/54))
+- Switched build system to rollup for building esm, cjs and umd ([#55](https://github.com/cssinjs/theming/pull/55))
+- Added flow types ([#54](https://github.com/cssinjs/theming/pull/54))
+- Added TypeScript types ([#58](https://github.com/cssinjs/theming/pull/58))
+
 ### 1.3.0 (2017-12-18)
 
 - Added unsubscribe method
