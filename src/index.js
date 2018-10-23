@@ -24,9 +24,3 @@ export {
   createTheming,
   ThemeProvider,
 };
-
-export default {
-  withTheme,
-  ThemeProvider,
-  createTheming,
-};
