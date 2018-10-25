@@ -7,7 +7,6 @@ type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
 
 type WithThemeFactory<Theme> = <Props extends { theme: Theme }>(
     comp: React.ComponentType<Props>,
-    name: string,
 ) => React.ComponentType<Omit<Props, { theme: Theme }>>;
 
 type ThemeProviderFactory<Theme> = React.ComponentType<{

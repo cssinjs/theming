@@ -6,13 +6,13 @@ import hoist from 'hoist-non-react-statics';
 import getDisplayName from 'react-display-name';
 
 export default function createWithTheme(context: Context<{}>) {
-  function hoc<Props, Comp: ComponentType<Props>>(Component: Comp, propName: string = 'theme') {
+  function hoc<Props, Comp: ComponentType<Props>>(Component: Comp) {
     function withTheme(props: Props) {
       return (
         <context.Consumer>
           {theme => (
             <Component
-              {...{ [propName]: theme }}
+              theme={theme}
               {...props}
             />
           )}
