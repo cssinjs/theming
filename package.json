@@ -69,7 +69,7 @@
     "ava": "^1.0.0-beta.8",
     "coveralls": "^3.0.0",
     "eslint": "^5.6.0",
-    "eslint-config-jss": "^4.0.0",
+    "eslint-config-jss": "^5.0.1",
     "flow-bin": "^0.81.0",
     "nyc": "^13.0.1",
     "react": "^16.0.0",
