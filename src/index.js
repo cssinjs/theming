@@ -5,7 +5,7 @@ import createReactContext, { type Context } from 'create-react-context';
 import createThemeProvider from './create-theme-provider';
 import createWithTheme from './create-with-theme';
 
-type ExtractReturnType = <ReturnType>(() => ReturnType) => ReturnType;
+type ExtractReturnType = <ReturnType>((context: Context<{}>) => ReturnType) => ReturnType;
 
 interface Theming {
   withTheme: $Call<ExtractReturnType, typeof createWithTheme>,
