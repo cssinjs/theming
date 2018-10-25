@@ -36,6 +36,5 @@ export {
     createTheming,
     withTheme,
     ThemeProvider,
-    ThemeProviderFactory,
-    WithThemeFactory,
+    Theming,
 }
