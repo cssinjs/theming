@@ -6,7 +6,8 @@ import TestRenderer from 'react-test-renderer';
 
 import createWithTheme from './create-with-theme';
 
-const Comp = () => null;
+// eslint-disable-next-line no-unused-vars
+const Comp = (props: { theme: {} }) => null;
 
 test('createWithTheme\'s type', (t) => {
   t.true(typeof createWithTheme === 'function', 'createWithTheme should be a function');
@@ -15,6 +16,7 @@ test('createWithTheme\'s type', (t) => {
 test('createWithTheme\'s result is function on its own', (t) => {
   const context = createReactContext({});
   const withTheme = createWithTheme(context);
+
   t.true(typeof withTheme === 'function', 'withTheme should be a function');
 });
 
@@ -41,17 +43,6 @@ test('should pass the value of the Provider', (t) => {
   t.true(root.findByType(Comp).props.theme === theme);
 });
 
-test('should pass the theme as the specified prop', (t) => {
-  const theme = { test: 'test' };
-  const context = createReactContext(theme);
-  const WithTheme = createWithTheme(context)(Comp, 'outerTheme');
-  const { root } = TestRenderer.create((
-    <WithTheme />
-  ));
-
-  t.true(root.findByType(Comp).props.outerTheme === theme);
-});
-
 test('should allow overriding the prop from the outer props', (t) => {
   const theme = {};
   const otherTheme = {};
@@ -67,7 +58,7 @@ test('should allow overriding the prop from the outer props', (t) => {
 test('withTheme(Comp) hoists non-react static class properties', (t) => {
   const context = createReactContext({});
   const withTheme = createWithTheme(context);
-  class ExampleComponent extends React.Component<{}> {
+  class ExampleComponent extends React.Component<{ theme: {} }> {
     static displayName = 'foo';
 
     static someSpecialStatic = 'bar';
