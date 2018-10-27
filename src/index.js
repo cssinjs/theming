@@ -29,6 +29,7 @@ const {
 export type { Theming };
 
 export {
+  defaultContext as context,
   withTheme,
   createTheming,
   ThemeProvider,
