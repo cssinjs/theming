@@ -214,13 +214,6 @@ const App = () => (
 export default App;
 ```
 
-#### propName
-
-Type: `String`
-Default: `theme`
-
-The prop name of the theme.
-
 ### createTheming(context)
 
 Function to create `ThemeProvider` and `withTheme` with custom context.

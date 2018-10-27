@@ -1,19 +1,38 @@
 // @flow
 
-import React, { type ComponentType } from 'react';
+import React, { type ComponentType, type ElementRef } from 'react';
 import { type Context } from 'create-react-context';
 import hoist from 'hoist-non-react-statics';
 import getDisplayName from 'react-display-name';
 
-export default function createWithTheme(context: Context<{}>) {
-  function hoc<Props, Comp: ComponentType<Props>>(Component: Comp, propName: string = 'theme') {
-    function withTheme(props: Props) {
+type Options = { forwardInnerRef?: boolean };
+type OuterPropsType<InnerProps, InnerComponent, Theme> = $Diff<InnerProps, { theme: Theme }> & {
+  theme?: Theme,
+  innerRef?: (instance: ElementRef<InnerComponent> | null) => void
+};
+type InnerPropsType<Theme> = { theme: Theme };
+
+export default function createWithTheme<Theme: {}>(context: Context<Theme>) {
+  return function hoc<
+    InnerProps: InnerPropsType<Theme>,
+    InnerComponent: ComponentType<InnerProps>,
+    OuterProps: OuterPropsType<InnerProps, InnerComponent, Theme>,
+  >(
+    Component: InnerComponent,
+    { forwardInnerRef = false }: Options = {},
+  ): ComponentType<OuterProps> {
+    function withTheme(props: OuterProps) {
+      // $FlowFixMe
+      const { innerRef, ...otherProps } = props;
+
+      otherProps[forwardInnerRef ? 'innerRef' : 'ref'] = innerRef;
+
       return (
         <context.Consumer>
           {theme => (
             <Component
-              {...{ [propName]: theme }}
-              {...props}
+              theme={theme}
+              {...otherProps}
             />
           )}
         </context.Consumer>
@@ -25,7 +44,5 @@ export default function createWithTheme(context: Context<{}>) {
     hoist(withTheme, Component);
 
     return withTheme;
-  }
-
-  return hoc;
+  };
 }

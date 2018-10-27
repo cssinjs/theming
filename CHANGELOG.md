@@ -3,7 +3,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-### 2.0.0 (Unreleased)
+### 2.1.0 (Unreleased)
+
+- Align flow and TypeScript types so they export the same interfaces ([#60](https://github.com/cssinjs/theming/pull/60))
+- Improve withTheme HoC, added support for innerRef and improved typings ([#61](https://github.com/cssinjs/theming/pull/61))
+
+### 2.0.0 (2018-10-24)
 
 - Use new React Context API ([#54](https://github.com/cssinjs/theming/pull/54))
 - Switched build system to rollup for building esm, cjs and umd ([#55](https://github.com/cssinjs/theming/pull/55))
