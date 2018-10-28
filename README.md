@@ -166,7 +166,7 @@ const augment = outerTheme =>
 *Required*  
 Type: `PropTypes.element`
 
-### withTheme(component)
+### withTheme(component, options)
 
 React High-Order component, which maps context to theme prop.
 
@@ -214,6 +214,21 @@ const App = () => (
 export default App;
 ```
 
+#### options
+ 
+Type: `Object`
+
+The options currently only contains one property.
+
+##### forwardInnerRef
+
+Type: `Boolean`
+Default: `false`
+
+This will actually just forward the `innerRef` property to the nested component.
+Otherwise the `innerRef` will be set as the `ref` prop of the wrapped component.
+This is most useful when building a Higher-Order-Component which uses `withTheme` to not have the ref on your Higher-Order-Component.
+
 ### createTheming(context)
 
 Function to create `ThemeProvider` and `withTheme` with custom context.
@@ -240,6 +255,15 @@ export default {
   withTheme,
   ThemeProvider,
 };
+```
+
+## ThemeContext
+
+We export the default ThemeContext so you can use it with the new `static contextType` with classes or even the new React Hooks API.
+This is the context which also the exported `withTheme` and `ThemeProvider` use.
+
+```js
+import { ThemeContext } from 'theming';
 ```
 
 ## Credits
