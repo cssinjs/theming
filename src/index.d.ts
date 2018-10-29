@@ -31,8 +31,10 @@ declare function createTheming<Theme>(context: Context<Theme>): Theming<Theme>;
 
 declare const withTheme: WithThemeFactory<DefaultTheme>;
 declare const ThemeProvider: WithThemeFactory<DefaultTheme>;
+declare const ThemeContext: Context<{}>;
 
 export {
+    ThemeContext,
     createTheming,
     withTheme,
     ThemeProvider,
