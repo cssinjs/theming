@@ -14,13 +14,15 @@ type WithThemeFactory<Theme> = <
     },
 >(
     comp: InnerComponent,
-    options: { forwardInnerRef: boolean },
+    options?: { forwardInnerRef?: boolean },
 ) => React.ComponentType<OuterProps>;
 
-type ThemeProviderFactory<Theme> = React.ComponentType<{
+interface ThemeProviderProps<Theme> {
     theme: Theme | ((outerTheme: object) => Theme),
     children: React.ReactNode,
-}>;
+}
+
+type ThemeProviderFactory<Theme> = React.ComponentType<ThemeProviderProps<Theme>>;
 
 interface Theming<Theme> {
     withTheme: WithThemeFactory<Theme>,
@@ -30,7 +32,7 @@ interface Theming<Theme> {
 declare function createTheming<Theme>(context: Context<Theme>): Theming<Theme>;
 
 declare const withTheme: WithThemeFactory<DefaultTheme>;
-declare const ThemeProvider: WithThemeFactory<DefaultTheme>;
+declare const ThemeProvider: ThemeProviderFactory<DefaultTheme>;
 declare const ThemeContext: Context<{}>;
 
 export {
