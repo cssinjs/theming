@@ -18,7 +18,7 @@ type WithThemeFactory<Theme> = <
 ) => React.ComponentType<OuterProps>;
 
 interface ThemeProviderProps<Theme> {
-    theme: Theme,
+    theme: Theme | ((outerTheme: object) => Theme),
     children: React.ReactNode,
 }
 
