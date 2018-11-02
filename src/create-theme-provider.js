@@ -8,7 +8,7 @@ import isObject from './is-object';
 
 export type ThemeProviderProps<Theme> = {
   children: Node,
-  theme: Theme | (outerTheme: Object) => Theme,
+  theme: Theme | (outerTheme: Theme) => Theme,
 };
 
 export default function createThemeProvider<Theme>(context: Context<Theme>) {
@@ -21,7 +21,7 @@ export default function createThemeProvider<Theme>(context: Context<Theme>) {
     static defaultProps = { children: null };
 
     // Get the theme from the props, supporting both (outerTheme) => {} as well as object notation
-    getTheme(outerTheme: Object) {
+    getTheme(outerTheme: Theme) {
       const { theme } = this.props;
 
       if (typeof theme === 'function') {

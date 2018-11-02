@@ -12,7 +12,7 @@ interface Theming {
   ThemeProvider: $Call<ExtractReturnType, typeof createThemeProvider>,
 }
 
-const ThemeContext = createReactContext({});
+const ThemeContext = createReactContext<{}>({});
 
 function createTheming(context: Context<{}>): Theming {
   return {
