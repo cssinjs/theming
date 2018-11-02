@@ -2,7 +2,7 @@ module.exports = {
   presets: [
     ['@babel/env', { loose: true }],
     '@babel/react',
-    '@babel/flow'
+    '@babel/flow',
   ],
   plugins: ['@babel/proposal-class-properties'],
 };
