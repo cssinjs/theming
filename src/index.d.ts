@@ -40,5 +40,6 @@ export {
     createTheming,
     withTheme,
     ThemeProvider,
+    ThemeProviderProps,
     Theming,
 }

@@ -2,7 +2,7 @@
 
 import createReactContext, { type Context } from 'create-react-context';
 
-import createThemeProvider from './create-theme-provider';
+import createThemeProvider, { type ThemeProviderProps } from './create-theme-provider';
 import createWithTheme from './create-with-theme';
 
 type ExtractReturnType = <ReturnType>((context: Context<{}>) => ReturnType) => ReturnType;
@@ -26,7 +26,10 @@ const {
   ThemeProvider,
 } = createTheming(ThemeContext);
 
-export type { Theming };
+export type {
+  Theming,
+  ThemeProviderProps,
+};
 
 export {
   ThemeContext,

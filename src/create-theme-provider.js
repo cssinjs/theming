@@ -6,13 +6,13 @@ import warning from 'warning';
 import PropTypes from 'prop-types';
 import isObject from './is-object';
 
-type Props = {
+export type ThemeProviderProps<Theme> = {
   children: Node,
-  theme: Object | (outerTheme: Object) => Object,
+  theme: Theme | (outerTheme: Theme) => Theme,
 };
 
-export default function createThemeProvider(context: Context<{}>) {
-  return class ThemeProvider extends React.Component<Props> {
+export default function createThemeProvider<Theme>(context: Context<Theme>) {
+  return class ThemeProvider extends React.Component<ThemeProviderProps<Theme>> {
     static propTypes = {
       children: PropTypes.node,
       theme: PropTypes.oneOfType([PropTypes.shape({}), PropTypes.func]).isRequired,
@@ -21,7 +21,7 @@ export default function createThemeProvider(context: Context<{}>) {
     static defaultProps = { children: null };
 
     // Get the theme from the props, supporting both (outerTheme) => {} as well as object notation
-    getTheme(outerTheme: Object) {
+    getTheme(outerTheme: Theme) {
       const { theme } = this.props;
 
       if (typeof theme === 'function') {
