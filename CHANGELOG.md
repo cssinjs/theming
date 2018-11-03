@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+### 2.1.2 (2018-11-2)
+
+- Added exporting of ThemeProviderProps ([#67](https://github.com/cssinjs/theming/pull/67))
+
 ### 2.1.1 (2018-11-1)
 
 - Fix ts types ([#65](https://github.com/cssinjs/theming/pull/65))
