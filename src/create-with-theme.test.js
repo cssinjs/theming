@@ -83,17 +83,6 @@ test('innerRef should set the ref prop on the wrapped component', (t) => {
   t.deepEqual(refComp !== null && refComp.inner, true);
 });
 
-test('should forward the innerRef to the wrapped component when forwardInnerRef is true', (t) => {
-  const context = createReactContext({});
-  const WithTheme = createWithTheme(context)(FunctionalComponent, { forwardInnerRef: true });
-  const innerRef = () => undefined;
-  const { root } = TestRenderer.create((
-    <WithTheme innerRef={innerRef} />
-  ));
-
-  t.true(root.findByType(FunctionalComponent).props.innerRef === innerRef);
-});
-
 test('withTheme(Comp) hoists non-react static class properties', (t) => {
   const context = createReactContext({});
   const withTheme = createWithTheme(context);
