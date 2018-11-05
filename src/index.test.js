@@ -20,7 +20,7 @@ test('createTheming()\'s key names', (t) => {
   const context = createReactContext({});
   const theming = createTheming(context);
   const actual = Object.keys(theming);
-  const expected = ['withTheme', 'ThemeProvider', 'context'];
+  const expected = ['context', 'withTheme', 'ThemeProvider'];
 
   t.deepEqual(
     actual,
