@@ -8,7 +8,7 @@ import isObject from './is-object';
 
 export type ThemeProviderProps<Theme> = {
   children: Node,
-  theme: Theme | (outerTheme: Theme) => Theme,
+  theme: Theme | (outerTheme: {} | null) => Theme,
 };
 
 export default function createThemeProvider<Theme>(context: Context<Theme>) {
@@ -40,7 +40,7 @@ export default function createThemeProvider<Theme>(context: Context<Theme>) {
         '[ThemeProvider] Please make your theme prop a plain object',
       );
 
-      return { ...outerTheme, ...theme };
+      return outerTheme === null ? theme : { ...outerTheme, ...theme };
     }
 
     render() {

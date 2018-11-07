@@ -11,7 +11,9 @@ type OuterPropsType<InnerProps, InnerComponent, Theme> = $Diff<InnerProps, { the
 };
 type InnerPropsType<Theme> = { theme: Theme };
 
-export default function createWithTheme<Theme: {}>(context: Context<Theme>) {
+const env = process.env.NODE_ENV;
+
+export default function createWithTheme<Theme: {} | null>(context: Context<Theme>) {
   return function hoc<
     InnerProps: InnerPropsType<Theme>,
     InnerComponent: ComponentType<InnerProps>,
@@ -22,13 +24,19 @@ export default function createWithTheme<Theme: {}>(context: Context<Theme>) {
 
       return (
         <context.Consumer>
-          {theme => (
-            <Component
-              theme={theme}
-              ref={innerRef}
-              {...otherProps}
-            />
-          )}
+          {(theme) => {
+            if (env !== 'production' && theme === null) {
+              throw new Error('[theming] Please use withTheme only with the ThemeProvider');
+            }
+
+            return (
+              <Component
+                theme={theme}
+                ref={innerRef}
+                {...otherProps}
+              />
+            );
+          }}
         </context.Consumer>
       );
     }
