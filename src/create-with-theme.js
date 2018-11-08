@@ -4,6 +4,7 @@ import React, { type ComponentType, type ElementRef } from 'react';
 import { type Context } from 'create-react-context';
 import hoist from 'hoist-non-react-statics';
 import getDisplayName from 'react-display-name';
+import warning from 'warning';
 
 type OuterPropsType<InnerProps, InnerComponent, Theme> = $Diff<InnerProps, { theme: Theme }> & {
   theme?: Theme,
@@ -11,9 +12,7 @@ type OuterPropsType<InnerProps, InnerComponent, Theme> = $Diff<InnerProps, { the
 };
 type InnerPropsType<Theme> = { theme: Theme };
 
-const env = process.env.NODE_ENV;
-
-export default function createWithTheme<Theme: {} | null>(context: Context<Theme>) {
+export default function createWithTheme<Theme: {}>(context: Context<Theme | null>) {
   return function hoc<
     InnerProps: InnerPropsType<Theme>,
     InnerComponent: ComponentType<InnerProps>,
@@ -25,9 +24,7 @@ export default function createWithTheme<Theme: {} | null>(context: Context<Theme
       return (
         <context.Consumer>
           {(theme) => {
-            if (env !== 'production' && theme === null) {
-              throw new Error('[theming] Please use withTheme only with the ThemeProvider');
-            }
+            warning('[theming] Please use withTheme only with the ThemeProvider');
 
             return (
               <Component

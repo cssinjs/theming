@@ -6,18 +6,18 @@ import createThemeProvider, { type ThemeProviderProps } from './create-theme-pro
 import createWithTheme from './create-with-theme';
 
 type ExtractReturnType<Theme> = <ReturnType>(
-  (context: Context<Theme>) => ReturnType
+  (context: Context<Theme | null>) => ReturnType
 ) => ReturnType;
 
 interface Theming<Theme> {
-  context: Context<Theme>,
+  context: Context<Theme | null>,
   withTheme: $Call<ExtractReturnType<Theme>, typeof createWithTheme>,
   ThemeProvider: $Call<ExtractReturnType<Theme>, typeof createThemeProvider>,
 }
 
 const ThemeContext = createReactContext<{} | null>(null);
 
-function createTheming<Theme: {} | null>(context: Context<Theme>): Theming<Theme> {
+function createTheming<Theme: {}>(context: Context<Theme | null>): Theming<Theme> {
   return {
     context,
     withTheme: createWithTheme(context),
