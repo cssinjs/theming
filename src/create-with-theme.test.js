@@ -3,6 +3,7 @@ import test from 'ava';
 import createReactContext from 'create-react-context';
 import React from 'react';
 import TestRenderer from 'react-test-renderer';
+import sinon from 'sinon';
 
 import createWithTheme from './create-with-theme';
 
@@ -99,4 +100,20 @@ test('withTheme(Comp) hoists non-react static class properties', (t) => {
     ClassComponent.someSpecialStatic,
     'withTheme(Comp) should hoist non-react static properties',
   );
+});
+
+test('should warn when theme isn\'t an object', (t) => {
+  const spy = sinon.spy(console, 'error');
+
+  const context = createReactContext(null);
+  const withTheme = createWithTheme(context);
+  const WithTheme = withTheme(ClassComponent);
+
+  TestRenderer.create((
+    <WithTheme />
+  ));
+
+  t.deepEqual(spy.callCount, 1);
+
+  spy.restore();
 });

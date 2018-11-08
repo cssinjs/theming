@@ -81,3 +81,49 @@ test('should not render any Consumer and Provider if no children were passed', (
 
   t.deepEqual(root.findByType(ThemeProvider).children.length, 0);
 });
+
+test('should return not modify the theme when the ThemeProvider isn\'t nested', (t) => {
+  const context = createReactContext(null);
+  const ThemeProvider = createThemeProvider(context);
+  const themeA = {};
+  let receivedTheme = null;
+
+  TestRenderer.create((
+    <ThemeProvider theme={themeA}>
+      <context.Consumer>
+        {(theme) => {
+          receivedTheme = theme;
+
+          return null;
+        }}
+      </context.Consumer>
+    </ThemeProvider>
+  ));
+
+  t.true(themeA === receivedTheme);
+});
+
+test('should create new theme object when 2 ThemeProvider\'s are nested', (t) => {
+  const context = createReactContext(null);
+  const ThemeProvider = createThemeProvider(context);
+  const themeA = {};
+  const themeB = {};
+  let receivedTheme = null;
+
+  TestRenderer.create((
+    <ThemeProvider theme={themeA}>
+      <ThemeProvider theme={themeB}>
+        <context.Consumer>
+          {(theme) => {
+            receivedTheme = theme;
+
+            return null;
+          }}
+        </context.Consumer>
+      </ThemeProvider>
+    </ThemeProvider>
+  ));
+
+  t.true(themeA !== receivedTheme);
+  t.true(themeB !== receivedTheme);
+});

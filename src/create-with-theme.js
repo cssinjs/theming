@@ -5,6 +5,7 @@ import { type Context } from 'create-react-context';
 import hoist from 'hoist-non-react-statics';
 import getDisplayName from 'react-display-name';
 import warning from 'warning';
+import isObject from './is-object';
 
 type OuterPropsType<InnerProps, InnerComponent, Theme> = $Diff<InnerProps, { theme: Theme }> & {
   theme?: Theme,
@@ -24,7 +25,7 @@ export default function createWithTheme<Theme: {}>(context: Context<Theme | null
       return (
         <context.Consumer>
           {(theme) => {
-            warning('[theming] Please use withTheme only with the ThemeProvider');
+            warning(isObject(theme), '[theming] Please use withTheme only with the ThemeProvider');
 
             return (
               <Component
