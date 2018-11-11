@@ -7,10 +7,12 @@ import sinon from 'sinon';
 
 import createWithTheme from './create-with-theme';
 
-// eslint-disable-next-line no-unused-vars
-const FunctionalComponent = (props: { theme: {} }) => null;
+type Props = { theme: {} };
 
-class ClassComponent extends React.Component<{ theme: {} }> {
+// eslint-disable-next-line no-unused-vars
+const FunctionalComponent = (props: Props) => null;
+
+class ClassComponent extends React.Component<Props> {
   static displayName = 'foo';
 
   static someSpecialStatic = 'bar';
@@ -69,7 +71,8 @@ test('should allow overriding the prop from the outer props', (t) => {
 });
 
 test('innerRef should set the ref prop on the wrapped component', (t) => {
-  const context = createReactContext({});
+  const theme = {};
+  const context = createReactContext<{}>(theme);
   const withTheme = createWithTheme(context);
   let refComp = null;
   const innerRef = (comp) => {
