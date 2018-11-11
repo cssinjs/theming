@@ -8,10 +8,10 @@ import isObject from './is-object';
 
 export type ThemeProviderProps<Theme> = {
   children: Node,
-  theme: Theme | (outerTheme: Theme | null) => Theme,
+  theme: $NonMaybeType<Theme> | (outerTheme: Theme) => $NonMaybeType<Theme>,
 };
 
-export default function createThemeProvider<Theme>(context: Context<Theme | null>) {
+export default function createThemeProvider<Theme>(context: Context<Theme>) {
   return class ThemeProvider extends React.Component<ThemeProviderProps<Theme>> {
     static propTypes = {
       children: PropTypes.node,
@@ -21,7 +21,7 @@ export default function createThemeProvider<Theme>(context: Context<Theme | null
     static defaultProps = { children: null };
 
     // Get the theme from the props, supporting both (outerTheme) => {} as well as object notation
-    getTheme(outerTheme: Theme | null) {
+    getTheme(outerTheme: Theme) {
       const { theme } = this.props;
 
       if (typeof theme === 'function') {

@@ -7,13 +7,14 @@ import getDisplayName from 'react-display-name';
 import warning from 'warning';
 import isObject from './is-object';
 
-type OuterPropsType<InnerProps, InnerComponent, Theme> = $Diff<InnerProps, { theme: Theme }> & {
-  theme?: Theme,
-  innerRef?: (instance: ElementRef<InnerComponent> | null) => void
-};
-type InnerPropsType<Theme> = { theme: Theme };
+type OuterPropsType<InnerProps, InnerComponent, Theme> =
+  $Diff<InnerProps, { theme: $NonMaybeType<Theme> }> & {
+    theme?: $NonMaybeType<Theme>,
+    innerRef?: (instance: ElementRef<InnerComponent> | null) => void
+  };
+type InnerPropsType<Theme> = { theme: $NonMaybeType<Theme> };
 
-export default function createWithTheme<Theme: {}>(context: Context<Theme | null>) {
+export default function createWithTheme<Theme>(context: Context<Theme>) {
   return function hoc<
     InnerProps: InnerPropsType<Theme>,
     InnerComponent: ComponentType<InnerProps>,
