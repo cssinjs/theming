@@ -83,17 +83,16 @@ test('should not render any Consumer and Provider if no children were passed', (
 });
 
 test('should return not modify the theme when the ThemeProvider isn\'t nested', (t) => {
-  const context = createReactContext(null);
+  const context = createReactContext();
   const ThemeProvider = createThemeProvider(context);
   const themeA = {};
-  let receivedTheme = null;
+  let receivedTheme;
 
   TestRenderer.create((
     <ThemeProvider theme={themeA}>
       <context.Consumer>
         {(theme) => {
           receivedTheme = theme;
-
           return null;
         }}
       </context.Consumer>
@@ -104,11 +103,11 @@ test('should return not modify the theme when the ThemeProvider isn\'t nested', 
 });
 
 test('should create new theme object when 2 ThemeProvider\'s are nested', (t) => {
-  const context = createReactContext(null);
+  const context = createReactContext();
   const ThemeProvider = createThemeProvider(context);
   const themeA = {};
   const themeB = {};
-  let receivedTheme = null;
+  let receivedTheme;
 
   TestRenderer.create((
     <ThemeProvider theme={themeA}>
@@ -116,7 +115,6 @@ test('should create new theme object when 2 ThemeProvider\'s are nested', (t) =>
         <context.Consumer>
           {(theme) => {
             receivedTheme = theme;
-
             return null;
           }}
         </context.Consumer>

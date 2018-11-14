@@ -15,7 +15,7 @@ interface Theming<Theme> {
   ThemeProvider: $Call<ExtractReturnType<Theme>, typeof createThemeProvider>,
 }
 
-const ThemeContext = createReactContext<{} | null>(null);
+const ThemeContext = createReactContext<{} | void>();
 
 function createTheming<Theme>(context: Context<Theme>): Theming<Theme> {
   return {

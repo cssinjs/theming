@@ -40,7 +40,7 @@ export default function createThemeProvider<Theme>(context: Context<Theme>) {
         '[ThemeProvider] Please make your theme prop a plain object',
       );
 
-      return outerTheme === null ? theme : { ...outerTheme, ...theme };
+      return outerTheme == null ? theme : { ...outerTheme, ...theme };
     }
 
     render() {
