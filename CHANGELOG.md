@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+### 2.2.0 (2018-11-16)
+
+- Make the default theme undefined so when a ThemeProvider is not nested, it will not merge the themes ([#70](https://github.com/cssinjs/theming/pull/70))
+- Save the context on the theming object ([#69](https://github.com/cssinjs/theming/pull/69))
+
 ### 2.1.2 (2018-11-2)
 
 - Added exporting of ThemeProviderProps ([#67](https://github.com/cssinjs/theming/pull/67))
