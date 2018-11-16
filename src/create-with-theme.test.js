@@ -3,13 +3,16 @@ import test from 'ava';
 import createReactContext from 'create-react-context';
 import React from 'react';
 import TestRenderer from 'react-test-renderer';
+import sinon from 'sinon';
 
 import createWithTheme from './create-with-theme';
 
-// eslint-disable-next-line no-unused-vars
-const FunctionalComponent = (props: { theme: {} }) => null;
+type Props = { theme: {} };
 
-class ClassComponent extends React.Component<{ theme: {} }> {
+// eslint-disable-next-line no-unused-vars
+const FunctionalComponent = (props: Props) => null;
+
+class ClassComponent extends React.Component<Props> {
   static displayName = 'foo';
 
   static someSpecialStatic = 'bar';
@@ -68,7 +71,8 @@ test('should allow overriding the prop from the outer props', (t) => {
 });
 
 test('innerRef should set the ref prop on the wrapped component', (t) => {
-  const context = createReactContext({});
+  const theme = {};
+  const context = createReactContext<{}>(theme);
   const withTheme = createWithTheme(context);
   let refComp = null;
   const innerRef = (comp) => {
@@ -99,4 +103,20 @@ test('withTheme(Comp) hoists non-react static class properties', (t) => {
     ClassComponent.someSpecialStatic,
     'withTheme(Comp) should hoist non-react static properties',
   );
+});
+
+test('should warn when theme isn\'t an object', (t) => {
+  const spy = sinon.spy(console, 'error');
+
+  const context = createReactContext(null);
+  const withTheme = createWithTheme(context);
+  const WithTheme = withTheme(ClassComponent);
+
+  TestRenderer.create((
+    <WithTheme />
+  ));
+
+  t.deepEqual(spy.callCount, 1);
+
+  spy.restore();
 });

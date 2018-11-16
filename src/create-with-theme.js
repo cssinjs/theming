@@ -1,34 +1,34 @@
 // @flow
 
-import React, { type ComponentType, type ElementRef } from 'react';
+import React, { type ComponentType, type Ref } from 'react';
 import { type Context } from 'create-react-context';
 import hoist from 'hoist-non-react-statics';
 import getDisplayName from 'react-display-name';
+import warning from 'warning';
+import isObject from './is-object';
 
-type OuterPropsType<InnerProps, InnerComponent, Theme> = $Diff<InnerProps, { theme: Theme }> & {
-  theme?: Theme,
-  innerRef?: (instance: ElementRef<InnerComponent> | null) => void
-};
-type InnerPropsType<Theme> = { theme: Theme };
-
-export default function createWithTheme<Theme: {}>(context: Context<Theme>) {
+export default function createWithTheme<Theme>(context: Context<Theme>) {
   return function hoc<
-    InnerProps: InnerPropsType<Theme>,
+    InnerProps: {},
     InnerComponent: ComponentType<InnerProps>,
-    OuterProps: OuterPropsType<InnerProps, InnerComponent, Theme>,
+    OuterProps: $Diff<InnerProps, { theme: Theme }> & { innerRef?: Ref<InnerComponent> },
   >(Component: InnerComponent): ComponentType<OuterProps> {
     function withTheme(props: OuterProps) {
       const { innerRef, ...otherProps } = props;
 
       return (
         <context.Consumer>
-          {theme => (
-            <Component
-              theme={theme}
-              ref={innerRef}
-              {...otherProps}
-            />
-          )}
+          {(theme) => {
+            warning(isObject(theme), '[theming] Please use withTheme only with the ThemeProvider');
+
+            return (
+              <Component
+                theme={theme}
+                ref={innerRef}
+                {...otherProps}
+              />
+            );
+          }}
         </context.Consumer>
       );
     }
