@@ -87,13 +87,13 @@ These components are enabling seamless theming for your react applications. And 
 
 > If you insist on using context despite these warnings, try to isolate your use of context to a small area and avoid using the context API directly when possible so that it's easier to upgrade when the API changes.
 >
-> If you insist on using context despite these warnings, try to isolate your use of context to a small area and avoid using the context API directly when possible so that it's easier to upgrade when the API changes.  
+> If you insist on using context despite these warnings, try to isolate your use of context to a small area and avoid using the context API directly when possible so that it's easier to upgrade when the API changes.
 > — [Context, React documentation](https://facebook.github.io/react/docs/context.html)
 
 Regarding _isolation your use of context to a small area_ and _small areas__ in particular our very own react prophet Dan Abramov have a thing to say:
 
-> Should I use React unstable “context” feature?  
-> <img src="https://pbs.twimg.com/media/CmeGPNcVYAAM7TR.jpg" alt="![context application areas]" height="300" />  
+> Should I use React unstable “context” feature?
+> <img src="https://pbs.twimg.com/media/CmeGPNcVYAAM7TR.jpg" alt="![context application areas]" height="300" />
 > — [Dan Abramov @dan_abramov on Twitter](https://twitter.com/dan_abramov/status/749715530454622208?lang=en)
 
 So you are fine to use context for theming. `theming` package provides everything you need to do that:
@@ -121,7 +121,7 @@ const theme = { /*…*/ };
 
 ##### props.theme
 
-*Required*  
+*Required*
 Type: `Object`, `Function`
 
 If its `Object` and its root `ThemeProvider` then its intact and being passed down the react tree.
@@ -163,7 +163,7 @@ const augment = outerTheme =>
 
 ##### props.children
 
-*Required*  
+*Required*
 Type: `PropTypes.element`
 
 ### withTheme(component)
@@ -172,8 +172,8 @@ React High-Order component, which maps context to theme prop.
 
 #### component
 
-*Required*  
-Type: `PropTypes.element`
+*Required*
+Type: `ComponentType`
 
 You need to have `ThemeProvider` with a theme somewhere upper the react tree, after that wrap your component in `withTheme` and your component will get theme as a prop. `withTheme` will handle initial theme object as well as theme updates.
 
@@ -221,7 +221,7 @@ The context you pass in will be used.
 
 #### context
 
-Type: `Object`   
+Type: `Object`
 Result: `Object { withTheme, ThemeProvider }`
 
 `withTheme` and `ThemeProvider` will use the context passed to `createTheming`.
