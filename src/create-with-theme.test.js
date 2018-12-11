@@ -69,7 +69,7 @@ test('should allow overriding the prop from the outer props', (t) => {
   t.true(root.findByType(FunctionalComponent).props.theme === otherTheme);
 });
 
-test('innerRef should set the ref prop on the wrapped component', (t) => {
+test('normal refs should just work and correctly be forwarded', (t) => {
   const theme = {};
   const context = React.createContext<{}>(theme);
   const withTheme = createWithTheme(context);
@@ -80,7 +80,7 @@ test('innerRef should set the ref prop on the wrapped component', (t) => {
   const WithTheme = withTheme(ClassComponent);
 
   TestRenderer.create((
-    <WithTheme innerRef={innerRef} />
+    <WithTheme ref={innerRef} />
   ));
 
   t.deepEqual(refComp !== null && refComp.inner, true);
