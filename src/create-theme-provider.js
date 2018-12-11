@@ -23,19 +23,15 @@ export default function createThemeProvider<Theme>(context: Context<Theme>) {
     getTheme(outerTheme: Theme) {
       const { theme } = this.props;
 
-      // Check if any of the themes have changed or if it we don't have a cached theme yet
       if (theme !== this.lastTheme || outerTheme !== this.lastOuterTheme || !this.cachedTheme) {
-        // Update the last themes
         this.lastOuterTheme = outerTheme;
         this.lastTheme = theme;
-        let mergedTheme;
 
-        // Compute the new theme
         if (typeof theme === 'function') {
-          mergedTheme = theme(outerTheme);
+          this.cachedTheme = theme(outerTheme);
 
           warning(
-            isObject(mergedTheme),
+            isObject(this.cachedTheme),
             '[ThemeProvider] Please return an object from your theme function',
           );
         } else {
@@ -44,13 +40,10 @@ export default function createThemeProvider<Theme>(context: Context<Theme>) {
             '[ThemeProvider] Please make your theme prop a plain object',
           );
 
-          mergedTheme = outerTheme ? { ...outerTheme, ...theme } : theme;
+          this.cachedTheme = outerTheme ? { ...outerTheme, ...theme } : theme;
         }
-
-        this.cachedTheme = mergedTheme;
       }
 
-      // Return the cached theme
       return this.cachedTheme;
     }
 
