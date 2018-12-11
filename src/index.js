@@ -1,6 +1,6 @@
 // @flow
 
-import createReactContext, { type Context } from 'create-react-context';
+import { createContext, type Context } from 'react';
 
 import createThemeProvider, { type ThemeProviderProps } from './create-theme-provider';
 import createWithTheme from './create-with-theme';
@@ -15,7 +15,7 @@ interface Theming<Theme> {
   ThemeProvider: $Call<ExtractReturnType<Theme>, typeof createThemeProvider>,
 }
 
-const ThemeContext = createReactContext<{} | void>();
+const ThemeContext = createContext<{} | void>();
 
 function createTheming<Theme>(context: Context<Theme>): Theming<Theme> {
   return {

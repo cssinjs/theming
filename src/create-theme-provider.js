@@ -1,7 +1,6 @@
 // @flow
 
-import { type Context } from 'create-react-context';
-import React, { type Node } from 'react';
+import React, { type Node, type Context } from 'react';
 import warning from 'warning';
 import PropTypes from 'prop-types';
 import isObject from './is-object';
@@ -24,24 +23,52 @@ export default function createThemeProvider<Theme>(context: Context<Theme>) {
     getTheme(outerTheme: Theme) {
       const { theme } = this.props;
 
-      if (typeof theme === 'function') {
-        const mergedTheme = theme(outerTheme);
+      // Check if any of the themes have changed or if it we don't have a cached theme yet
+      if (theme !== this.lastTheme || outerTheme !== this.lastOuterTheme || !this.cachedTheme) {
+        // Update the last themes
+        this.lastOuterTheme = outerTheme;
+        this.lastTheme = theme;
+        let mergedTheme;
 
-        warning(
-          isObject(mergedTheme),
-          '[ThemeProvider] Please return an object from your theme function',
-        );
+        // Compute the new theme
+        if (typeof theme === 'function') {
+          mergedTheme = theme(outerTheme);
 
-        return mergedTheme;
+          warning(
+            isObject(mergedTheme),
+            '[ThemeProvider] Please return an object from your theme function',
+          );
+        } else {
+          warning(
+            isObject(theme),
+            '[ThemeProvider] Please make your theme prop a plain object',
+          );
+
+          mergedTheme = outerTheme ? { ...outerTheme, ...theme } : theme;
+        }
+
+        this.cachedTheme = mergedTheme;
       }
 
-      warning(
-        isObject(theme),
-        '[ThemeProvider] Please make your theme prop a plain object',
-      );
-
-      return !outerTheme ? theme : { ...outerTheme, ...theme };
+      // Return the cached theme
+      return this.cachedTheme;
     }
+
+    cachedTheme: Theme;
+
+    lastOuterTheme: Theme;
+
+    lastTheme: $NonMaybeType<Theme>;
+
+    renderProvider = (outerTheme: Theme) => {
+      const { children } = this.props;
+
+      return (
+        <context.Provider value={this.getTheme(outerTheme)}>
+          {children}
+        </context.Provider>
+      );
+    };
 
     render() {
       const { children } = this.props;
@@ -52,11 +79,7 @@ export default function createThemeProvider<Theme>(context: Context<Theme>) {
 
       return (
         <context.Consumer>
-          {outerTheme => (
-            <context.Provider value={this.getTheme(outerTheme)}>
-              {children}
-            </context.Provider>
-          )}
+          {this.renderProvider}
         </context.Consumer>
       );
     }
