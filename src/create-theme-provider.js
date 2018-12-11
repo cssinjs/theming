@@ -26,13 +26,12 @@ export default function createThemeProvider<Theme>(context: Context<Theme>) {
       if (theme !== this.lastTheme || outerTheme !== this.lastOuterTheme || !this.cachedTheme) {
         this.lastOuterTheme = outerTheme;
         this.lastTheme = theme;
-        let mergedTheme;
 
         if (typeof theme === 'function') {
-          mergedTheme = theme(outerTheme);
+          this.cachedTheme = theme(outerTheme);
 
           warning(
-            isObject(mergedTheme),
+            isObject(this.cachedTheme),
             '[ThemeProvider] Please return an object from your theme function',
           );
         } else {
@@ -41,10 +40,8 @@ export default function createThemeProvider<Theme>(context: Context<Theme>) {
             '[ThemeProvider] Please make your theme prop a plain object',
           );
 
-          mergedTheme = outerTheme ? { ...outerTheme, ...theme } : theme;
+          this.cachedTheme = outerTheme ? { ...outerTheme, ...theme } : theme;
         }
-
-        this.cachedTheme = mergedTheme;
       }
 
       return this.cachedTheme;
