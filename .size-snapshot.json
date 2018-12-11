@@ -1,21 +1,21 @@
 {
   "dist/theming.js": {
-    "bundled": 50965,
+    "bundled": 50791,
     "minified": 16787,
     "gzipped": 5332
   },
   "dist/theming.min.js": {
-    "bundled": 19171,
+    "bundled": 18997,
     "minified": 7279,
     "gzipped": 2754
   },
   "dist/theming.cjs.js": {
-    "bundled": 5872,
+    "bundled": 5700,
     "minified": 3547,
     "gzipped": 1287
   },
   "dist/theming.esm.js": {
-    "bundled": 5437,
+    "bundled": 5265,
     "minified": 3184,
     "gzipped": 1210,
     "treeshaked": {
