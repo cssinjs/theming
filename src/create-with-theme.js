@@ -1,7 +1,6 @@
 // @flow
 
-import React, { type ComponentType, type Ref } from 'react';
-import { type Context } from 'create-react-context';
+import React, { type ComponentType, type Ref, type Context } from 'react';
 import hoist from 'hoist-non-react-statics';
 import getDisplayName from 'react-display-name';
 import warning from 'warning';

@@ -1,7 +1,6 @@
 // @flow
 
-import { type Context } from 'create-react-context';
-import React, { type Node } from 'react';
+import React, { type Node, type Context } from 'react';
 import warning from 'warning';
 import PropTypes from 'prop-types';
 import isObject from './is-object';
@@ -24,24 +23,45 @@ export default function createThemeProvider<Theme>(context: Context<Theme>) {
     getTheme(outerTheme: Theme) {
       const { theme } = this.props;
 
-      if (typeof theme === 'function') {
-        const mergedTheme = theme(outerTheme);
+      if (theme !== this.lastTheme || outerTheme !== this.lastOuterTheme || !this.cachedTheme) {
+        this.lastOuterTheme = outerTheme;
+        this.lastTheme = theme;
 
-        warning(
-          isObject(mergedTheme),
-          '[ThemeProvider] Please return an object from your theme function',
-        );
+        if (typeof theme === 'function') {
+          this.cachedTheme = theme(outerTheme);
 
-        return mergedTheme;
+          warning(
+            isObject(this.cachedTheme),
+            '[ThemeProvider] Please return an object from your theme function',
+          );
+        } else {
+          warning(
+            isObject(theme),
+            '[ThemeProvider] Please make your theme prop a plain object',
+          );
+
+          this.cachedTheme = outerTheme ? { ...outerTheme, ...theme } : theme;
+        }
       }
 
-      warning(
-        isObject(theme),
-        '[ThemeProvider] Please make your theme prop a plain object',
-      );
-
-      return !outerTheme ? theme : { ...outerTheme, ...theme };
+      return this.cachedTheme;
     }
+
+    cachedTheme: Theme;
+
+    lastOuterTheme: Theme;
+
+    lastTheme: $NonMaybeType<Theme>;
+
+    renderProvider = (outerTheme: Theme) => {
+      const { children } = this.props;
+
+      return (
+        <context.Provider value={this.getTheme(outerTheme)}>
+          {children}
+        </context.Provider>
+      );
+    };
 
     render() {
       const { children } = this.props;
@@ -52,11 +72,7 @@ export default function createThemeProvider<Theme>(context: Context<Theme>) {
 
       return (
         <context.Consumer>
-          {outerTheme => (
-            <context.Provider value={this.getTheme(outerTheme)}>
-              {children}
-            </context.Provider>
-          )}
+          {this.renderProvider}
         </context.Consumer>
       );
     }

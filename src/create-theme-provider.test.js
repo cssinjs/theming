@@ -1,7 +1,6 @@
 // @flow
 
 import test from 'ava';
-import createReactContext from 'create-react-context';
 import React from 'react';
 import sinon from 'sinon';
 import TestRenderer from 'react-test-renderer';
@@ -17,7 +16,7 @@ test('createThemeProvider\'s type', (t) => {
 test('should call the theme fn with the default theme', (t) => {
   const defaultTheme = {};
   const themeFn = sinon.spy(outerTheme => outerTheme);
-  const context = createReactContext(defaultTheme);
+  const context = React.createContext(defaultTheme);
   const ThemeProvider = createThemeProvider(context);
 
   TestRenderer.create((
@@ -32,7 +31,7 @@ test('should call the theme fn with the default theme', (t) => {
 test('should call the theme fn with the outerTheme', (t) => {
   const outerTheme = {};
   const themeFn = sinon.spy(theme => theme);
-  const context = createReactContext({});
+  const context = React.createContext({});
   const ThemeProvider = createThemeProvider(context);
 
   TestRenderer.create((
@@ -47,7 +46,7 @@ test('should call the theme fn with the outerTheme', (t) => {
 });
 
 test('should merge nested themes', (t) => {
-  const context = createReactContext({});
+  const context = React.createContext({});
   const ThemeProvider = createThemeProvider(context);
   const themeA = { themeA: 'a' };
   const themeB = { themeB: 'b' };
@@ -72,7 +71,7 @@ test('should merge nested themes', (t) => {
 });
 
 test('should not render any Consumer and Provider if no children were passed', (t) => {
-  const context = createReactContext({});
+  const context = React.createContext({});
   const ThemeProvider = createThemeProvider(context);
 
   const { root } = TestRenderer.create((
@@ -83,7 +82,7 @@ test('should not render any Consumer and Provider if no children were passed', (
 });
 
 test('should return not modify the theme when the ThemeProvider isn\'t nested', (t) => {
-  const context = createReactContext();
+  const context = React.createContext();
   const ThemeProvider = createThemeProvider(context);
   const themeA = {};
   let receivedTheme;
@@ -103,7 +102,7 @@ test('should return not modify the theme when the ThemeProvider isn\'t nested', 
 });
 
 test('should create new theme object when 2 ThemeProvider\'s are nested', (t) => {
-  const context = createReactContext();
+  const context = React.createContext();
   const ThemeProvider = createThemeProvider(context);
   const themeA = {};
   const themeB = {};

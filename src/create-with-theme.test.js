@@ -1,6 +1,5 @@
 // @flow
 import test from 'ava';
-import createReactContext from 'create-react-context';
 import React from 'react';
 import TestRenderer from 'react-test-renderer';
 import sinon from 'sinon';
@@ -29,7 +28,7 @@ test('createWithTheme\'s type', (t) => {
 });
 
 test('createWithTheme\'s result is function on its own', (t) => {
-  const context = createReactContext({});
+  const context = React.createContext({});
   const withTheme = createWithTheme(context);
 
   t.true(typeof withTheme === 'function', 'withTheme should be a function');
@@ -37,7 +36,7 @@ test('createWithTheme\'s result is function on its own', (t) => {
 
 test('should pass the default value of the context', (t) => {
   const theme = {};
-  const context = createReactContext(theme);
+  const context = React.createContext(theme);
   const WithTheme = createWithTheme(context)(FunctionalComponent);
   const { root } = TestRenderer.create(<WithTheme />);
 
@@ -47,7 +46,7 @@ test('should pass the default value of the context', (t) => {
 
 test('should pass the value of the Provider', (t) => {
   const theme = { test: 'test' };
-  const context = createReactContext(theme);
+  const context = React.createContext(theme);
   const WithTheme = createWithTheme(context)(FunctionalComponent);
   const { root } = TestRenderer.create((
     <context.Provider value={theme}>
@@ -61,7 +60,7 @@ test('should pass the value of the Provider', (t) => {
 test('should allow overriding the prop from the outer props', (t) => {
   const theme = {};
   const otherTheme = {};
-  const context = createReactContext(theme);
+  const context = React.createContext(theme);
   const WithTheme = createWithTheme(context)(FunctionalComponent);
   const { root } = TestRenderer.create((
     <WithTheme theme={otherTheme} />
@@ -72,7 +71,7 @@ test('should allow overriding the prop from the outer props', (t) => {
 
 test('innerRef should set the ref prop on the wrapped component', (t) => {
   const theme = {};
-  const context = createReactContext<{}>(theme);
+  const context = React.createContext<{}>(theme);
   const withTheme = createWithTheme(context);
   let refComp = null;
   const innerRef = (comp) => {
@@ -88,7 +87,7 @@ test('innerRef should set the ref prop on the wrapped component', (t) => {
 });
 
 test('withTheme(Comp) hoists non-react static class properties', (t) => {
-  const context = createReactContext({});
+  const context = React.createContext({});
   const withTheme = createWithTheme(context);
   const WithTheme = withTheme(ClassComponent);
 
@@ -108,7 +107,7 @@ test('withTheme(Comp) hoists non-react static class properties', (t) => {
 test('should warn when theme isn\'t an object', (t) => {
   const spy = sinon.spy(console, 'error');
 
-  const context = createReactContext(null);
+  const context = React.createContext(null);
   const withTheme = createWithTheme(context);
   const WithTheme = withTheme(ClassComponent);
 

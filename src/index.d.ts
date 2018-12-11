@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Context } from 'create-react-context';
 
 type DefaultTheme = object | null;
 
@@ -19,16 +18,16 @@ interface ThemeProviderProps<Theme> {
 type ThemeProviderFactory<Theme> = React.ComponentType<ThemeProviderProps<Theme>>;
 
 interface Theming<Theme> {
-    context: Context<Theme>,
+    context: React.Context<Theme>,
     withTheme: WithThemeFactory<Theme>,
     ThemeProvider: ThemeProviderFactory<Theme>,
 }
 
-declare function createTheming<Theme>(context: Context<Theme>): Theming<Theme>;
+declare function createTheming<Theme>(context: React.Context<Theme>): Theming<Theme>;
 
 declare const withTheme: WithThemeFactory<DefaultTheme>;
 declare const ThemeProvider: ThemeProviderFactory<DefaultTheme>;
-declare const ThemeContext: Context<DefaultTheme>;
+declare const ThemeContext: React.Context<DefaultTheme>;
 
 export {
     ThemeContext,
