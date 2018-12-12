@@ -8,6 +8,7 @@ import createWithTheme from './create-with-theme';
 
 type Props = { theme: {} };
 
+// eslint-disable-next-line no-unused-vars
 const FunctionalComponent = (props: Props) => null;
 
 class ClassComponent extends React.Component<Props> {
