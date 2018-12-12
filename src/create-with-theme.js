@@ -8,10 +8,11 @@ import isObject from './is-object';
 
 export default function createWithTheme<Theme>(context: Context<Theme>) {
   return function hoc<
-    InnerProps: {},
+    InnerProps,
     InnerComponent: ComponentType<InnerProps>,
-    OuterProps: $Diff<InnerProps, { theme: Theme }>,
+    OuterProps: { ...InnerProps, theme?: $NonMaybeType<Theme> },
   >(Component: InnerComponent): ComponentType<OuterProps> {
+    // $FlowFixMe
     const withTheme = React.forwardRef((props, ref) => (
       <context.Consumer>
         {(theme) => {
