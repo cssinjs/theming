@@ -1,30 +1,30 @@
 {
   "dist/theming.js": {
-    "bundled": 50736,
-    "minified": 16811,
-    "gzipped": 5325
+    "bundled": 50307,
+    "minified": 16661,
+    "gzipped": 5259
   },
   "dist/theming.min.js": {
-    "bundled": 18942,
-    "minified": 7303,
-    "gzipped": 2747
+    "bundled": 18513,
+    "minified": 7153,
+    "gzipped": 2674
   },
   "dist/theming.cjs.js": {
-    "bundled": 5649,
-    "minified": 3571,
-    "gzipped": 1281
+    "bundled": 5246,
+    "minified": 3378,
+    "gzipped": 1201
   },
   "dist/theming.esm.js": {
-    "bundled": 5214,
-    "minified": 3208,
-    "gzipped": 1207,
+    "bundled": 4802,
+    "minified": 3006,
+    "gzipped": 1124,
     "treeshaked": {
       "rollup": {
-        "code": 2327,
+        "code": 1885,
         "import_statements": 163
       },
       "webpack": {
-        "code": 3576
+        "code": 3428
       }
     }
   }

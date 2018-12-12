@@ -58,10 +58,9 @@ test('should pass the value of the Provider', (t) => {
 });
 
 test('should allow overriding the prop from the outer props', (t) => {
-  const theme = {};
   const otherTheme = {};
-  const context = React.createContext(theme);
-  const WithTheme = createWithTheme(context)(FunctionalComponent);
+  const context = React.createContext<{}>({});
+  const WithTheme = createWithTheme<{}>(context)(FunctionalComponent);
   const { root } = TestRenderer.create((
     <WithTheme theme={otherTheme} />
   ));
@@ -69,18 +68,16 @@ test('should allow overriding the prop from the outer props', (t) => {
   t.true(root.findByType(FunctionalComponent).props.theme === otherTheme);
 });
 
-test('innerRef should set the ref prop on the wrapped component', (t) => {
-  const theme = {};
-  const context = React.createContext<{}>(theme);
-  const withTheme = createWithTheme(context);
+test('normal refs should just work and correctly be forwarded', (t) => {
+  const context = React.createContext({});
+  const WithTheme = createWithTheme(context)(ClassComponent);
   let refComp = null;
   const innerRef = (comp) => {
     refComp = comp;
   };
-  const WithTheme = withTheme(ClassComponent);
 
   TestRenderer.create((
-    <WithTheme innerRef={innerRef} />
+    <WithTheme ref={innerRef} />
   ));
 
   t.deepEqual(refComp !== null && refComp.inner, true);
@@ -107,7 +104,7 @@ test('withTheme(Comp) hoists non-react static class properties', (t) => {
 test('should warn when theme isn\'t an object', (t) => {
   const spy = sinon.spy(console, 'error');
 
-  const context = React.createContext(null);
+  const context = React.createContext<{} | void>();
   const withTheme = createWithTheme(context);
   const WithTheme = withTheme(ClassComponent);
 

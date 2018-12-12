@@ -2,12 +2,10 @@ import * as React from 'react';
 
 type DefaultTheme = object | null;
 
-type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
-
 type WithThemeFactory<Theme> = <
     InnerProps extends { theme: NonNullable<Theme> },
     InnerComponent extends React.ComponentType<InnerProps>,
-    OuterProps extends Omit<InnerProps, { theme: NonNullable<Theme> }> & { innerRef?: React.Ref<InnerComponent> },
+    OuterProps extends InnerProps & { theme?: NonNullable<Theme> },
 >(comp: InnerComponent) => React.ComponentType<OuterProps>;
 
 interface ThemeProviderProps<Theme> {
