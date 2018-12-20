@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-### 3.0 (unreleased)
+### 3.0 (2018-12-20)
 
 - Upgrade to React 16.3 and cache the calculation of the theme object ([#74](https://github.com/cssinjs/theming/pull/74))
 - Add support for the new forward ref API and deprecate the `innerRef` prop ([#75](https://github.com/cssinjs/theming/pull/75))
