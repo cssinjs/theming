@@ -216,8 +216,7 @@ export default App;
 
 #### Access inner component instance
 
-With theming version 3 we implemented the new `forwardRef` API.
-You can just use the normal `ref` property to get the wrapped component instance.
+The `withTheme` HOC supports the new React forwardRef API so you can just use the normal ref prop.
 
 ### createTheming(context)
 
