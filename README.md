@@ -214,6 +214,10 @@ const App = () => (
 export default App;
 ```
 
+#### Access inner component instance
+
+The `withTheme` HOC supports the new React forwardRef API so you can just use the normal ref prop.
+
 ### createTheming(context)
 
 Function to create `ThemeProvider` and `withTheme` with custom context.
