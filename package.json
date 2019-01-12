@@ -67,6 +67,7 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.0.0",
     "ava": "^1.0.0-rc.1",
+    "babel-plugin-dev-expression": "^0.2.1",
     "coveralls": "^3.0.0",
     "eslint": "^5.8.0",
     "eslint-config-jss": "^5.0.1",

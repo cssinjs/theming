@@ -4,5 +4,5 @@ module.exports = {
     '@babel/react',
     '@babel/flow',
   ],
-  plugins: ['@babel/proposal-class-properties'],
+  plugins: ['@babel/proposal-class-properties', 'dev-expression'],
 };
