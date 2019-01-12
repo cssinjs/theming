@@ -3,7 +3,7 @@
 import React, { type ComponentType, type Context } from 'react';
 import hoist from 'hoist-non-react-statics';
 import getDisplayName from 'react-display-name';
-import warning from 'warning';
+import warning from 'tiny-warning';
 import isObject from './is-object';
 
 export default function createWithTheme<Theme>(context: Context<Theme>) {

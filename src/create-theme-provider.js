@@ -1,7 +1,7 @@
 // @flow
 
 import React, { type Node, type Context } from 'react';
-import warning from 'warning';
+import warning from 'tiny-warning';
 import PropTypes from 'prop-types';
 import isObject from './is-object';
 
