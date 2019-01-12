@@ -102,7 +102,7 @@ test('withTheme(Comp) hoists non-react static class properties', (t) => {
 });
 
 test('should warn when theme isn\'t an object', (t) => {
-  const spy = sinon.spy(console, 'error');
+  const spy = sinon.spy(console, 'warn');
 
   const context = React.createContext<{} | void>();
   const withTheme = createWithTheme(context);
