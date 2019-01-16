@@ -22,7 +22,7 @@
     "coveralls": "yarn coverage && coveralls < coverage/lcov.info",
     "prebuild": "rimraf dist",
     "build": "rollup -c",
-    "postversion": "yarn build",
+    "prepare": "yarn build",
     "match-snapshot": "SNAPSHOT=match rollup -c"
   },
   "nyc": {
