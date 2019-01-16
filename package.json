@@ -1,6 +1,6 @@
 {
   "name": "theming",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Unified CSSinJS theming solution for React",
   "main": "dist/theming.cjs.js",
   "module": "dist/theming.esm.js",
@@ -22,7 +22,7 @@
     "coveralls": "yarn coverage && coveralls < coverage/lcov.info",
     "prebuild": "rimraf dist",
     "build": "rollup -c",
-    "postversion": "yarn build",
+    "prepare": "yarn build",
     "match-snapshot": "SNAPSHOT=match rollup -c"
   },
   "nyc": {
