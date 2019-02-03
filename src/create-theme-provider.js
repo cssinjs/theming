@@ -11,14 +11,7 @@ export type ThemeProviderProps<Theme> = {
 };
 
 export default function createThemeProvider<Theme>(context: Context<Theme>) {
-  return class ThemeProvider extends React.Component<ThemeProviderProps<Theme>> {
-    static propTypes = {
-      children: PropTypes.node,
-      theme: PropTypes.oneOfType([PropTypes.shape({}), PropTypes.func]).isRequired,
-    };
-
-    static defaultProps = { children: null };
-
+  class ThemeProvider extends React.Component<ThemeProviderProps<Theme>> {
     // Get the theme from the props, supporting both (outerTheme) => {} as well as object notation
     getTheme(outerTheme: Theme) {
       const { theme } = this.props;
@@ -76,5 +69,15 @@ export default function createThemeProvider<Theme>(context: Context<Theme>) {
         </context.Consumer>
       );
     }
-  };
+  }
+
+  if (process.env.NODE_ENV !== 'production') {
+    ThemeProvider.propTypes = {
+      // eslint-disable-next-line react/require-default-props
+      children: PropTypes.node,
+      theme: PropTypes.oneOfType([PropTypes.shape({}), PropTypes.func]).isRequired,
+    };
+  }
+
+  return ThemeProvider;
 }
