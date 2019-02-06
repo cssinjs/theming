@@ -75,6 +75,7 @@ test('should not render any Consumer and Provider if no children were passed', (
   const ThemeProvider = createThemeProvider(context);
 
   const { root } = TestRenderer.create((
+    // $FlowFixMe: Flow complains because we require children
     <ThemeProvider theme={{}} />
   ));
 
