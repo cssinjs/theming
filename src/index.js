@@ -4,6 +4,7 @@ import { createContext, type Context } from 'react';
 
 import createThemeProvider, { type ThemeProviderProps } from './create-theme-provider';
 import createWithTheme from './create-with-theme';
+import createUseTheme from './create-use-theme';
 
 type ExtractReturnType<Theme> = <ReturnType>(
   (context: Context<Theme>) => ReturnType
@@ -21,6 +22,7 @@ function createTheming<Theme>(context: Context<Theme>): Theming<Theme> {
   return {
     context,
     withTheme: createWithTheme(context),
+    useTheme: createUseTheme(context),
     ThemeProvider: createThemeProvider(context),
   };
 }
