@@ -75,9 +75,8 @@ test('should not render any Consumer and Provider if no children were passed', (
   const ThemeProvider = createThemeProvider(context);
 
   const { root } = TestRenderer.create((
-    <ThemeProvider theme={{}}>
-      <span />
-    </ThemeProvider>
+    // $FlowFixMe: Flow complains because we require children
+    <ThemeProvider theme={{}} />
   ));
 
   t.deepEqual(root.findByType(ThemeProvider).children.length, 0);
