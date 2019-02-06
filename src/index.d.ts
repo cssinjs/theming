@@ -15,10 +15,13 @@ interface ThemeProviderProps<Theme> {
 
 type ThemeProviderFactory<Theme> = React.ComponentType<ThemeProviderProps<Theme>>;
 
+type UseThemeFactory<Theme> = () => Theme;
+
 interface Theming<Theme> {
     context: React.Context<Theme>,
     withTheme: WithThemeFactory<Theme>,
     ThemeProvider: ThemeProviderFactory<Theme>,
+    useTheme: UseThemeFactory<Theme>,
 }
 
 declare function createTheming<Theme>(context: React.Context<Theme>): Theming<Theme>;
@@ -26,11 +29,13 @@ declare function createTheming<Theme>(context: React.Context<Theme>): Theming<Th
 declare const withTheme: WithThemeFactory<DefaultTheme>;
 declare const ThemeProvider: ThemeProviderFactory<DefaultTheme>;
 declare const ThemeContext: React.Context<DefaultTheme>;
+declare const useTheme: UseThemeFactory<DefaultTheme>;
 
 export {
     ThemeContext,
     createTheming,
     withTheme,
+    useTheme,
     ThemeProvider,
     ThemeProviderProps,
     Theming,

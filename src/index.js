@@ -30,6 +30,7 @@ function createTheming<Theme>(context: Context<Theme>): Theming<Theme> {
 const {
   withTheme,
   ThemeProvider,
+  useTheme,
 } = createTheming(ThemeContext);
 
 export type {
@@ -38,6 +39,7 @@ export type {
 };
 
 export {
+  useTheme,
   ThemeContext,
   withTheme,
   createTheming,
