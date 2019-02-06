@@ -14,6 +14,7 @@ interface Theming<Theme> {
   context: Context<Theme>,
   withTheme: $Call<ExtractReturnType<Theme>, typeof createWithTheme>,
   ThemeProvider: $Call<ExtractReturnType<Theme>, typeof createThemeProvider>,
+  useTheme: $Call<ExtractReturnType<Theme>, typeof createUseTheme>,
 }
 
 const ThemeContext = createContext<{} | void>();
