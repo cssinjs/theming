@@ -29,7 +29,9 @@ export default function createWithTheme<Theme>(context: Context<Theme>) {
       </context.Consumer>
     ));
 
-    withTheme.displayName = `WithTheme(${getDisplayName(Component)})`;
+    if (process.env.NODE_ENV !== 'production') {
+      withTheme.displayName = `WithTheme(${getDisplayName(Component)})`;
+    }
 
     hoist(withTheme, Component);
 
