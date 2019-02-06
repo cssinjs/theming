@@ -7,6 +7,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 - Improve bundle size ([#83](https://github.com/cssinjs/theming/pull/83))
 
+### 3.0.3 (2019-1-20)
+
+- Fix @types/react dependency ([#81](https://github.com/cssinjs/theming/pull/81))
+
+### 3.0.2 (2019-1-16)
+
+- Republish with new build
+
 ### 3.0.1 (2019-1-13)
 
 - Use tiny-warning instead of warning package ([#78](https://github.com/cssinjs/theming/pull/78))
