@@ -40,7 +40,7 @@ See [Motivation](#motivation) for details.
 
 In your components
 
-Note: this component i will use later to show what theme you will get
+Note: this component is used to show what theme you receive.
 
 ```jsx
 import React from 'react';
@@ -84,7 +84,7 @@ Be our guest, play with `theming` in codesandbox:
 
 ## Motivation
 
-These components are enabling seamless theming for your react applications. And as far as you dont want to pass theme object to each and every component. Thats why you want to use context. But as far context feature is _experimental API and it is likely to break in future releases of React_ you don't want to use it directly. Here `theming` comes to play.
+These components are enabling seamless theming for your react applications. So as far as you don't want to pass the theme object to every component. That's why you want to use context. However, as far context feature is _experimental API and it is likely to break in future releases of React_ you don't want to use it directly. Here `theming` comes to play.
 
 > If you insist on using context despite these warnings, try to isolate your use of context to a small area and avoid using the context API directly when possible so that it's easier to upgrade when the API changes.
 >
@@ -97,8 +97,8 @@ Regarding _isolation your use of context to a small area_ and _small areas__ in 
 > <img src="https://pbs.twimg.com/media/CmeGPNcVYAAM7TR.jpg" alt="![context application areas]" height="300" />
 > — [Dan Abramov @dan_abramov on Twitter](https://twitter.com/dan_abramov/status/749715530454622208?lang=en)
 
-So you are fine to use context for theming. `theming` package provides everything you need to do that:
-* `ThemeProvider` allows you to pass and update `theme` through context down react tree.
+So you are okay to use context for theming. `theming` package provides everything you need to do that:
+* The `ThemeProvider` allows you to pass and update your theme through context down the react tree.
 * `withTheme` allows you to receive theme and its updates in your components as a `theme` prop.
 * `createTheming` allows you to integrate `theming` into your CSSinJS library with a custom `context` (if you need custom one).
 
@@ -125,7 +125,7 @@ const theme = { /*…*/ };
 *Required*
 Type: `Object`, `Function`
 
-If its `Object` and its root `ThemeProvider` then its intact and being passed down the react tree.
+If its `Object` and its root `ThemeProvider` then it's intact and being passed down the react tree.
 
 ```jsx
 const theme = { themed: true };
@@ -135,7 +135,7 @@ const theme = { themed: true };
 </ThemeProvider>
 ```
 
-If its `Object` and its nested `ThemeProvider` then its being merged with theme from parent `ThemeProvider` and passed down to the react tree.
+If its `Object` and its nested `ThemeProvider` then it is being merged with the theme from the parent `ThemeProvider` and passed down to the react tree.
 
 ```jsx
 const theme = { themed: true };
@@ -148,7 +148,7 @@ const patch = { merged: true };
 </ThemeProvider>
 ```
 
-If its `Function` and its nested `ThemeProvider` then its being applied to the theme from parent `ThemeProvider`. if result is an `Object` it will be passed down to the react tree, throws otherwise.
+If its `Function` and its nested `ThemeProvider` then it's being applied to the theme from parent `ThemeProvider`. If the result is an `Object` it's passed down to the react tree, throws otherwise.
 
 ```jsx
 const theme = { themed: true };
@@ -176,9 +176,9 @@ React High-Order component, which maps context to theme prop.
 *Required*
 Type: `ComponentType`
 
-You need to have `ThemeProvider` with a theme somewhere upper the react tree, after that wrap your component in `withTheme` and your component will get theme as a prop. `withTheme` will handle initial theme object as well as theme updates.
+You need to have `ThemeProvider` with a theme somewhere upper the react tree after that wrap your component in `withTheme` and your component gets the theme as a prop. `withTheme`  handles the initial theme object as well as theme updates.
 
-PS. It doesnt break if you have `PureComponent` somewhere in between your ThemeProvider and withTheme (i have tests for that).
+PS. It doesn't break if you have `PureComponent` somewhere in between your `ThemeProvider` and `withTheme`.
 
 Usage with Component:
 
@@ -217,7 +217,7 @@ export default App;
 
 #### Access inner component instance
 
-The `withTheme` HOC supports the new React forwardRef API so you can just use the normal ref prop.
+The `withTheme` HOC supports the new React forwardRef API so you can use the regular ref prop.
 
 ### useTheme
 
@@ -241,7 +241,7 @@ export default Demobox;
 ### createTheming(context)
 
 Function to create `ThemeProvider` and `withTheme` with custom context.
-The context you pass in will be used.
+The context you pass in is used.
 
 #### context
 
