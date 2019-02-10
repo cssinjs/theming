@@ -254,10 +254,9 @@ Note: You will only be able to use `useTheme` when you are on React version 16.8
 
 ```js
 import { createTheming } from 'theming';
-import createReactContext from 'create-react-context';
+import React from 'react';
 
-const context = createReactContext({});
-
+const context = React.createContext({});
 const theming = createTheming(context);
 
 const { withTheme, ThemeProvider, useTheme } = theming;
