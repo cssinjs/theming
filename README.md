@@ -219,7 +219,7 @@ export default App;
 
 The `withTheme` HOC supports the new React forwardRef API so you can just use the normal ref prop.
 
-### Use theme (Hook)
+### useTheme
 
 When you are on React 16.8 higher you will be able to use the `useTheme` hook which will return the theme object.
 
