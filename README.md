@@ -23,6 +23,7 @@ See [Motivation](#motivation) for details.
 * [API](#api)
   * [ThemeProvider](#themeprovider)
   * [withTheme](#withthemecomponent)
+  * [useTheme](#usetheme)
   * [createTheming](#createthemingcustomchannel)
 * [Credits](#credits)
 * [License](#license)
@@ -218,6 +219,25 @@ export default App;
 
 The `withTheme` HOC supports the new React forwardRef API so you can use the regular ref prop.
 
+### useTheme
+
+When you are on React 16.8 higher you will be able to use the `useTheme` hook which will return the theme object.
+
+Usage with Component:
+
+```jsx
+import React from 'react';
+import { useTheme } from 'theming';
+
+const DemoBox = () => {
+  const theme = useTheme();
+  console.log(theme);
+  return (<div />);
+}
+
+export default Demobox;
+```
+
 ### createTheming(context)
 
 Function to create `ThemeProvider` and `withTheme` with custom context.
@@ -226,23 +246,25 @@ The context you pass in is used.
 #### context
 
 Type: `Object`
-Result: `Object { withTheme, ThemeProvider }`
+Result: `Object { withTheme, ThemeProvider, useTheme }`
 
-`withTheme` and `ThemeProvider` use the context passed to `createTheming`.
+`withTheme`, `ThemeProvider` and `useTheme` will use the context passed to `createTheming`.
+
+Note: You will only be able to use `useTheme` when you are on React version 16.8 or higher.
 
 ```js
 import { createTheming } from 'theming';
-import createReactContext from 'create-react-context';
+import React from 'react';
 
-const context = createReactContext({});
-
+const context = React.createContext({});
 const theming = createTheming(context);
 
-const { withTheme, ThemeProvider } = theming;
+const { withTheme, ThemeProvider, useTheme } = theming;
 
 export default {
   withTheme,
   ThemeProvider,
+  useTheme,
 };
 ```
 
