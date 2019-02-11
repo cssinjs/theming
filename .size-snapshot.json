@@ -1,13 +1,13 @@
 {
   "dist/theming.js": {
-    "bundled": 49491,
-    "minified": 16411,
-    "gzipped": 5229
+    "bundled": 51667,
+    "minified": 17170,
+    "gzipped": 5420
   },
   "dist/theming.min.js": {
-    "bundled": 17790,
-    "minified": 6729,
-    "gzipped": 2507
+    "bundled": 19204,
+    "minified": 7248,
+    "gzipped": 2645
   },
   "dist/theming.cjs.js": {
     "bundled": 5914,

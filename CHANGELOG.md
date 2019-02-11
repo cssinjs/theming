@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 - Improve bundle size ([#83](https://github.com/cssinjs/theming/pull/83))
 - Add useTheme hook ([#84](https://github.com/cssinjs/theming/pull/84))
+- Upgrade hoist-non-react-statics to 3.3.0 ([#86](https://github.com/cssinjs/theming/pull/86))
 
 ### 3.0.3 (2019-1-20)
 
