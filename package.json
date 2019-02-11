@@ -1,6 +1,6 @@
 {
   "name": "theming",
-  "version": "3.0.3",
+  "version": "3.1.0",
   "description": "Unified CSSinJS theming solution for React",
   "main": "dist/theming.cjs.js",
   "module": "dist/theming.esm.js",
