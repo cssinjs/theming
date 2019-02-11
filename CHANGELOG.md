@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-### Next
+### v3.1.0 (2019-2-11)
 
 - Improve bundle size ([#83](https://github.com/cssinjs/theming/pull/83))
 - Add useTheme hook ([#84](https://github.com/cssinjs/theming/pull/84))
