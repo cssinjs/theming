@@ -3,21 +3,26 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-### v3.1.0 (2019-2-11)
+### v3.2.0 (2019-05-06)
+
+- Upgrade flow, fix types
+- Add prettier config, fix formatting
+
+### v3.1.0 (2019-02-11)
 
 - Improve bundle size ([#83](https://github.com/cssinjs/theming/pull/83))
 - Add useTheme hook ([#84](https://github.com/cssinjs/theming/pull/84))
 - Upgrade hoist-non-react-statics to 3.3.0 ([#86](https://github.com/cssinjs/theming/pull/86))
 
-### 3.0.3 (2019-1-20)
+### 3.0.3 (2019-01-20)
 
 - Fix @types/react dependency ([#81](https://github.com/cssinjs/theming/pull/81))
 
-### 3.0.2 (2019-1-16)
+### 3.0.2 (2019-01-16)
 
 - Republish with new build
 
-### 3.0.1 (2019-1-13)
+### 3.0.1 (2019-01-13)
 
 - Use tiny-warning instead of warning package ([#78](https://github.com/cssinjs/theming/pull/78))
 
