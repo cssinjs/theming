@@ -8,7 +8,10 @@ export default function createUseTheme<Theme>(context: Context<Theme>) {
   const useTheme = () => {
     const theme = React.useContext(context);
 
-    warning(isObject(theme), '[theming] Please use useTheme only with the ThemeProvider');
+    warning(
+      isObject(theme),
+      '[theming] Please use useTheme only with the ThemeProvider'
+    );
 
     return theme;
   };

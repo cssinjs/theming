@@ -5,32 +5,40 @@ import warning from 'tiny-warning';
 import PropTypes from 'prop-types';
 import isObject from './is-object';
 
+type ThemeFunction<Theme> = (outerTheme: Theme) => $NonMaybeType<Theme>;
+
+type ThemeOrThemeFunction<Theme> = $NonMaybeType<Theme> | ThemeFunction<Theme>;
+
 export type ThemeProviderProps<Theme> = {
   children: Node,
-  theme: $NonMaybeType<Theme> | (outerTheme: Theme) => $NonMaybeType<Theme>,
+  theme: ThemeOrThemeFunction<Theme>
 };
 
 export default function createThemeProvider<Theme>(context: Context<Theme>) {
   class ThemeProvider extends React.Component<ThemeProviderProps<Theme>> {
     // Get the theme from the props, supporting both (outerTheme) => {} as well as object notation
     getTheme(outerTheme: Theme) {
-      const { theme } = this.props;
-
-      if (theme !== this.lastTheme || outerTheme !== this.lastOuterTheme || !this.cachedTheme) {
+      if (
+        this.props.theme !== this.lastTheme ||
+        outerTheme !== this.lastOuterTheme ||
+        !this.cachedTheme
+      ) {
         this.lastOuterTheme = outerTheme;
-        this.lastTheme = theme;
+        this.lastTheme = this.props.theme;
 
-        if (typeof theme === 'function') {
+        if (typeof this.lastTheme === 'function') {
+          const theme: ThemeFunction<Theme> = (this.props.theme: any);
           this.cachedTheme = theme(outerTheme);
 
           warning(
             isObject(this.cachedTheme),
-            '[ThemeProvider] Please return an object from your theme function',
+            '[ThemeProvider] Please return an object from your theme function'
           );
         } else {
+          const theme: Theme = (this.props.theme: any);
           warning(
             isObject(theme),
-            '[ThemeProvider] Please make your theme prop a plain object',
+            '[ThemeProvider] Please make your theme prop a plain object'
           );
 
           this.cachedTheme = outerTheme ? { ...outerTheme, ...theme } : theme;
@@ -44,7 +52,7 @@ export default function createThemeProvider<Theme>(context: Context<Theme>) {
 
     lastOuterTheme: Theme;
 
-    lastTheme: $NonMaybeType<Theme>;
+    lastTheme: ThemeOrThemeFunction<Theme>;
 
     renderProvider = (outerTheme: Theme) => {
       const { children } = this.props;
@@ -63,11 +71,7 @@ export default function createThemeProvider<Theme>(context: Context<Theme>) {
         return null;
       }
 
-      return (
-        <context.Consumer>
-          {this.renderProvider}
-        </context.Consumer>
-      );
+      return <context.Consumer>{this.renderProvider}</context.Consumer>;
     }
   }
 
@@ -75,7 +79,8 @@ export default function createThemeProvider<Theme>(context: Context<Theme>) {
     ThemeProvider.propTypes = {
       // eslint-disable-next-line react/require-default-props
       children: PropTypes.node,
-      theme: PropTypes.oneOfType([PropTypes.shape({}), PropTypes.func]).isRequired,
+      theme: PropTypes.oneOfType([PropTypes.shape({}), PropTypes.func])
+        .isRequired
     };
   }
 

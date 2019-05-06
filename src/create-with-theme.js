@@ -10,21 +10,17 @@ export default function createWithTheme<Theme>(context: Context<Theme>) {
   return function hoc<
     InnerProps,
     InnerComponent: ComponentType<InnerProps>,
-    OuterProps: { ...InnerProps, theme?: $NonMaybeType<Theme> },
+    OuterProps: { ...InnerProps, theme?: $NonMaybeType<Theme> }
   >(Component: InnerComponent): ComponentType<OuterProps> {
-    // $FlowFixMe
     const withTheme = React.forwardRef((props, ref) => (
       <context.Consumer>
-        {(theme) => {
-          warning(isObject(theme), '[theming] Please use withTheme only with the ThemeProvider');
-
-          return (
-            <Component
-              theme={theme}
-              ref={ref}
-              {...props}
-            />
+        {theme => {
+          warning(
+            isObject(theme),
+            '[theming] Please use withTheme only with the ThemeProvider'
           );
+
+          return <Component theme={theme} ref={ref} {...props} />;
         }}
       </context.Consumer>
     ));
