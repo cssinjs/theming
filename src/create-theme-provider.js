@@ -1,9 +1,9 @@
 // @flow
 
-import React, { type Node, type Context } from "react";
-import warning from "tiny-warning";
-import PropTypes from "prop-types";
-import isObject from "./is-object";
+import React, { type Node, type Context } from 'react';
+import warning from 'tiny-warning';
+import PropTypes from 'prop-types';
+import isObject from './is-object';
 
 type ThemeFunction<Theme> = (outerTheme: Theme) => $NonMaybeType<Theme>;
 
@@ -26,19 +26,19 @@ export default function createThemeProvider<Theme>(context: Context<Theme>) {
         this.lastOuterTheme = outerTheme;
         this.lastTheme = this.props.theme;
 
-        if (typeof this.lastTheme === "function") {
+        if (typeof this.lastTheme === 'function') {
           const theme: ThemeFunction<Theme> = (this.props.theme: any);
           this.cachedTheme = theme(outerTheme);
 
           warning(
             isObject(this.cachedTheme),
-            "[ThemeProvider] Please return an object from your theme function"
+            '[ThemeProvider] Please return an object from your theme function'
           );
         } else {
           const theme: Theme = (this.props.theme: any);
           warning(
             isObject(theme),
-            "[ThemeProvider] Please make your theme prop a plain object"
+            '[ThemeProvider] Please make your theme prop a plain object'
           );
 
           this.cachedTheme = outerTheme ? { ...outerTheme, ...theme } : theme;
@@ -75,7 +75,7 @@ export default function createThemeProvider<Theme>(context: Context<Theme>) {
     }
   }
 
-  if (process.env.NODE_ENV !== "production") {
+  if (process.env.NODE_ENV !== 'production') {
     ThemeProvider.propTypes = {
       // eslint-disable-next-line react/require-default-props
       children: PropTypes.node,

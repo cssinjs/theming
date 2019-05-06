@@ -1,3 +1,4 @@
 module.exports = {
-  extends: 'jss',
-};
+  extends: ['jss', 'prettier', 'prettier/react'],
+  parser: 'babel-eslint'
+}

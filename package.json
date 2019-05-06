@@ -72,6 +72,7 @@
     "coveralls": "^3.0.0",
     "eslint": "^5.8.0",
     "eslint-config-jss": "^5.0.1",
+    "eslint-config-prettier": "^4.2.0",
     "flow-bin": "^0.98.0",
     "nyc": "^13.1.0",
     "react": "^16.8.0",
