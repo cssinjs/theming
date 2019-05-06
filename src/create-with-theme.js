@@ -12,7 +12,6 @@ export default function createWithTheme<Theme>(context: Context<Theme>) {
     InnerComponent: ComponentType<InnerProps>,
     OuterProps: { ...InnerProps, theme?: $NonMaybeType<Theme> },
   >(Component: InnerComponent): ComponentType<OuterProps> {
-    // $FlowFixMe
     const withTheme = React.forwardRef((props, ref) => (
       <context.Consumer>
         {(theme) => {

@@ -14,13 +14,13 @@ export default function createThemeProvider<Theme>(context: Context<Theme>) {
   class ThemeProvider extends React.Component<ThemeProviderProps<Theme>> {
     // Get the theme from the props, supporting both (outerTheme) => {} as well as object notation
     getTheme(outerTheme: Theme) {
-      const { theme } = this.props;
-
-      if (theme !== this.lastTheme || outerTheme !== this.lastOuterTheme || !this.cachedTheme) {
+      if (this.props.theme !== this.lastTheme || outerTheme !== this.lastOuterTheme || !this.cachedTheme) {
         this.lastOuterTheme = outerTheme;
-        this.lastTheme = theme;
+        this.lastTheme = this.props.theme;
 
-        if (typeof theme === 'function') {
+        if (typeof this.lastTheme === 'function') {
+          const theme: (outerTheme: Theme) => $NonMaybeType<Theme> = (this.props.theme: any);
+
           this.cachedTheme = theme(outerTheme);
 
           warning(
@@ -28,6 +28,7 @@ export default function createThemeProvider<Theme>(context: Context<Theme>) {
             '[ThemeProvider] Please return an object from your theme function',
           );
         } else {
+          const theme: $NonMaybeType<Theme> = (this.props.theme: any);
           warning(
             isObject(theme),
             '[ThemeProvider] Please make your theme prop a plain object',
@@ -44,7 +45,7 @@ export default function createThemeProvider<Theme>(context: Context<Theme>) {
 
     lastOuterTheme: Theme;
 
-    lastTheme: $NonMaybeType<Theme>;
+    lastTheme: $NonMaybeType<Theme> | (outerTheme: Theme) => $NonMaybeType<Theme>;
 
     renderProvider = (outerTheme: Theme) => {
       const { children } = this.props;
