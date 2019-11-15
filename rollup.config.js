@@ -14,7 +14,7 @@ function toCamelCase(name) {
 }
 
 const matchSnapshot = process.env.SNAPSHOT === 'match';
-const input = './src/index.js';
+const input = './src/index.ts';
 
 const globals = Object.keys(pkg.peerDependencies || {}).reduce(
   (acc, key) => Object.assign({}, acc, { [key]: toCamelCase(key) }),
