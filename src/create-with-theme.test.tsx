@@ -1,4 +1,3 @@
-// @flow
 import test from 'ava'
 import React from 'react'
 import TestRenderer from 'react-test-renderer'
@@ -9,7 +8,7 @@ import createWithTheme from './create-with-theme'
 type Props = {theme: {}}
 
 // eslint-disable-next-line no-unused-vars
-const FunctionalComponent = (props: Props) => null
+const FunctionalComponent = (_: Props) => null
 
 class ClassComponent extends React.Component<Props> {
   static displayName = 'foo'
@@ -68,14 +67,11 @@ test('should allow overriding the prop from the outer props', t => {
 test('normal refs should just work and correctly be forwarded', t => {
   const context = React.createContext({})
   const WithTheme = createWithTheme(context)(ClassComponent)
-  let refComp = null
-  const innerRef = comp => {
-    refComp = comp
+  const innerRef = (comp: ClassComponent | null) => {
+    t.deepEqual(comp?.inner, true)
   }
 
   TestRenderer.create(<WithTheme ref={innerRef} />)
-
-  t.deepEqual(refComp !== null && refComp.inner, true)
 })
 
 test('withTheme(Comp) hoists non-react static class properties', t => {
@@ -89,23 +85,9 @@ test('withTheme(Comp) hoists non-react static class properties', t => {
     'withTheme(Comp) should not hoist react static properties'
   )
   t.deepEqual(
-    // $FlowFixMe: Need to find a better way to type the hoist-non-react-statics
     WithTheme.someSpecialStatic,
     ClassComponent.someSpecialStatic,
     'withTheme(Comp) should hoist non-react static properties'
   )
 })
 
-test("should warn when theme isn't an object", t => {
-  const spy = sinon.spy(console, 'warn')
-
-  const context = React.createContext<{} | void>()
-  const withTheme = createWithTheme(context)
-  const WithTheme = withTheme(ClassComponent)
-
-  TestRenderer.create(<WithTheme />)
-
-  t.deepEqual(spy.callCount, 1)
-
-  spy.restore()
-})

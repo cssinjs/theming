@@ -1,33 +1,43 @@
 import * as React from 'react'
-import hoist from 'hoist-non-react-statics'
 import getDisplayName from 'react-display-name'
-import warning from 'tiny-warning'
-import isObject from './is-object'
+import createUseTheme from './create-use-theme'
+import {ForwardRefExoticComponent} from 'react'
+import {PropsWithoutRef} from 'react'
+import {RefAttributes} from 'react'
+import hoistNonReactStatics from 'hoist-non-react-statics'
 
-function createWithTheme<Theme extends object>(context: React.Context<Theme>) {
-  function hoc<
-    InnerProps,
-    InnerComponent extends React.ComponentType<InnerProps>,
-    OuterProps extends InnerProps & {theme?: Theme}
-  >(Component: InnerComponent) {
-    const withTheme = React.forwardRef<InnerComponent, OuterProps>((props, ref) => (
-      <context.Consumer>
-        {theme => {
-          warning(isObject(theme), '[theming] Please use withTheme only with the ThemeProvider')
+export interface WithThemeInnerProps<Theme> {
+  theme?: Theme
+}
 
-          return <Component theme={theme} ref={ref} {...props} />
-        }}
-      </context.Consumer>
-    ))
+export type WithThemeFactory<Theme> = <InnerProps extends WithThemeInnerProps<Theme>>(
+  component: React.ComponentType<InnerProps>
+) => ForwardRefExoticComponent<
+  PropsWithoutRef<InnerProps> & RefAttributes<React.ComponentType<InnerProps>>
+>
+
+function createWithTheme<Theme extends object>(
+  context: React.Context<Theme>
+): WithThemeFactory<Theme> {
+  const useTheme = createUseTheme(context)
+
+  function factory<InnerProps extends WithThemeInnerProps<Theme>>(
+    Component: React.ComponentType<InnerProps>
+  ) {
+    const withTheme = React.forwardRef<React.ComponentType<InnerProps>, InnerProps>(
+      (props, ref) => {
+        const theme = useTheme()
+
+        return <Component ref={ref} theme={theme} {...props} />
+      }
+    )
 
     withTheme.displayName = `WithTheme(${getDisplayName(Component)})`
 
-    hoist(withTheme, Component)
-
-    return withTheme
+    return hoistNonReactStatics(withTheme, Component)
   }
 
-  return hoc
+  return factory
 }
 
 export default createWithTheme

@@ -1,14 +1,22 @@
 {
+  "include": ["src",
+    "typings"
+  ],
   "compilerOptions": {
-    "target": "es6",
-    "noEmit": true,
-    "pretty": true,
-    "esModuleInterop": true,
-    "module": "es6",
+    "target": "es5",
+    "module": "commonjs",
+    "lib": ["dom", "esnext"],
+    "importHelpers": true,
+    "declaration": true,
+    "sourceMap": true,
+    "rootDir": "./",
+    "strict": true,
     "moduleResolution": "node",
-    "jsx": "react"
-  },
-  "include": [
-    "src/*.ts"
-  ]
+    "baseUrl": "./",
+    "jsx": "react",
+    "noEmit": true,
+    "esModuleInterop": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
+  }
 }

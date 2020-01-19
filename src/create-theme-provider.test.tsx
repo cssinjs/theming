@@ -1,5 +1,3 @@
-// @flow
-
 import test from 'ava'
 import React from 'react'
 import sinon from 'sinon'
@@ -7,7 +5,7 @@ import TestRenderer from 'react-test-renderer'
 
 import createThemeProvider from './create-theme-provider'
 
-const Comp = () => null
+const Comp = (_: {theme?: {}}) => null
 
 test("createThemeProvider's type", t => {
   t.true(typeof createThemeProvider === 'function', 'createThemeProvider should be a function')
@@ -65,20 +63,8 @@ test('should merge nested themes', t => {
   })
 })
 
-test('should not render any Consumer and Provider if no children were passed', t => {
-  const context = React.createContext({})
-  const ThemeProvider = createThemeProvider(context)
-
-  const {root} = TestRenderer.create(
-    // $FlowFixMe: Flow complains because we require children
-    <ThemeProvider theme={{}} />
-  )
-
-  t.deepEqual(root.findByType(ThemeProvider).children.length, 0)
-})
-
 test("should return not modify the theme when the ThemeProvider isn't nested", t => {
-  const context = React.createContext()
+  const context = React.createContext({})
   const ThemeProvider = createThemeProvider(context)
   const themeA: Object = {}
   let receivedTheme
@@ -98,7 +84,7 @@ test("should return not modify the theme when the ThemeProvider isn't nested", t
 })
 
 test("should create new theme object when 2 ThemeProvider's are nested", t => {
-  const context = React.createContext()
+  const context = React.createContext({})
   const ThemeProvider = createThemeProvider(context)
   const themeA: Object = {}
   const themeB: Object = {}

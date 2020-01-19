@@ -5,9 +5,12 @@ export default {
   failWithoutAssertions: true,
   verbose: true,
   files: [
-    'src/*.test.js',
+    'src/*.test.*',
+  ],
+  extensions: [
+    'ts'
   ],
   require: [
-    '@babel/register',
+    'ts-node/register',
   ],
 };

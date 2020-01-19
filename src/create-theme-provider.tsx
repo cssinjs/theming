@@ -1,50 +1,35 @@
 import * as React from 'react'
 import warning from 'tiny-warning'
-import PropTypes from 'prop-types'
 import isObject from './is-object'
+import createUseTheme from './create-use-theme'
 
-export type ThemeProviderProps<Theme extends {}> = {
-  children: Node
+export interface ThemeProviderProps<Theme extends {}> {
+  children: React.ReactNode
   theme: Theme | ((outerTheme: Theme) => Theme)
 }
 
-export default function createThemeProvider<Theme extends object>(context: React.Context<Theme>) {
-  class ThemeProvider extends React.PureComponent<ThemeProviderProps<Theme>> {
-    static propTypes = {
-      children: PropTypes.node,
-      theme: PropTypes.oneOfType([PropTypes.shape({}), PropTypes.func]).isRequired
-    }
+export default function createThemeProvider<Theme extends object>(
+  context: React.Context<Theme>
+): React.ComponentType<ThemeProviderProps<Theme>> {
+  const useTheme = createUseTheme(context)
 
-    // Get the theme from the props, supporting both (outerTheme) => {} as well as object notation
-    private getTheme(outerTheme: Theme) {
-      const {theme} = this.props
+  return function(props: ThemeProviderProps<Theme>) {
+    const outerTheme = useTheme()
 
-      if (theme instanceof Function) {
-        const t = theme(outerTheme)
+    const computedTheme = React.useMemo(() => {
+      if (props.theme instanceof Function) {
+        const theme = props.theme(outerTheme)
 
-        warning(isObject(t), '[ThemeProvider] Please return an object from your theme function')
+        warning(isObject(theme), '[ThemeProvider] Please return an object from your theme function')
 
-        return t
-      }
-      warning(isObject(theme), '[ThemeProvider] Please make your theme prop a plain object')
-
-      return outerTheme ? {...outerTheme, ...theme} : theme
-    }
-
-    private renderProvider = (outerTheme: Theme) => {
-      return (
-        <context.Provider value={this.getTheme(outerTheme)}>{this.props.children}</context.Provider>
-      )
-    }
-
-    public render() {
-      if (!this.props.children) {
-        return null
+        return theme
       }
 
-      return <context.Consumer>{this.renderProvider}</context.Consumer>
-    }
+      warning(isObject(props.theme), '[ThemeProvider] Please make your theme prop a plain object')
+
+      return outerTheme ? {...outerTheme, ...props.theme} : props.theme
+    }, [outerTheme, props.theme])
+
+    return <context.Provider value={computedTheme}>{props.children}</context.Provider>
   }
-
-  return ThemeProvider
 }
