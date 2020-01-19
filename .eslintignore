@@ -1,9 +1,0 @@
-node_modules
-.DS_Store
-*.log
-*.lock
-*-lock.json
-dist
-shrinkwrap.*
-.nyc_output
-coverage
