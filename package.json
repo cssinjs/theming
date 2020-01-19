@@ -16,7 +16,7 @@
     "test": "ava",
     "prebuild": "rimraf dist",
     "build": "tsdx build",
-    "format": "prettier src/* --write"
+    "format": "prettier src/* typings/* --write"
   },
   "nyc": {
     "include": [
