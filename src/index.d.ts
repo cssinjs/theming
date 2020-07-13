@@ -15,7 +15,7 @@ interface ThemeProviderProps<Theme> {
 
 type ThemeProviderFactory<Theme> = React.ComponentType<ThemeProviderProps<Theme>>;
 
-type UseThemeFactory<Theme> = () => Theme;
+type UseThemeFactory<Theme> = <CustomTheme = Theme>() => CustomTheme;
 
 interface Theming<Theme> {
     context: React.Context<Theme>,
