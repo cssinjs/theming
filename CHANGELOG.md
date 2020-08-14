@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+### v3.3.0 (2020-08-14)
+
+- Upgrade to flow 0.131.0
+- Apply prettier config to the sources (was defined before but not used)
+
 ### v3.2.1 (2020-07-13)
 
 - Support passing a custom theme type to useTheme for TS types ([#93](https://github.com/cssinjs/theming/pull/93))

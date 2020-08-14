@@ -73,7 +73,7 @@
     "eslint": "^5.8.0",
     "eslint-config-jss": "^5.0.1",
     "eslint-config-prettier": "^4.2.0",
-    "flow-bin": "^0.98.0",
+    "flow-bin": "^0.131.0",
     "nyc": "^13.1.0",
     "react": "^16.8.0",
     "react-test-renderer": "^16.8.0",
