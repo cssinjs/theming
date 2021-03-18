@@ -5,7 +5,7 @@ import warning from 'tiny-warning'
 import isObject from './is-object'
 
 export default function createUseTheme<Theme>(context: Context<Theme>) {
-  const useTheme = (defaultTheme: Theme = null) => {
+  const useTheme = (defaultTheme: ?Theme = null) => {
     const theme = React.useContext(context)
 
     // Return default theme if not set in the context
