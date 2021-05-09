@@ -3,12 +3,12 @@ import * as React from 'react';
 import createThemeProvider, {
   ThemeProviderProps,
 } from './create-theme-provider';
-import createWithTheme, { WithThemeFactory } from './create-with-theme';
+import createWithTheme from './create-with-theme';
 import createUseTheme from './create-use-theme';
 
 interface Theming<Theme> {
   context: React.Context<Theme>;
-  withTheme: WithThemeFactory<Theme>;
+  withTheme: ReturnType<typeof createWithTheme>;
   ThemeProvider: React.ComponentType<ThemeProviderProps<Theme>>;
   useTheme: () => Theme;
 }
@@ -31,9 +31,9 @@ const { withTheme, ThemeProvider, useTheme } = createTheming(ThemeContext);
 export {
   Theming,
   ThemeProviderProps,
+  createTheming,
   useTheme,
   ThemeContext,
   withTheme,
-  createTheming,
   ThemeProvider,
 };

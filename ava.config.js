@@ -8,7 +8,8 @@ export default {
     'src/*.test.*',
   ],
   extensions: [
-    'ts'
+    'ts',
+    'tsx',
   ],
   require: [
     'ts-node/register',

@@ -1,22 +1,22 @@
 {
   "include": [
-    "src",
-    "typings"
+    "src"
   ],
   "compilerOptions": {
     "target": "es5",
-    "module": "es2015",
-    "lib": ["dom", "esnext"],
+    "module": "ESNext",
+    "esModuleInterop": true,
+    "lib": [
+      "dom",
+      "esnext"
+    ],
     "importHelpers": true,
     "declaration": true,
     "sourceMap": true,
-    "rootDir": "./",
     "strict": true,
     "moduleResolution": "node",
     "baseUrl": "./",
     "jsx": "react",
-    "noEmit": true,
-    "esModuleInterop": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true
   }

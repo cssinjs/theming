@@ -1,86 +1,68 @@
 import test from 'ava';
-import React from 'react';
-import TestRenderer from 'react-test-renderer';
-import sinon from 'sinon';
+import * as React from 'react';
+import * as TestRenderer from 'react-test-renderer';
 
-import createWithTheme from './create-with-theme'
+import createWithTheme from './create-with-theme';
 
-type Props = {|theme: {||}|}
+type Props = {
+  disabled: true,
+  theme: {},
+};
 
-// eslint-disable-next-line no-unused-vars
 const FunctionalComponent = (_: Props) => null;
 
 class ClassComponent extends React.Component<Props> {
-  static displayName = 'foo'
+  static displayName = 'foo';
 
-  static someSpecialStatic = 'bar'
+  static someSpecialStatic = 'bar';
 
-  inner = true
+  inner = true;
 
   render() {
-    return null
+    return null;
   }
 }
-
-test("createWithTheme's type", t => {
-  t.true(
-    typeof createWithTheme === 'function',
-    'createWithTheme should be a function',
-  );
-});
-
-test("createWithTheme's result is function on its own", t => {
-  const context = React.createContext({});
-  const withTheme = createWithTheme(context);
-
-  t.true(typeof withTheme === 'function', 'withTheme should be a function');
-});
 
 test('should pass the default value of the context', t => {
   const theme = {};
   const context = React.createContext(theme);
-  const WithTheme = createWithTheme(context)(FunctionalComponent);
-  const { root } = TestRenderer.create(<WithTheme />);
+  const withTheme = createWithTheme(context)
+  const WithTheme = withTheme<Props, typeof FunctionalComponent>(FunctionalComponent);
+  const { root } = TestRenderer.create(<WithTheme disabled={true} />);
 
   t.true(root.findByType(FunctionalComponent).props.theme === theme);
 });
 
 test('should pass the value of the Provider', t => {
+  const context = React.createContext<{ test?: string }>({});
+  const withTheme = createWithTheme(context)
+  const WithTheme = withTheme<Props, typeof FunctionalComponent>(FunctionalComponent);
+
   const theme = { test: 'test' };
-  const context = React.createContext(theme);
-  const WithTheme = createWithTheme(context)(FunctionalComponent);
-  const { root } = TestRenderer.create(
+  const {root} = TestRenderer.create(
     <context.Provider value={theme}>
-      <WithTheme />
+      <WithTheme disabled={true} />
     </context.Provider>,
   );
 
-  t.true(typeof withTheme === 'function', 'withTheme should be a function')
-})
-
-test('should pass the default value of the context', (t) => {
-  const theme = {}
-  const context = React.createContext(theme)
-  const WithTheme = createWithTheme(context)(FunctionalComponent)
-  const {root} = TestRenderer.create(<WithTheme />)
-
-  t.true(root.findByType(FunctionalComponent).props.theme === theme)
-})
+  t.true(root.findByType(FunctionalComponent).props.theme === theme);
+});
 
 test('normal refs should just work and correctly be forwarded', t => {
   const context = React.createContext({});
-  const WithTheme = createWithTheme(context)(ClassComponent);
-  const innerRef = (comp: ClassComponent | null) => {
-    t.deepEqual(comp?.inner, true);
-  };
+  const withTheme = createWithTheme(context);
+  const WithTheme = withTheme<Props, typeof ClassComponent>(ClassComponent);
+  const ref = React.createRef<ClassComponent>();
 
-  TestRenderer.create(<WithTheme ref={innerRef} />);
+  TestRenderer.create(<WithTheme ref={ref} />);
+
+  t.is(ref?.current?.inner, true);
 });
 
-test('withTheme(Comp) hoists non-react static class properties', (t) => {
-  const context = React.createContext({})
-  const withTheme = createWithTheme(context)
-  const WithTheme = withTheme(ClassComponent)
+test('withTheme(Comp) hoists non-react static class properties', t => {
+  const context = React.createContext({});
+  const withTheme = createWithTheme(context);
+  const WithTheme = withTheme<Props, typeof ClassComponent>(ClassComponent);
 
   t.deepEqual(
     WithTheme.displayName,

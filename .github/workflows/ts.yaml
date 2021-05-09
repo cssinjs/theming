@@ -1,0 +1,40 @@
+name: Typescript CI
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: Test
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: 15.x
+    - run: yarn install
+    - run: yarn test
+
+  build:
+    runs-on: ubuntu-latest
+    name: Build
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: 15.x
+    - run: yarn install
+    - run: yarn build
+
+  format:
+    runs-on: ubuntu-latest
+    name: Format
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: 15.x
+    - run: yarn install
+    - run: yarn ts:format:check

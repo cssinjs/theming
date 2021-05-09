@@ -1,44 +1,35 @@
 import * as React from 'react';
 import getDisplayName from 'react-display-name';
 import createUseTheme from './create-use-theme';
-import { ForwardRefExoticComponent } from 'react';
-import { PropsWithoutRef } from 'react';
-import { RefAttributes } from 'react';
 import hoistNonReactStatics from 'hoist-non-react-statics';
 
 export interface WithThemeInnerProps<Theme> {
-  theme?: Theme;
+  theme: Theme;
 }
 
-export type WithThemeFactory<Theme> = <
-  InnerProps extends WithThemeInnerProps<Theme>
->(
-  component: React.ComponentType<InnerProps>,
-) => ForwardRefExoticComponent<
-  PropsWithoutRef<InnerProps> & RefAttributes<React.ComponentType<InnerProps>>
->;
-
-function createWithTheme<Theme extends object>(
-  context: React.Context<Theme>,
-): WithThemeFactory<Theme> {
+function createWithTheme<Theme>(context: React.Context<Theme>) {
   const useTheme = createUseTheme(context);
 
-  function factory<InnerProps extends WithThemeInnerProps<Theme>>(
-    Component: React.ComponentType<InnerProps>,
-  ) {
-    const withTheme = React.forwardRef<
-      React.ComponentType<InnerProps>,
-      InnerProps
+  const factory = <
+    Props extends WithThemeInnerProps<Theme>,
+    WrapperComponent extends React.JSXElementConstructor<Props>,
+    >(
+      Component: WrapperComponent,
+  ) => {
+    const WithTheme = React.forwardRef<
+    WrapperComponent,
+     Omit<Props, 'theme'>
     >((props, ref) => {
       const theme = useTheme();
 
+      // @ts-ignore
       return <Component ref={ref} theme={theme} {...props} />;
     });
 
-    withTheme.displayName = `WithTheme(${getDisplayName(Component)})`;
+    WithTheme.displayName = `WithTheme(${getDisplayName(Component)})`;
 
-    return hoistNonReactStatics(withTheme, Component);
-  }
+    return hoistNonReactStatics(WithTheme, Component);
+  };
 
   return factory;
 }
