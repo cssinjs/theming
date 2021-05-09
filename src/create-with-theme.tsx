@@ -12,19 +12,18 @@ function createWithTheme<Theme>(context: React.Context<Theme>) {
 
   const factory = <
     Props extends WithThemeInnerProps<Theme>,
-    WrapperComponent extends React.JSXElementConstructor<Props>,
-    >(
-      Component: WrapperComponent,
+    WrapperComponent extends React.JSXElementConstructor<Props>
+  >(
+    Component: WrapperComponent,
   ) => {
-    const WithTheme = React.forwardRef<
-    WrapperComponent,
-     Omit<Props, 'theme'>
-    >((props, ref) => {
-      const theme = useTheme();
+    const WithTheme = React.forwardRef<WrapperComponent, Omit<Props, 'theme'>>(
+      (props, ref) => {
+        const theme = useTheme();
 
-      // @ts-ignore
-      return <Component ref={ref} theme={theme} {...props} />;
-    });
+        // @ts-ignore
+        return <Component ref={ref} theme={theme} {...props} />;
+      },
+    );
 
     WithTheme.displayName = `WithTheme(${getDisplayName(Component)})`;
 

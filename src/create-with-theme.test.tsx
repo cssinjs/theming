@@ -5,8 +5,8 @@ import * as TestRenderer from 'react-test-renderer';
 import createWithTheme from './create-with-theme';
 
 type Props = {
-  disabled: true,
-  theme: {},
+  disabled: true;
+  theme: {};
 };
 
 const FunctionalComponent = (_: Props) => null;
@@ -26,8 +26,10 @@ class ClassComponent extends React.Component<Props> {
 test('should pass the default value of the context', t => {
   const theme = {};
   const context = React.createContext(theme);
-  const withTheme = createWithTheme(context)
-  const WithTheme = withTheme<Props, typeof FunctionalComponent>(FunctionalComponent);
+  const withTheme = createWithTheme(context);
+  const WithTheme = withTheme<Props, typeof FunctionalComponent>(
+    FunctionalComponent,
+  );
   const { root } = TestRenderer.create(<WithTheme disabled={true} />);
 
   t.true(root.findByType(FunctionalComponent).props.theme === theme);
@@ -35,11 +37,13 @@ test('should pass the default value of the context', t => {
 
 test('should pass the value of the Provider', t => {
   const context = React.createContext<{ test?: string }>({});
-  const withTheme = createWithTheme(context)
-  const WithTheme = withTheme<Props, typeof FunctionalComponent>(FunctionalComponent);
+  const withTheme = createWithTheme(context);
+  const WithTheme = withTheme<Props, typeof FunctionalComponent>(
+    FunctionalComponent,
+  );
 
   const theme = { test: 'test' };
-  const {root} = TestRenderer.create(
+  const { root } = TestRenderer.create(
     <context.Provider value={theme}>
       <WithTheme disabled={true} />
     </context.Provider>,
