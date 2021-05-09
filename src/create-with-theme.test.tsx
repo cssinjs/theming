@@ -3,22 +3,22 @@ import React from 'react';
 import TestRenderer from 'react-test-renderer';
 import sinon from 'sinon';
 
-import createWithTheme from './create-with-theme';
+import createWithTheme from './create-with-theme'
 
-type Props = { theme: {} };
+type Props = {|theme: {||}|}
 
 // eslint-disable-next-line no-unused-vars
 const FunctionalComponent = (_: Props) => null;
 
 class ClassComponent extends React.Component<Props> {
-  static displayName = 'foo';
+  static displayName = 'foo'
 
-  static someSpecialStatic = 'bar';
+  static someSpecialStatic = 'bar'
 
-  inner = true;
+  inner = true
 
   render() {
-    return null;
+    return null
   }
 }
 
@@ -55,17 +55,17 @@ test('should pass the value of the Provider', t => {
     </context.Provider>,
   );
 
-  t.true(root.findByType(FunctionalComponent).props.theme === theme);
-});
+  t.true(typeof withTheme === 'function', 'withTheme should be a function')
+})
 
-test('should allow overriding the prop from the outer props', t => {
-  const otherTheme = {};
-  const context = React.createContext<{}>({});
-  const WithTheme = createWithTheme<{}>(context)(FunctionalComponent);
-  const { root } = TestRenderer.create(<WithTheme theme={otherTheme} />);
+test('should pass the default value of the context', (t) => {
+  const theme = {}
+  const context = React.createContext(theme)
+  const WithTheme = createWithTheme(context)(FunctionalComponent)
+  const {root} = TestRenderer.create(<WithTheme />)
 
-  t.true(root.findByType(FunctionalComponent).props.theme === otherTheme);
-});
+  t.true(root.findByType(FunctionalComponent).props.theme === theme)
+})
 
 test('normal refs should just work and correctly be forwarded', t => {
   const context = React.createContext({});
@@ -77,10 +77,10 @@ test('normal refs should just work and correctly be forwarded', t => {
   TestRenderer.create(<WithTheme ref={innerRef} />);
 });
 
-test('withTheme(Comp) hoists non-react static class properties', t => {
-  const context = React.createContext({});
-  const withTheme = createWithTheme(context);
-  const WithTheme = withTheme(ClassComponent);
+test('withTheme(Comp) hoists non-react static class properties', (t) => {
+  const context = React.createContext({})
+  const withTheme = createWithTheme(context)
+  const WithTheme = withTheme(ClassComponent)
 
   t.deepEqual(
     WithTheme.displayName,

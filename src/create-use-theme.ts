@@ -6,15 +6,15 @@ const createUseTheme = <Theme extends object>(
   context: React.Context<Theme>,
 ) => {
   const useTheme = () => {
-    const theme = React.useContext(context);
+    const theme = React.useContext(context)
 
     warning(
       isObject(theme),
       '[theming] Please use useTheme only with the ThemeProvider',
     );
 
-    return theme;
-  };
+    return theme
+  }
 
   return useTheme;
 };
