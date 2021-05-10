@@ -15,7 +15,6 @@
     "sourceMap": true,
     "strict": true,
     "moduleResolution": "node",
-    "baseUrl": "./",
     "jsx": "react",
     "noUnusedLocals": true,
     "noUnusedParameters": true

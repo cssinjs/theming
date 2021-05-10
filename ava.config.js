@@ -14,4 +14,7 @@ export default {
   require: [
     'ts-node/register',
   ],
+  environmentVariables: {
+    'TS_NODE_PROJECT': './tsconfig.test.json',
+  }
 };

@@ -68,7 +68,7 @@ test('should merge two nested theme objects', t => {
   const themeB = {
     colorB: 'blue',
   };
-  let receivedTheme;
+  let receivedTheme: Object | undefined;
 
   TestRenderer.create(
     <ThemeProvider theme={themeA}>

@@ -1,5 +1,4 @@
 import * as React from 'react';
-
 import createThemeProvider, {
   ThemeProviderProps,
 } from './create-theme-provider';

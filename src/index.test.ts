@@ -1,7 +1,6 @@
 import test from 'ava';
 import { createContext } from 'react';
-
-import { createTheming } from '.';
+import { createTheming } from './';
 
 test("createTheming()'s key names", t => {
   const context = createContext({});

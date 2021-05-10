@@ -930,6 +930,11 @@
   dependencies:
     arrify "^1.0.1"
 
+"@cto.af/textdecoder@^0.0.0":
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/@cto.af/textdecoder/-/textdecoder-0.0.0.tgz#e1e8d84c936c30a0f4619971f19ca41941af9fdc"
+  integrity sha512-sJpx3F5xcVV/9jNYJQtvimo4Vfld/nD3ph+ZWtQzZ03Zo8rJC7QKQTRcIGS13Rcz80DwFNthCWMrd58vpY4ZAQ==
+
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@istanbuljs/load-nyc-config/-/load-nyc-config-1.1.0.tgz#fd3db1d59ecf7cf121e80650bb86712f9b55eced"
@@ -1492,7 +1497,7 @@ acorn-walk@^6.0.1:
   resolved "https://registry.yarnpkg.com/acorn-walk/-/acorn-walk-6.2.0.tgz#123cb8f3b84c2171f1f7fb252615b1c78a6b1a8c"
   integrity sha512-7evsyfH1cLOCdAzZAd43Cic04yKydNx0cF+7tiA19p1XnLLPU4dpCQOqpjqwokFe//vS0QqfqqjCS2JkiIs0cA==
 
-acorn-walk@^8.0.0:
+acorn-walk@^8.0.2:
   version "8.1.0"
   resolved "https://registry.yarnpkg.com/acorn-walk/-/acorn-walk-8.1.0.tgz#d3c6a9faf00987a5e2b9bdb506c2aa76cd707f83"
   integrity sha512-mjmzmv12YIG/G8JQdQuz2MUDShEJ6teYpT5bmWA4q7iwoGen8xtt3twF3OvzIUl+Q06aWIjvnwQUKvQ6TtMRjg==
@@ -1507,7 +1512,7 @@ acorn@^7.1.0, acorn@^7.1.1:
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-7.4.1.tgz#feaed255973d2e77555b83dbc08851a6c63520fa"
   integrity sha512-nQyp0o1/mNdbTO1PO6kHkwSrmgZ0MT/jCCpNiwbUjGoRN4dlBhqJtoQuCnEOKzgTVwg0ZWiCoQy6SxMebQVh8A==
 
-acorn@^8.0.4:
+acorn@^8.1.0:
   version "8.2.4"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-8.2.4.tgz#caba24b08185c3b56e3168e97d15ed17f4d31fd0"
   integrity sha512-Ibt84YwBDDA890eDiDCEqcbwvHlBvzzDkU2cGBBDDI1QWT12jTiXIOn2CIw5KK4i6N5Z2HUxwYjzriDyqaqqZg==
@@ -1583,7 +1588,7 @@ ansi-styles@^4.0.0, ansi-styles@^4.1.0:
   dependencies:
     color-convert "^2.0.1"
 
-ansi-styles@^5.0.0:
+ansi-styles@^5.1.0:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/ansi-styles/-/ansi-styles-5.2.0.tgz#07449690ad45777d1924ac2abb2fc8895dba836b"
   integrity sha512-Cxwpt2SfTzTtXcfOlzGEee8O+c+MmUgGrNiBcXnuWxuFJHe6a5Hz7qwhwe5OgaSYI0IJvkLqWX1ASG+cJOkEiA==
@@ -1756,22 +1761,23 @@ atob@^2.1.2:
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
 
-ava@3.15.0:
-  version "3.15.0"
-  resolved "https://registry.yarnpkg.com/ava/-/ava-3.15.0.tgz#a239658ab1de8a29a243cc902e6b42e4574de2f0"
-  integrity sha512-HGAnk1SHPk4Sx6plFAUkzV/XC1j9+iQhOzt4vBly18/yo0AV8Oytx7mtJd/CR8igCJ5p160N/Oo/cNJi2uSeWA==
+ava@^4.0.0-alpha.2:
+  version "4.0.0-alpha.2"
+  resolved "https://registry.yarnpkg.com/ava/-/ava-4.0.0-alpha.2.tgz#26badd3e202ec4d38713c113761b54a9c88e28ce"
+  integrity sha512-7ePbJ00F/W4+traX8uxjA0dQu+6m8AE90BCOloFuH/zvCoqTKu7kChdWoxTPOlGZJnBHk/qCyI3nkMsEFJiDDg==
   dependencies:
     "@concordance/react" "^2.0.0"
-    acorn "^8.0.4"
-    acorn-walk "^8.0.0"
-    ansi-styles "^5.0.0"
+    acorn "^8.1.0"
+    acorn-walk "^8.0.2"
+    ansi-styles "^5.1.0"
     arrgv "^1.0.2"
     arrify "^2.0.1"
     callsites "^3.1.0"
+    cbor "^7.0.3"
     chalk "^4.1.0"
-    chokidar "^3.4.3"
+    chokidar "^3.5.1"
     chunkd "^2.0.1"
-    ci-info "^2.0.0"
+    ci-info "^3.1.1"
     ci-parallel-vars "^1.0.1"
     clean-yaml-object "^0.1.0"
     cli-cursor "^3.1.0"
@@ -1783,22 +1789,20 @@ ava@3.15.0:
     currently-unhandled "^0.4.1"
     debug "^4.3.1"
     del "^6.0.0"
-    emittery "^0.8.0"
+    emittery "^0.8.1"
     equal-length "^1.0.0"
     figures "^3.2.0"
-    globby "^11.0.1"
+    globby "^11.0.2"
     ignore-by-default "^2.0.0"
-    import-local "^3.0.2"
     indent-string "^4.0.0"
     is-error "^2.2.2"
     is-plain-object "^5.0.0"
     is-promise "^4.0.0"
     lodash "^4.17.20"
     matcher "^3.0.0"
-    md5-hex "^3.0.1"
     mem "^8.0.0"
     ms "^2.1.3"
-    ora "^5.2.0"
+    ora "^5.3.0"
     p-event "^4.2.0"
     p-map "^4.0.0"
     picomatch "^2.2.2"
@@ -1814,7 +1818,7 @@ ava@3.15.0:
     supertap "^2.0.0"
     temp-dir "^2.0.0"
     trim-off-newlines "^1.0.1"
-    update-notifier "^5.0.1"
+    update-notifier "^5.1.0"
     write-file-atomic "^3.0.3"
     yargs "^16.2.0"
 
@@ -2188,6 +2192,14 @@ caseless@~0.12.0:
   resolved "https://registry.yarnpkg.com/caseless/-/caseless-0.12.0.tgz#1b681c21ff84033c826543090689420d187151dc"
   integrity sha1-G2gcIf+EAzyCZUMJBolCDRhxUdw=
 
+cbor@^7.0.3:
+  version "7.0.5"
+  resolved "https://registry.yarnpkg.com/cbor/-/cbor-7.0.5.tgz#ed54cdbc19fa7352bb328d00a5393aa7ce45a10f"
+  integrity sha512-0aaAPgW92lLmypb9iCd22k7tSD1FbF6dps8VQzmIBKY6ych2gO09b2vo/SbaLTmezJuB8Kh88Rvpl/Uq52mNZg==
+  dependencies:
+    "@cto.af/textdecoder" "^0.0.0"
+    nofilter "^2.0.3"
+
 chalk@^2.0.0, chalk@^2.1.0, chalk@^2.4.1, chalk@^2.4.2:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-2.4.2.tgz#cd42541677a54333cf541a49108c1432b44c9424"
@@ -2218,7 +2230,7 @@ chardet@^0.7.0:
   resolved "https://registry.yarnpkg.com/chardet/-/chardet-0.7.0.tgz#90094849f0937f2eedc2425d0d28a9e5f0cbad9e"
   integrity sha512-mT8iDcrh03qDGRRmoA2hmBJnxpllMR+0/0qlzjqZES6NdiWDcZkCNAk4rPFZ9Q85r27unkiNNg8ZOiwZXBHwcA==
 
-chokidar@^3.4.3:
+chokidar@^3.5.1:
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-3.5.1.tgz#ee9ce7bbebd2b79f49f304799d5468e31e14e68a"
   integrity sha512-9+s+Od+W0VJJzawDma/gvBNQqkTiqYTWLuZoyAsivsI4AaWTCzHG06/TMjsf1cYe9Cb97UCEhjz7HvnPk2p/tw==
@@ -2242,6 +2254,11 @@ ci-info@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ci-info/-/ci-info-2.0.0.tgz#67a9e964be31a51e15e5010d58e6f12834002f46"
   integrity sha512-5tK7EtrZ0N+OLFMthtqOj4fI2Jeb88C4CAZPu25LDVUgXJ0A3Js4PMGqrn0JU1W0Mh1/Z8wZzYPxqUrXeBboCQ==
+
+ci-info@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/ci-info/-/ci-info-3.1.1.tgz#9a32fcefdf7bcdb6f0a7e1c0f8098ec57897b80a"
+  integrity sha512-kdRWLBIJwdsYJWYJFtAFFYxybguqeF91qpZaggjG5Nf8QKdizFG2hjqvaTXbxFIcYbSaD74KpAXv6BSm17DHEQ==
 
 ci-parallel-vars@^1.0.1:
   version "1.0.1"
@@ -2777,7 +2794,7 @@ electron-to-chromium@^1.3.723:
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.727.tgz#857e310ca00f0b75da4e1db6ff0e073cc4a91ddf"
   integrity sha512-Mfz4FIB4FSvEwBpDfdipRIrwd6uo8gUDoRDF4QEYb4h4tSuI3ov594OrjU6on042UlFHouIJpClDODGkPcBSbg==
 
-emittery@^0.8.0:
+emittery@^0.8.1:
   version "0.8.1"
   resolved "https://registry.yarnpkg.com/emittery/-/emittery-0.8.1.tgz#bb23cc86d03b30aa75a7f734819dee2e1ba70860"
   integrity sha512-uDfvUjVrfGJJhymx/kz6prltenw1u7WrCg1oa94zYY8xxVpLLUu045LAT0dhDZdXG58/EpPL/5kA180fQ/qudg==
@@ -3534,7 +3551,7 @@ globalyzer@0.1.0:
   resolved "https://registry.yarnpkg.com/globalyzer/-/globalyzer-0.1.0.tgz#cb76da79555669a1519d5a8edf093afaa0bf1465"
   integrity sha512-40oNTM9UfG6aBmuKxk/giHn5nQ8RVz/SS4Ir6zgzOv9/qC3kKZ9v4etGTcJbEl/NyVQH7FGU7d+X1egr57Md2Q==
 
-globby@^11.0.1:
+globby@^11.0.1, globby@^11.0.2:
   version "11.0.3"
   resolved "https://registry.yarnpkg.com/globby/-/globby-11.0.3.tgz#9b1f0cb523e171dd1ad8c7b2a9fb4b644b9593cb"
   integrity sha512-ffdmosjA807y7+lA1NM0jELARVmYul/715xiILEjo3hBLPTcirgQNnXECn5g3mtR8TOLCVbkfua1Hpen25/Xcg==
@@ -5200,6 +5217,13 @@ node-releases@^1.1.71:
   resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-1.1.71.tgz#cb1334b179896b1c89ecfdd4b725fb7bbdfc7dbb"
   integrity sha512-zR6HoT6LrLCRBwukmrVbHv0EpEQjksO6GmFcZQQuCAy139BEsoVKPYnf3jongYW83fAa1torLGYwxxky/p28sg==
 
+nofilter@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/nofilter/-/nofilter-2.0.3.tgz#f5460f3cb33147005883e3f5d4476239501fa187"
+  integrity sha512-FbuXC+lK+GU2+63D1kC1ETiZo+Z7SIi7B+mxKTCH1byrh6WFvfBCN/wpherFz0a0bjGd7EKTst/cz0yLeNngug==
+  dependencies:
+    "@cto.af/textdecoder" "^0.0.0"
+
 normalize-package-data@^2.3.2, normalize-package-data@^2.5.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/normalize-package-data/-/normalize-package-data-2.5.0.tgz#e66db1838b200c1dfc233225d12cb36520e234a8"
@@ -5376,7 +5400,7 @@ ora@^4.0.3:
     strip-ansi "^6.0.0"
     wcwidth "^1.0.1"
 
-ora@^5.2.0:
+ora@^5.3.0:
   version "5.4.0"
   resolved "https://registry.yarnpkg.com/ora/-/ora-5.4.0.tgz#42eda4855835b9cd14d33864c97a3c95a3f56bf4"
   integrity sha512-1StwyXQGoU6gdjYkyVcqOLnVlbKj+6yPNNOxJVgpt9t4eksKjiriiHuxktLYkgllwk+D6MbC4ihH84L1udRXPg==
@@ -7167,7 +7191,7 @@ unset-value@^1.0.0:
     has-value "^0.3.1"
     isobject "^3.0.0"
 
-update-notifier@^5.0.1:
+update-notifier@^5.1.0:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/update-notifier/-/update-notifier-5.1.0.tgz#4ab0d7c7f36a231dd7316cf7729313f0214d9ad9"
   integrity sha512-ItnICHbeMh9GqUy31hFPrD1kcuZ3rpxDZbf4KUDavXwS0bW5m7SLbDQpGX3UYr072cbrF5hFUs3r5tUsPwjfHw==
