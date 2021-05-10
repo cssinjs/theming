@@ -5,7 +5,6 @@
   "main": "dist/index.js",
   "module": "dist/theming.esm.js",
   "typings": "./dist/index.d.ts",
-  "type": "module",
   "files": [
     "dist"
   ],
