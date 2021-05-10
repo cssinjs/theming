@@ -5,9 +5,16 @@ export default {
   failWithoutAssertions: true,
   verbose: true,
   files: [
-    'src/*.test.js',
+    'src/*.test.*',
+  ],
+  extensions: [
+    'ts',
+    'tsx',
   ],
   require: [
-    '@babel/register',
+    'ts-node/register',
   ],
+  environmentVariables: {
+    'TS_NODE_PROJECT': './tsconfig.test.json',
+  }
 };
